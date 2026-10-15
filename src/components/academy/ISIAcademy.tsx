@@ -88,10 +88,11 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
 
   // Active slide index state for course sliders
   const [carouselIndices, setCarouselIndices] = useState<{ [key: number]: number }>({
-    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0,
-    101: 0, 102: 0, 103: 0,
+    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
+    101: 0, 102: 0, 103: 0, 104: 0, 105: 0, 106: 0, 107: 0,
     201: 0, 202: 0, 203: 0, 204: 0, 205: 0, 206: 0, 207: 0, 208: 0,
-    209: 0, 210: 0, 211: 0, 212: 0, 213: 0, 214: 0, 215: 0, 216: 0, 217: 0, 218: 0
+    209: 0, 210: 0, 211: 0, 212: 0, 213: 0, 214: 0, 215: 0, 216: 0, 217: 0, 218: 0,
+    219: 0, 220: 0
   });
 
   // Sync track with URL hash
@@ -254,6 +255,54 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       duration: "90 Days + 30 Days Residency",
       campuses: "Chennai, Coimbatore, Hosur",
       batch: "Admissions Open"
+    },
+    {
+      id: 8,
+      title: "Campus Network Engineering Specialist",
+      badge: "Wired Ethernet & Enterprise Wi-Fi",
+      images: [enterpriseImg, cyberRangeImg, smartCityImg],
+      captions: ["Core Switch & Patch Panel Rack", "Enterprise Wi-Fi Heatmap Console", "Structured Cabling & Fluke Tester"],
+      desc: "Develop practical skills for installing, configuring, monitoring, and troubleshooting campus networks that use wired Ethernet and wireless Wi-Fi connectivity.",
+      modules: [
+        "Networking Fundamentals and TCP/IP",
+        "Ethernet Switching and VLAN Fundamentals",
+        "Wi-Fi Deployment and Wireless Access Points",
+        "Network Cabling and Structured Connectivity",
+        "IP Addressing, DHCP, and DNS Fundamentals",
+        "Network Troubleshooting and Connectivity Diagnostics",
+        "Network Performance Monitoring",
+        "Network Security Fundamentals and Access Management"
+      ],
+      careerRoles: ["Campus Network Engineer", "Network Support Engineer", "Wi-Fi Support Specialist"],
+      outcome: "Campus Network Engineer / Network Support Engineer",
+      labs: "Cisco/Aruba Enterprise Switch Stacking & Enterprise WLAN Testbed",
+      duration: "90 Days + 30 Days Residency",
+      campuses: "Chennai, Coimbatore, Hosur",
+      batch: "Admissions Open"
+    },
+    {
+      id: 9,
+      title: "Workspace Support Specialist",
+      badge: "End-User Computing & IT Helpdesk",
+      images: [smartCityImg, enterpriseImg, academyHeroImg],
+      captions: ["IT Helpdesk Diagnostic Bench", "OS Deployment & Image Cloner", "Peripherals & Docking Test Station"],
+      desc: "Train learners to provide end-user IT support for laptops, desktops, workplace applications, peripherals, connectivity, and day-to-day technology issues.",
+      modules: [
+        "Laptop and Desktop Hardware Fundamentals",
+        "Operating System Installation and Configuration",
+        "Software Installation and Application Support",
+        "Printer, Peripheral, and Docking Station Support",
+        "Wi-Fi, Ethernet, and Basic Network Troubleshooting",
+        "User Accounts, Access, and Password Support",
+        "IT Helpdesk Ticketing and Service Management",
+        "Device Maintenance, Troubleshooting, and Escalation"
+      ],
+      careerRoles: ["IT Support Engineer", "Desktop Support Engineer", "End-User Computing Support Specialist", "IT Helpdesk Technician"],
+      outcome: "IT Support Engineer / Desktop Support Specialist",
+      labs: "Hardware Assembly & Enterprise IT Service Management (ITSM) Workbench",
+      duration: "90 Days + 30 Days Residency",
+      campuses: "Chennai, Coimbatore, Madurai",
+      batch: "Admissions Open"
     }
   ];
 
@@ -315,6 +364,79 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       labs: "Enterprise Space Management & EHS Simulation Facility",
       duration: "90 Days + 30 Days Residency",
       campuses: "Chennai, Coimbatore",
+      batch: "Admissions Open"
+    },
+    {
+      id: 105,
+      title: "Horticulture and Grounds Maintenance Specialist",
+      badge: "Landscaping & Grounds Maintenance",
+      images: [smartCityImg, enterpriseImg, academyHeroImg],
+      captions: ["Automated Drip Irrigation Rig", "Commercial Horticulture Nursery", "Landscape Maintenance Fleet"],
+      desc: "Train staff to maintain landscaped areas, gardens, lawns, outdoor spaces, and green environments across commercial and institutional facilities.",
+      modules: [
+        "Gardening and Horticulture Fundamentals",
+        "Plant Care, Pruning, and Maintenance",
+        "Lawn Care and Landscape Maintenance",
+        "Irrigation and Water Management",
+        "Seasonal Planting and Grounds Upkeep",
+        "Pest Awareness and Safe Handling Practices",
+        "Landscaping Equipment and Tool Safety",
+        "Sustainable Grounds Maintenance"
+      ],
+      careerRoles: ["Grounds Maintenance Supervisor", "Horticulture Technician", "Landscape Maintenance Coordinator"],
+      outcome: "Grounds Maintenance Supervisor / Horticulture Technician",
+      labs: "Commercial Campus Grounds & Automated Irrigation Sandbox",
+      duration: "90 Days + 30 Days Residency",
+      campuses: "Chennai, Coimbatore, Madurai",
+      batch: "Admissions Open"
+    },
+    {
+      id: 106,
+      title: "Kitchen Operations and Food Service Management Specialist",
+      badge: "Kitchen Operations & Hygiene Standards",
+      images: [enterpriseImg, smartCityImg, academyHeroImg],
+      captions: ["Commercial Kitchen Hygiene Station", "Cold Storage & FIFO Inventory Rack", "Food Safety Audit & HACCP Console"],
+      desc: "Prepare staff to support professional kitchen operations, food service coordination, kitchen hygiene, inventory control, and catering operations in corporate campuses, commercial facilities, and institutional environments.",
+      modules: [
+        "Commercial Kitchen Operations",
+        "Food Safety, Hygiene, and Sanitation",
+        "Kitchen Equipment Handling and Maintenance",
+        "Food Storage and Inventory Management",
+        "Meal Service and Catering Coordination",
+        "Kitchen Waste Management",
+        "Workplace Health and Safety in Kitchens",
+        "Food Service Quality and Operational Procedures"
+      ],
+      careerRoles: ["Kitchen Operations Supervisor", "Food Service Coordinator", "Catering Operations Assistant"],
+      outcome: "Kitchen Operations Supervisor / Food Service Coordinator",
+      labs: "Commercial Facility Kitchen & Food Safety Inspection Center",
+      duration: "90 Days + 30 Days Residency",
+      campuses: "Chennai, Coimbatore, Madurai",
+      batch: "Admissions Open"
+    },
+    {
+      id: 107,
+      title: "Workplace Health and Safety Specialist",
+      badge: "Workplace Safety & Compliance",
+      images: [academyHeroImg, enterpriseImg, cyberRangeImg],
+      captions: ["PPE & Safety Inspection Station", "Workplace Hazard & Risk Assessment Desk", "Emergency Evacuation & Fire Safety Drill Area"],
+      desc: "Develop practical knowledge of workplace hazard identification, risk assessment, safety inspections, emergency preparedness, incident reporting, and preventive safety practices. Note: Leads to an ISI internal training completion certificate.",
+      modules: [
+        "Workplace Hazard Identification",
+        "Risk Assessment and Control Measures",
+        "Occupational Health and Safety Fundamentals",
+        "Fire Safety and Emergency Preparedness",
+        "Personal Protective Equipment",
+        "Workplace Inspections and Safety Audits",
+        "Incident Reporting and Corrective Actions",
+        "Safety Communication and Awareness"
+      ],
+      careerRoles: ["Workplace Safety Coordinator", "Health and Safety Assistant", "Safety Compliance Executive"],
+      outcome: "Workplace Safety Coordinator / Safety Compliance Executive",
+      eligibility: "12th Pass / Graduate · Practical industry certification (internal training certificate, distinct from statutory licences)",
+      labs: "EHS Simulation Lab & Emergency Preparedness Drill Center",
+      duration: "90 Days + 30 Days Residency",
+      campuses: "Chennai, Coimbatore, Hosur",
       batch: "Admissions Open"
     }
   ];
@@ -430,6 +552,60 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       labs: "Industrial Inward/Outward Gate & Weighbridge Mockup",
       campuses: "Madurai · Coimbatore · Chennai",
       eligibility: "12th Pass / Diploma / Graduate",
+      batch: "Admissions Open"
+    },
+    {
+      id: 219,
+      category: "core",
+      title: "Certified Security Command Center Specialist (CSCCS)",
+      duration: "90 Days Training + 30 Days Internship",
+      badge: "Command Center & Incident Escalation",
+      type: "Normal Course",
+      images: [cyberRangeImg, enterpriseImg, academyHeroImg],
+      captions: ["Security Command Center Video Wall", "Integrated Alarm Dispatch Rig", "Real-Time Incident Monitoring Desk"],
+      desc: "Train professionals to operate security command centers, monitor integrated security systems, coordinate incident responses, and manage real-time security operations.",
+      modules: [
+        "Security Command Center Operations",
+        "Control Room Monitoring and Situational Awareness",
+        "Alarm Monitoring and Incident Prioritisation",
+        "Emergency Communication and Escalation",
+        "Incident Logging, Reporting, and Shift Handover",
+        "Coordination with Security Teams and Emergency Responders",
+        "Introduction to Integrated Security Management Systems",
+        "Standard Operating Procedures and Operational Readiness"
+      ],
+      careerRoles: ["Security Command Center Operator", "Security Control Room Specialist", "Security Operations Coordinator"],
+      outcome: "Certified Security Command Center Specialist",
+      labs: "Centralized Command Center & VMS Video Wall Simulator",
+      campuses: "Madurai · Coimbatore · Chennai",
+      eligibility: "12th Pass / Diploma / Graduate · Basic computer literacy",
+      batch: "Admissions Open"
+    },
+    {
+      id: 220,
+      category: "core",
+      title: "Certified CCTV Surveillance Specialist (CCSS)",
+      duration: "90 Days Training + 30 Days Internship",
+      badge: "CCTV & Video Analytics",
+      type: "Normal Course",
+      images: [smartCityImg, enterpriseImg, academyHeroImg],
+      captions: ["Multi-Display CCTV Monitoring Wall", "Video Playback & Evidence Export Rig", "PTZ Surveillance & Camera Diagnostics Console"],
+      desc: "Prepare learners to monitor CCTV systems, identify suspicious activities, manage surveillance incidents, maintain monitoring records, and follow responsible surveillance practices.",
+      modules: [
+        "CCTV Surveillance Fundamentals",
+        "Camera Types, Placement, and Field of View",
+        "Live Monitoring and Suspicious Activity Detection",
+        "Video Playback, Evidence Preservation, and Export",
+        "Video Management Systems and Recording Devices",
+        "Incident Documentation and Reporting",
+        "CCTV Equipment Checks and Basic Troubleshooting",
+        "Privacy, Access Control, and Surveillance Procedures"
+      ],
+      careerRoles: ["CCTV Surveillance Operator", "Video Monitoring Specialist", "Security Surveillance Executive"],
+      outcome: "Certified CCTV Surveillance Specialist",
+      labs: "Multi-Display Surveillance Console & Digital Evidence Export Lab",
+      campuses: "Madurai · Coimbatore · Chennai",
+      eligibility: "10th / 12th Pass · Computer operation skills",
       batch: "Admissions Open"
     },
 
@@ -796,6 +972,17 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
     }
   ];
 
+  // Dynamic course counts
+  const totalGuardingCount = guardingSecurityCoursePortfolio.length;
+  const totalTechnologyCount = technologyCoursePortfolio.length;
+  const totalFacilityCount = facilityManagementCoursePortfolio.length;
+  const totalAllCoursesCount = totalGuardingCount + totalTechnologyCount + totalFacilityCount;
+
+  const coreGuardingCount = guardingSecurityCoursePortfolio.filter(c => c.category === "core").length;
+  const industryGuardingCount = guardingSecurityCoursePortfolio.filter(c => c.category === "industry").length;
+  const leadershipGuardingCount = guardingSecurityCoursePortfolio.filter(c => c.category === "leadership").length;
+  const specialisedGuardingCount = guardingSecurityCoursePortfolio.filter(c => c.category === "specialised").length;
+
   const filteredGuardingCourses = guardingSecurityCoursePortfolio.filter(c => {
     if (guardingFilter === "all") return true;
     return c.category === guardingFilter;
@@ -869,7 +1056,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   size="lg"
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-base px-8 py-6 rounded-2xl shadow-lg shadow-blue-500/20 transition-all gap-2 hover:-translate-y-0.5"
                 >
-                  <span>Explore 18 Certification Courses</span>
+                  <span>Explore {totalGuardingCount} Certification Courses</span>
                   <ArrowRight className="w-5 h-5" />
                 </Button>
 
@@ -934,7 +1121,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
               Structured Professional Certification Programs
             </h2>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Explore specialized courses across Physical Guarding Security, High-Tech Cybersecurity & AI, and Integrated Facility Management.
+              Explore {totalAllCoursesCount} specialized courses across Physical Guarding Security, High-Tech Cybersecurity & AI, and Integrated Facility Management.
             </p>
           </div>
 
@@ -953,7 +1140,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
               )}
             >
               <ShieldCheck className="w-5 h-5" />
-              <span>🛡️ Guarding Security (18 Courses)</span>
+              <span>🛡️ Guarding Security ({totalGuardingCount} Courses)</span>
             </button>
 
             <button
@@ -969,7 +1156,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
               )}
             >
               <Laptop className="w-5 h-5" />
-              <span>💻 Technology Programs (8 Domains)</span>
+              <span>💻 Technology Programs ({totalTechnologyCount} Courses)</span>
             </button>
 
             <button
@@ -985,7 +1172,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
               )}
             >
               <Building2 className="w-5 h-5" />
-              <span>🏢 Facility Management (4 Domains)</span>
+              <span>🏢 Facility Management ({totalFacilityCount} Courses)</span>
             </button>
           </div>
 
@@ -999,7 +1186,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   guardingFilter === "all" ? "bg-white text-blue-700 shadow-sm" : "text-slate-600 hover:text-slate-900"
                 )}
               >
-                All 18 Courses
+                All {totalGuardingCount} Courses
               </button>
               <button
                 onClick={() => setGuardingFilter("core")}
@@ -1008,7 +1195,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   guardingFilter === "core" ? "bg-white text-blue-700 shadow-sm" : "text-slate-600 hover:text-slate-900"
                 )}
               >
-                Core Guarding (4)
+                Core Guarding ({coreGuardingCount})
               </button>
               <button
                 onClick={() => setGuardingFilter("industry")}
@@ -1017,7 +1204,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   guardingFilter === "industry" ? "bg-white text-blue-700 shadow-sm" : "text-slate-600 hover:text-slate-900"
                 )}
               >
-                Industry-Specific (7)
+                Industry-Specific ({industryGuardingCount})
               </button>
               <button
                 onClick={() => setGuardingFilter("leadership")}
@@ -1026,7 +1213,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   guardingFilter === "leadership" ? "bg-white text-blue-700 shadow-sm" : "text-slate-600 hover:text-slate-900"
                 )}
               >
-                Advanced Leadership (3)
+                Advanced Leadership ({leadershipGuardingCount})
               </button>
               <button
                 onClick={() => setGuardingFilter("specialised")}
@@ -1035,7 +1222,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   guardingFilter === "specialised" ? "bg-white text-blue-700 shadow-sm" : "text-slate-600 hover:text-slate-900"
                 )}
               >
-                Specialised Programs (4)
+                Specialised Programs ({specialisedGuardingCount})
               </button>
             </div>
           )}
@@ -1855,10 +2042,12 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
             )}
 
             {/* Career Outcomes & Roles */}
-            {activeProgramModal.careerRoles && (
+            {(activeProgramModal.careerRoles || activeProgramModal.outcome) && (
               <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-slate-900 space-y-1 mb-6 text-xs">
-                <div className="text-blue-800 font-bold">Target Career Roles:</div>
-                <div className="text-slate-800 font-semibold">{activeProgramModal.careerRoles.join(' · ')}</div>
+                <div className="text-blue-800 font-bold">Target Career Roles / Outcomes:</div>
+                <div className="text-slate-800 font-semibold">
+                  {activeProgramModal.careerRoles ? activeProgramModal.careerRoles.join(' · ') : activeProgramModal.outcome}
+                </div>
                 {activeProgramModal.eligibility && (
                   <div className="text-slate-600 text-[11px] pt-1 border-t border-blue-200/60 mt-2">
                     Eligibility: <strong>{activeProgramModal.eligibility}</strong>

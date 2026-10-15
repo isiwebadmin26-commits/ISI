@@ -95,12 +95,27 @@ function isCorporateEmail(email) {
 
   for (var i = 0; i < BLOCKED_DOMAINS.length; i++) {
     var blocked = BLOCKED_DOMAINS[i];
-    if (domain === blocked || domain.indexOf('.' + blocked) === (domain.length - (blocked.length + 1))) {
+    var subDomainSuffix = '.' + blocked;
+    if (domain === blocked || (domain.length > blocked.length && domain.slice(-subDomainSuffix.length) === subDomainSuffix)) {
       return false;
     }
   }
 
   return true;
+}
+
+/**
+ * Sanitizes email content to remove Unicode replacement chars and emojis that cause corruption.
+ */
+function sanitizeEmailContent(str) {
+  if (!str) return str;
+  var clean = str.replace(/[\uFFFD\uFEFF]/g, '');
+  clean = clean.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '')
+               .replace(/[\u2300-\u23FF]/g, '')
+               .replace(/[\u2600-\u27BF]/g, '')
+               .replace(/[\u2B50-\u2B55]/g, '')
+               .replace(/[\uFE00-\uFE0F]/g, '');
+  return clean;
 }
 
 /**

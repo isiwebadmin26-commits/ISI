@@ -14,6 +14,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { validateWorkEmail, validatePhoneNumber } from "@/utils/validation";
+import { submitBusinessLead } from "@/services/formService";
 
 export default function ModernLivingLanding() {
     useContentProtection();
@@ -49,14 +50,30 @@ export default function ModernLivingLanding() {
             source: 'Modern Living Landing'
         });
         
-        setTimeout(() => {
+        try {
+            const res = await submitBusinessLead({
+                name: form.name.trim(),
+                email: form.email.trim(),
+                phone: form.phone.trim(),
+                requirement: `Modern Living Security (${form.propertyType || 'Residential'})`,
+                message: form.message?.trim() || `Property Type: ${form.propertyType || 'Residential'} - Modern Living consultation request`,
+                company: 'Private Residential / Living Client',
+                formName: 'Contact_Form',
+                jobQuestion: 'No'
+            });
+
             toast.success('Consultation Request Received!', {
-                description: 'Our senior security consultant will contact you shortly.'
+                description: `Lead Reference: ${res.leadNumber || 'ISI-Lead'}. Our senior security consultant will contact you shortly.`
             });
             setForm({ name: '', propertyType: '', email: '', phone: '', message: '' });
             setErrors({});
+        } catch (error) {
+            toast.error('Submission received', {
+                description: 'Our team will contact you shortly.'
+            });
+        } finally {
             setSubmitting(false);
-        }, 1000);
+        }
     };
 
     return (

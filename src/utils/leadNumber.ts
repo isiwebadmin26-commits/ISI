@@ -96,7 +96,7 @@ export function normalizeLeadSource(utmSource?: string, referrer?: string, pageU
     return 'Community';
   }
 
-  // 6. Organic (Default for search engines, direct, or organic visits)
+  // 6. Google Organic Search (Default for search engines, direct, or organic visits)
   if (
     s.includes('organic') ||
     s.includes('google') ||
@@ -107,8 +107,8 @@ export function normalizeLeadSource(utmSource?: string, referrer?: string, pageU
     r.includes('yahoo.com') ||
     !s
   ) {
-    return 'Organic';
+    return 'Google Organic Search';
   }
 
-  return 'Organic';
+  return 'Google Organic Search';
 }

@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "package": "node scripts/build-package.js",
+    "build:package": "vite build && node scripts/build-package.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server.js"

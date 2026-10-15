@@ -2,20 +2,8 @@
 # Optimized for cPanel/Apache React Deployments
 
 # 1. Stability & Standards
-Options -MultiViews -Indexes
 DirectoryIndex index.html
-
-# Set default content-type & charset for HTML pages to avoid Accept header negotiation failures (406)
 AddDefaultCharset UTF-8
-
-# Disable ModSecurity engine if permitted in .htaccess to prevent 406 Not Acceptable on legitimate crawlers
-<IfModule mod_security2.c>
-  SecRuleEngine Off
-</IfModule>
-<IfModule mod_security.c>
-  SecFilterEngine Off
-  SecFilterScanPOST Off
-</IfModule>
 
 <IfModule mod_negotiation.c>
   Options -MultiViews
@@ -25,42 +13,48 @@ AddDefaultCharset UTF-8
   RewriteEngine On
   RewriteBase /
 
-  # 3. Canonical Host & HTTPS Redirection (301 Permanent Redirect)
-  # Redirect HTTP to HTTPS and non-www (isisecurity.in) to www.isisecurity.in
-  RewriteCond %{HTTPS} off [OR]
-  RewriteCond %{HTTP_HOST} !^www\.isisecurity\.in$ [NC]
-  RewriteRule ^(.*)$ https://www.isisecurity.in/$1 [L,R=301]
+  # 2. Canonical Host & HTTPS Redirection (301 Permanent Redirect)
+  # Step A: Force HTTPS for all non-local domains (handles both www and non-www, proxy-aware)
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-  # 4. SPA Routing (React Router)
+  # Step B: Canonical redirect bare domain to www.isisecurity.in
+  RewriteCond %{HTTP_HOST} ^isisecurity\.in$ [NC]
+  RewriteRule ^(.*)$ https://www.isisecurity.in/$1 [R=301,L]
+
+  # 3. SPA Routing (React Router)
   RewriteRule ^index\.html$ - [L]
 
-  # Optimization: Don't rewrite known static assets
-  RewriteCond %{REQUEST_URI} !\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot|map|json|xml|txt)$ [NC]
+  # Don't rewrite actual files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # Route client-side SPA URLs to index.html (ignore static assets with extensions)
+  RewriteCond %{REQUEST_URI} !\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot|map|json|xml|txt|webp|mp4|webm)$ [NC]
   RewriteRule . /index.html [L]
 </IfModule>
 
-# Fallback for 406 Not Acceptable to index.html with 200 OK
+# Fallback for 406 Not Acceptable
 ErrorDocument 406 /index.html
-ErrorDocument 404 /index.html
 
 <IfModule mod_headers.c>
-  # 5. Critical Cache Control
+  # 4. Critical Cache Control for HTML Entry Point
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
     Header set Expires "0"
   </FilesMatch>
 
-  # Cache Assets aggressively
-  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$">
+  # Cache Assets aggressively & Allow Cross-Origin (includes webp, mp4, webm, fonts)
+  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|mp4|webm)$">
     Header set Cache-Control "max-age=31536000, public"
+    Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 
-  # 6. Security (Safe Mode)
-  Header set Access-Control-Allow-Origin "https://www.isisecurity.in"
+  # 5. Security (Safe Mode)
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set X-XSS-Protection "1; mode=block"
@@ -73,4 +67,7 @@ ErrorDocument 404 /index.html
   AddType text/css .css
   AddType image/svg+xml .svg
   AddType application/xml .xml
+  AddType image/webp .webp
+  AddType video/mp4 .mp4
+  AddType video/webm .webm
 </IfModule>

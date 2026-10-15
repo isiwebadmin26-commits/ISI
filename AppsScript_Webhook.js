@@ -112,7 +112,8 @@ function isCorporateEmail(email) {
 
   for (var i = 0; i < BLOCKED_DOMAINS.length; i++) {
     var blocked = BLOCKED_DOMAINS[i];
-    if (domain === blocked || domain.indexOf('.' + blocked) === (domain.length - (blocked.length + 1))) {
+    var subDomainSuffix = '.' + blocked;
+    if (domain === blocked || (domain.length > blocked.length && domain.slice(-subDomainSuffix.length) === subDomainSuffix)) {
       return false;
     }
   }
@@ -1497,7 +1498,14 @@ function buildInternalLeadHtml(meta, data, spreadsheetUrl) {
     
     // Format display names nicely
     if (normKey === "leadnumber") prettyKey = isCareer ? "Application Number" : "Lead Number";
-    if (normKey === "leadsource") prettyKey = "Lead Source";
+    if (normKey === "leadsource" || normKey === "source") {
+      prettyKey = "Lead Source";
+      seenKeys["source"] = true;
+      seenKeys["leadsource"] = true;
+      if (!val || String(val).toLowerCase() === "organic") {
+        val = "Google Organic Search";
+      }
+    }
     if (normKey === "pageurl") prettyKey = "Page URL";
     if (normKey === "ipaddress") prettyKey = "IP Address";
     if (normKey === "resumefilename") prettyKey = "Resume File Name";
@@ -1519,6 +1527,14 @@ function buildInternalLeadHtml(meta, data, spreadsheetUrl) {
                   '<td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-size:13px;font-weight:500;">' + valStr + '</td>' +
                   '</tr>';
     }
+  }
+
+  if (!seenKeys["leadsource"] && !seenKeys["source"] && !isCareer) {
+    var defaultSourceVal = "Google Organic Search";
+    formRows = '<tr>' +
+               '<td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:600;color:#64748b;font-size:13px;width:35%;vertical-align:top;">Lead Source</td>' +
+               '<td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-size:13px;font-weight:500;">' + escapeHtml(defaultSourceVal) + '</td>' +
+               '</tr>' + formRows;
   }
 
   // Quick Action Buttons (No Drive button)
@@ -1604,7 +1620,7 @@ function buildInternalLeadHtml(meta, data, spreadsheetUrl) {
     '      ' + coverLetterSection,
     '',
     '      <!-- FORM DATA TABLE -->',
-    '      <h4 style="margin: 0 0 10px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #003380; font-weight: 700;">Submission Parameters</h4>',
+    '      <h4 style="margin: 0 0 10px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #003380; font-weight: 700;">Lead Details</h4>',
     '      <table style="width: 100%; border-collapse: collapse; border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden;">',
     '        <tbody>' + formRows + '</tbody>',
     '      </table>',
@@ -4451,7 +4467,8 @@ function resolveField(header, data) {
     "Drive File Id":          data.driveFileId  || data.driveId     || data["Drive File ID"]   || data["Drive File Id"] || data.drive_file_id || "",
     "File ID":                data.driveFileId  || data.driveId     || data["Drive File ID"]   || data["Drive File Id"] || data.drive_file_id || "",
     "Location":               data.location     || data.ipLocation  || data["Location"]     || data["IP Location"]  || "",
-    "Source":                 data.source       || data.utmSource   || data["Source"]       || "Website Direct",
+    "Source":                 data.source       || data.leadSource  || data.utmSource   || data["Source"]       || "Google Organic Search",
+    "Lead Source":            data.leadSource   || data.source      || data.utmSource   || data["Lead Source"]  || data["Source"] || "Google Organic Search",
     "IP Location":            data.location     || data.ipLocation  || data["IP Location"]  || "",
     "IP Address":             data.ipAddress     || data.ip_address  || data["IP Address"]   || "",
     "Organization":           data.organization  || data.org         || data["Organization"] || "",

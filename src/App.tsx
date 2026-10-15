@@ -2,29 +2,30 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, Navigate, useParams, generatePath } from "react-router-dom";
-import { useEffect, Suspense, lazy, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useEffect, Suspense, useState } from 'react';
+import { lazyWithRetry } from "./utils/lazyWithRetry";
 import Index from "./pages/Index";
-const ContactPage = lazy(() => import("./pages/ContactPage"));
+const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"), "ContactPage");
 
-const VerticalsPage = lazy(() => import("./pages/VerticalsPage"));
+const VerticalsPage = lazyWithRetry(() => import("./pages/VerticalsPage"), "VerticalsPage");
 
-const CareersPage = lazy(() => import("./pages/CareersPage"));
+const CareersPage = lazyWithRetry(() => import("./pages/CareersPage"), "CareersPage");
 
-const AboutPage = lazy(() => import("./pages/AboutPage"));
+const AboutPage = lazyWithRetry(() => import("./pages/AboutPage"), "AboutPage");
 
-const SolutionsPage = lazy(() => import("./pages/SolutionsPage"));
+const SolutionsPage = lazyWithRetry(() => import("./pages/SolutionsPage"), "SolutionsPage");
 
-const CustomersPage = lazy(() => import("./pages/CustomersPage"));
+const CustomersPage = lazyWithRetry(() => import("./pages/CustomersPage"), "CustomersPage");
 
-const PartnersPage = lazy(() => import("./pages/PartnersPage"));
+const PartnersPage = lazyWithRetry(() => import("./pages/PartnersPage"), "PartnersPage");
 
 import ErrorBoundary from "./components/ErrorBoundary";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { ChatBot } from "./components/ai/ChatBot";
 import { ISIAcademyChatbot } from "./components/ai/ISIAcademyChatbot";
 
-const IntelligenceDashboard = lazy(() => import("./pages/admin/IntelligenceDashboard"));
+const IntelligenceDashboard = lazyWithRetry(() => import("./pages/admin/IntelligenceDashboard"), "IntelligenceDashboard");
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,8 +41,9 @@ const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
     if (hash) {
-      setTimeout(() => {
+      const scrollToHash = () => {
         try {
           const id = hash.replace(/^#/, '');
           let element = document.getElementById(id);
@@ -54,64 +56,69 @@ const ScrollToTop = () => {
         } catch (e) {
           console.warn('ScrollToTop anchor lookup error:', e);
         }
-      }, 100);
+      };
+      timer = setTimeout(scrollToHash, 150);
     } else {
       window.scrollTo(0, 0);
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [pathname, hash]);
 
   return null;
 };
 
-const CapabilitiesPage = lazy(() => import("./pages/CapabilitiesPage"));
+const CapabilitiesPage = lazyWithRetry(() => import("./pages/CapabilitiesPage"), "CapabilitiesPage");
 
-const OfferingsPage = lazy(() => import("./pages/OfferingsPage"));
+const OfferingsPage = lazyWithRetry(() => import("./pages/OfferingsPage"), "OfferingsPage");
 
 
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"), "PrivacyPolicy");
 
-const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"), "TermsOfService");
 
-const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
+const CookiePolicy = lazyWithRetry(() => import("./pages/CookiePolicy"), "CookiePolicy");
 
-const CopyrightPolicy = lazy(() => import("./pages/CopyrightPolicy"));
+const CopyrightPolicy = lazyWithRetry(() => import("./pages/CopyrightPolicy"), "CopyrightPolicy");
 
-const Sitemap = lazy(() => import("./pages/Sitemap"));
+const Sitemap = lazyWithRetry(() => import("./pages/Sitemap"), "Sitemap");
 
-const VerticalDetailPage = lazy(() => import("./pages/VerticalDetailPage"));
+const VerticalDetailPage = lazyWithRetry(() => import("./pages/VerticalDetailPage"), "VerticalDetailPage");
 
-const SchoolSafetyLanding = lazy(() => import("./pages/SchoolSafetyLanding"));
+const SchoolSafetyLanding = lazyWithRetry(() => import("./pages/SchoolSafetyLanding"), "SchoolSafetyLanding");
 
-const CampusSafetyLanding = lazy(() => import("./pages/CampusSafetyLanding"));
+const CampusSafetyLanding = lazyWithRetry(() => import("./pages/CampusSafetyLanding"), "CampusSafetyLanding");
 
-const CashLogisticsPage = lazy(() => import("./pages/CashLogisticsPage"));
+const CashLogisticsPage = lazyWithRetry(() => import("./pages/CashLogisticsPage"), "CashLogisticsPage");
 
-const SecureValueLogisticsPage = lazy(() => import("./pages/SecureValueLogisticsPage"));
+const SecureValueLogisticsPage = lazyWithRetry(() => import("./pages/SecureValueLogisticsPage"), "SecureValueLogisticsPage");
 
-const CommandCenterPage = lazy(() => import("./pages/CommandCenterPage"));
+const CommandCenterPage = lazyWithRetry(() => import("./pages/CommandCenterPage"), "CommandCenterPage");
 
-const SmartCityPage = lazy(() => import("./pages/SmartCityPage"));
+const SmartCityPage = lazyWithRetry(() => import("./pages/SmartCityPage"), "SmartCityPage");
 
-const MassTransportationPage = lazy(() => import("./pages/MassTransportationPage"));
+const MassTransportationPage = lazyWithRetry(() => import("./pages/MassTransportationPage"), "MassTransportationPage");
 
-const TravelTourismPage = lazy(() => import("./pages/TravelTourismPage"));
+const TravelTourismPage = lazyWithRetry(() => import("./pages/TravelTourismPage"), "TravelTourismPage");
 
-const GccItParksPage = lazy(() => import("./pages/GccItParksPage"));
+const GccItParksPage = lazyWithRetry(() => import("./pages/GccItParksPage"), "GccItParksPage");
 
-const EventManagementPage = lazy(() => import("./pages/EventManagementPage"));
+const EventManagementPage = lazyWithRetry(() => import("./pages/EventManagementPage"), "EventManagementPage");
 
-const ModernLivingLanding = lazy(() => import("./pages/ModernLivingLanding"));
+const ModernLivingLanding = lazyWithRetry(() => import("./pages/ModernLivingLanding"), "ModernLivingLanding");
 
 
 import { BackToTop } from "./components/BackToTop";
-const ServiceCategoryPage = lazy(() => import("./pages/ServiceCategoryPage"));
-const SalesInquiryPage = lazy(() => import("./pages/SalesInquiryPage"));
-const ThankYouPage = lazy(() => import("./pages/ThankYouPage"));
-const BlogListingPage = lazy(() => import("./pages/BlogListingPage"));
-const BlogDetailPage = lazy(() => import("./pages/BlogDetailPage"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const CoursesPage = lazy(() => import("./pages/CoursesPage"));
-const AcademyPage = lazy(() => import("./pages/AcademyPage"));
+const ServiceCategoryPage = lazyWithRetry(() => import("./pages/ServiceCategoryPage"), "ServiceCategoryPage");
+const SalesInquiryPage = lazyWithRetry(() => import("./pages/SalesInquiryPage"), "SalesInquiryPage");
+const ThankYouPage = lazyWithRetry(() => import("./pages/ThankYouPage"), "ThankYouPage");
+const BlogListingPage = lazyWithRetry(() => import("./pages/BlogListingPage"), "BlogListingPage");
+const BlogDetailPage = lazyWithRetry(() => import("./pages/BlogDetailPage"), "BlogDetailPage");
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"), "NotFound");
+const CoursesPage = lazyWithRetry(() => import("./pages/CoursesPage"), "CoursesPage");
+const AcademyPage = lazyWithRetry(() => import("./pages/AcademyPage"), "AcademyPage");
 
 const appRoutes = [
   { path: "/admin", element: <IntelligenceDashboard /> },
@@ -158,19 +165,13 @@ const appRoutes = [
   { path: "/salesinquiry", element: <Navigate to="/lp/facility-management" replace /> },
   { path: "/sales-inquiry", element: <Navigate to="/lp/facility-management" replace /> },
   { path: "/services", element: <Navigate to="/services/security" replace /> },
-  { path: "/services/", element: <Navigate to="/services/security" replace /> },
-  { path: "/services/security", element: <ServiceCategoryPage categoryIdOverride="manned-guarding" canonicalPathOverride="/services/security/" /> },
-  { path: "/services/security/", element: <ServiceCategoryPage categoryIdOverride="manned-guarding" canonicalPathOverride="/services/security/" /> },
-  { path: "/services/integrated-facility-management", element: <ServiceCategoryPage categoryIdOverride="hard-fm" canonicalPathOverride="/services/integrated-facility-management/" /> },
-  { path: "/services/integrated-facility-management/", element: <ServiceCategoryPage categoryIdOverride="hard-fm" canonicalPathOverride="/services/integrated-facility-management/" /> },
-  { path: "/services/skill-development-manpower", element: <ServiceCategoryPage categoryIdOverride="manned-guarding" canonicalPathOverride="/services/skill-development-manpower/" /> },
-  { path: "/services/skill-development-manpower/", element: <ServiceCategoryPage categoryIdOverride="manned-guarding" canonicalPathOverride="/services/skill-development-manpower/" /> },
-  { path: "/mobile-security-services-chennai-crime-prevention", element: <ServiceCategoryPage categoryIdOverride="manned-guarding" canonicalPathOverride="/mobile-security-services-chennai-crime-prevention/" /> },
-  { path: "/need-protection-money-properties-vip-escort-services", element: <ServiceCategoryPage categoryIdOverride="specialized-protection" canonicalPathOverride="/need-protection-money-properties-vip-escort-services/" /> },
-  { path: "/need-protection-money-properties-vip-escort-services/", element: <ServiceCategoryPage categoryIdOverride="specialized-protection" canonicalPathOverride="/need-protection-money-properties-vip-escort-services/" /> },
+  { path: "/services/security", element: <ServiceCategoryPage categoryIdOverride="manned-guarding" canonicalPathOverride="/services/security" /> },
+  { path: "/services/integrated-facility-management", element: <ServiceCategoryPage categoryIdOverride="hard-fm" canonicalPathOverride="/services/integrated-facility-management" /> },
+  { path: "/services/skill-development-manpower", element: <Navigate to="/academy" replace /> },
+  { path: "/mobile-security-services-chennai-crime-prevention", element: <Navigate to="/services/security" replace /> },
+  { path: "/need-protection-money-properties-vip-escort-services", element: <ServiceCategoryPage categoryIdOverride="specialized-protection" canonicalPathOverride="/need-protection-money-properties-vip-escort-services" /> },
   { path: "/404", element: <NotFound /> },
-  { path: "/services/:type/:categoryId", element: <ServiceCategoryPage /> },
-  { path: "/services/:type/:categoryId/", element: <ServiceCategoryPage /> }
+  { path: "/services/:type/:categoryId", element: <ServiceCategoryPage /> }
 ];
 
 const AppRouter = () => {

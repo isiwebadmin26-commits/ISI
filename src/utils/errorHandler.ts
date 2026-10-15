@@ -100,7 +100,6 @@ class ErrorHandler {
         // Handle uncaught errors
         window.addEventListener('error', (event) => {
             this.logError(event.error || event.message, 'high');
-            event.preventDefault(); // Prevent default browser error handling
         });
 
         // Handle unhandled promise rejections
@@ -109,7 +108,6 @@ class ErrorHandler {
                 event.reason instanceof Error ? event.reason : String(event.reason),
                 'high'
             );
-            event.preventDefault();
         });
     }
 }

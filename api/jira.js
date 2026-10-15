@@ -76,7 +76,7 @@ function normalizeSource(utmSource, referrer, pageUrl, category) {
     return 'Community';
   }
 
-  return 'Organic';
+  return 'Google Organic Search';
 }
 
 /**

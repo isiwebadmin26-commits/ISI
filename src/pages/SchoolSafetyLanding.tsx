@@ -8,6 +8,7 @@ import { EbookFormData, ConsultationFormData } from "@/types/schoolSafety";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { sendToSheet } from "@/services/formService";
 
 import schoolSafety1 from "../assets/school_safety_1.jpg";
 import schoolSafety2 from "../assets/school_safety_2.jpg";
@@ -210,9 +211,29 @@ export default function SchoolSafetyLanding() {
 
         setConsultationSubmitting(true);
         try {
+            await sendToSheet('Consultation_Requests', {
+                name: consultationForm.name.trim(),
+                schoolName: consultationForm.schoolName.trim(),
+                company: consultationForm.schoolName.trim(),
+                board: consultationForm.board,
+                numberOfStudents: consultationForm.numberOfStudents,
+                primaryConcern: consultationForm.primaryConcern,
+                email: consultationForm.email.trim(),
+                workEmail: consultationForm.email.trim(),
+                phone: consultationForm.phone.trim(),
+                phoneNumber: consultationForm.phone.trim(),
+                city: consultationForm.city.trim(),
+                serviceRequested: 'School Safety Consultation',
+                message: `Board: ${consultationForm.board} | Students: ${consultationForm.numberOfStudents} | Concern: ${consultationForm.primaryConcern} | City: ${consultationForm.city}`,
+                jobQuestion: 'No',
+                leadType: 'sales',
+                status: 'New'
+            });
+
             // Track submission to Google Sheets
             trackFormSubmission('Consultation_Requests', {
                 ...consultationForm,
+                analyticsOnly: true,
                 status: 'New'
             });
 

@@ -17,7 +17,7 @@ import salesImg from "@/assets/Sales inquiry.png";
 import isiLogo from "@/assets/isi-logo.webp";
 
 import { getUtmParams } from '@/utils/utm';
-import { submitLeadToJira } from '@/services/jiraService';
+import { sendToSheet } from '@/services/formService';
 import { generateLeadNumber } from '@/utils/leadNumber';
 
 export const SalesInquiryPage = () => {
@@ -115,51 +115,34 @@ export const SalesInquiryPage = () => {
     }
 
     setIsSubmitting(true);
-    const leadNumber = generateLeadNumber();
-    
-    const data = {
-      sheetName: "Google_Ad_Leads",
-      leadNumber,
-      "Lead Number": leadNumber,
-      "Full Name": fullName,
-      "Phone Number": phoneNumber,
-      "Email": workEmail,
-      "Work Email": workEmail,
-      "Company Name": companyName,
-      "utm_source": utmSource,
-      "utm_medium": utmMedium,
-      "utm_campaign": utmCampaign,
-      "utm_term": utmTerm,
-      "utm_content": utmContent,
-      timestamp: new Date().toISOString()
-    };
 
     try {
-      const scriptURL = import.meta.env.VITE_AD_CAMPAIGN_WEB_APP_URL || "https://script.google.com/macros/s/AKfycbwL1i7fOTIPdyo86zgI2AbAmeAowti2nJy7LftH2YY-MEUmir8gYOKyaS2BhrK8zNnC/exec";
-      
-      await fetch(scriptURL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(data),
-      });
-
-      // Capture business leads in Jira Cloud
-      submitLeadToJira({
-        leadNumber,
-        name: fullName,
-        email: workEmail,
-        phone: phoneNumber,
-        company: companyName,
+      const res = await sendToSheet('Sales_Inquiries', {
+        name: fullName.trim(),
+        fullName: fullName.trim(),
+        phone: phoneNumber.trim(),
+        phoneNumber: phoneNumber.trim(),
+        email: workEmail.trim(),
+        workEmail: workEmail.trim(),
+        company: companyName.trim(),
+        companyName: companyName.trim(),
         serviceRequested: 'Facility Management & Integrated Solutions',
-        message: 'Sales inquiry from Integrated Services landing page',
-        formName: 'Google_Ad_Leads',
+        message: 'Sales inquiry from Facility Management landing page (/lp/facility-management)',
+        jobQuestion: 'No',
+        leadType: 'sales',
         utmSource,
         utmMedium,
         utmCampaign,
         utmTerm,
-        utmContent
-      }).catch(err => console.warn('[JIRA SALES CAPTURE ERROR]', err));
+        utmContent,
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        utm_term: utmTerm,
+        utm_content: utmContent
+      });
+
+      const leadNumber = res.leadNumber || generateLeadNumber();
 
       toast.success("Inquiry Submitted Successfully!", {
         description: `Lead Reference: ${leadNumber}. Our sales team will get back to you within 24 hours.`,

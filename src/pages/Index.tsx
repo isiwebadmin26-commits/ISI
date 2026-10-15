@@ -1,4 +1,5 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
+import { lazyWithRetry } from "@/utils/lazyWithRetry";
 import { Layout } from "@/components/Layout";
 import { Hero } from "@/components/Hero";
 import { homeLocations, activeLocations } from "@/data/locations-data";
@@ -7,20 +8,20 @@ import { ViewportLazy } from "@/components/ViewportLazy";
 
 import SEO from "@/components/SEO";
 
-// Lazy load below-the-fold components to improve LCP/FCP
-const TrustBar = lazy(() => import("@/components/TrustBar").then(module => ({ default: module.TrustBar })));
-const HomeCustomers = lazy(() => import("@/components/HomeCustomers").then(module => ({ default: module.HomeCustomers })));
-const HomeStats = lazy(() => import("@/components/HomeStats").then(module => ({ default: module.HomeStats })));
-const CorePhilosophy = lazy(() => import("@/components/CorePhilosophy").then(module => ({ default: module.CorePhilosophy })));
-const Services = lazy(() => import("@/components/Services").then(module => ({ default: module.Services })));
-const HomeIndustries = lazy(() => import("@/components/HomeIndustries").then(module => ({ default: module.HomeIndustries })));
-const SecurityProcess = lazy(() => import("@/components/SecurityProcess").then(module => ({ default: module.SecurityProcess })));
-const CommandCenters = lazy(() => import("@/components/CommandCenters").then(module => ({ default: module.CommandCenters })));
-const Certifications = lazy(() => import("@/components/Certifications").then(module => ({ default: module.Certifications })));
-const LogisticsSection = lazy(() => import("@/components/LogisticsSection").then(module => ({ default: module.LogisticsSection })));
-const Testimonials = lazy(() => import("@/components/Testimonials").then(module => ({ default: module.Testimonials })));
-const JobMap = lazy(() => import("@/components/JobMap").then(module => ({ default: module.JobMap })));
-const FinalCTA = lazy(() => import("@/components/FinalCTA").then(module => ({ default: module.FinalCTA })));
+// Lazy load below-the-fold components with retry recovery
+const TrustBar = lazyWithRetry(() => import("@/components/TrustBar").then(module => ({ default: module.TrustBar })), "TrustBar");
+const HomeCustomers = lazyWithRetry(() => import("@/components/HomeCustomers").then(module => ({ default: module.HomeCustomers })), "HomeCustomers");
+const HomeStats = lazyWithRetry(() => import("@/components/HomeStats").then(module => ({ default: module.HomeStats })), "HomeStats");
+const CorePhilosophy = lazyWithRetry(() => import("@/components/CorePhilosophy").then(module => ({ default: module.CorePhilosophy })), "CorePhilosophy");
+const Services = lazyWithRetry(() => import("@/components/Services").then(module => ({ default: module.Services })), "Services");
+const HomeIndustries = lazyWithRetry(() => import("@/components/HomeIndustries").then(module => ({ default: module.HomeIndustries })), "HomeIndustries");
+const SecurityProcess = lazyWithRetry(() => import("@/components/SecurityProcess").then(module => ({ default: module.SecurityProcess })), "SecurityProcess");
+const CommandCenters = lazyWithRetry(() => import("@/components/CommandCenters").then(module => ({ default: module.CommandCenters })), "CommandCenters");
+const Certifications = lazyWithRetry(() => import("@/components/Certifications").then(module => ({ default: module.Certifications })), "Certifications");
+const LogisticsSection = lazyWithRetry(() => import("@/components/LogisticsSection").then(module => ({ default: module.LogisticsSection })), "LogisticsSection");
+const Testimonials = lazyWithRetry(() => import("@/components/Testimonials").then(module => ({ default: module.Testimonials })), "Testimonials");
+const JobMap = lazyWithRetry(() => import("@/components/JobMap").then(module => ({ default: module.JobMap })), "JobMap");
+const FinalCTA = lazyWithRetry(() => import("@/components/FinalCTA").then(module => ({ default: module.FinalCTA })), "FinalCTA");
 
 const Index = () => {
   useContentProtection();

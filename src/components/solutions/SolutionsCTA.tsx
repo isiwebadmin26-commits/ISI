@@ -5,6 +5,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
 import { CTAPanel } from "@/components/school-safety/CTAPanel";
 import { useNavigate } from "react-router-dom";
+import { sendToSheet } from "@/services/formService";
 
 export const SolutionsCTA = () => {
     const { trackFormSubmission } = useAnalytics();
@@ -45,35 +46,39 @@ export const SolutionsCTA = () => {
             source: 'Solutions Page Landing',
             analyticsOnly: true
         });
-        
-        const data = {
-            sheetName: "Sales_Inquiries",
-            "Full Name": form.name,
-            "Phone Number": form.phone,
-            "Work Email": form.email,
-            "Company Name": form.companyType,
-            "Message": form.message,
-            timestamp: new Date().toISOString()
-        };
 
         try {
-            const scriptURL = import.meta.env.VITE_GOOGLE_SHEETS_WEB_APP_URL;
-            const response = await fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify(data),
+            const res = await sendToSheet('Sales_Inquiries', {
+                name: form.name.trim(),
+                fullName: form.name.trim(),
+                phone: form.phone.trim(),
+                phoneNumber: form.phone.trim(),
+                email: form.email.trim(),
+                workEmail: form.email.trim(),
+                company: form.companyType.trim(),
+                companyName: form.companyType.trim(),
+                serviceRequested: 'Solutions Consultation',
+                message: form.message.trim() || 'Solutions Page Landing Consultation Request',
+                jobQuestion: 'No',
+                leadType: 'sales',
+                source: 'Solutions Page Landing'
             });
 
-            if (response.ok) {
-                toast.success('Enquiry Received!', {
-                    description: 'Our security team will contact you shortly.'
-                });
-                const submittedName = form.name;
-                setForm({ name: '', companyType: '', email: '', phone: '', message: '' });
-                setErrors({});
-                navigate('/lp/facility-management/thank-you', { state: { name: submittedName } });
-            } else {
-                throw new Error("Network response was not ok");
-            }
+            const refNumber = res.leadNumber || 'ISI-Lead';
+            toast.success('Enquiry Received!', {
+                description: `Lead Reference: ${refNumber}. Our security team will contact you shortly.`
+            });
+            const submittedName = form.name;
+            setForm({ name: '', companyType: '', email: '', phone: '', message: '' });
+            setErrors({});
+            navigate('/lp/facility-management/thank-you', { 
+                state: { 
+                    name: submittedName,
+                    leadNumber: refNumber,
+                    fromIntegratedServices: true,
+                    leadType: 'sales'
+                } 
+            });
         } catch (error) {
             toast.error("Submission Failed", {
                 description: "There was an error submitting your request. Please try again later.",

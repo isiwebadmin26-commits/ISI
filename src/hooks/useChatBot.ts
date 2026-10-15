@@ -392,18 +392,6 @@ export const useChatBot = () => {
 
                 setContext(prev => ({ ...prev, stage: 'captured', leadData: { ...prev.leadData, email: cleanedEmail } }));
 
-                // Send Lead via Node.js Server
-                fetch('http://localhost:5000/api/chatbot-leads', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: context.leadData.name || 'Anonymous',
-                        phone: context.leadData.phone || 'No Phone',
-                        email: cleanedEmail,
-                        message: `Existing Customer: ${context.leadData.isExisting || 'N/A'}\nCategory: ${context.leadData.lookingFor || 'N/A'}\nTopic: ${context.topic || 'General Inquiry'}`
-                    })
-                }).catch(err => console.error("Chatbot lead capture err:", err));
-
                 // Send Lead directly to Google Sheets Integration
                 submitChatbotLead(
                     context.leadData.name || 'Anonymous',

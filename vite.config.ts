@@ -164,18 +164,18 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development', // Only enable source maps in development
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          ui: [
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-popover',
-            'lucide-react',
-            'framer-motion'
-          ],
-          carousel: ['embla-carousel-react'],
-          utils: ['tailwind-merge', 'clsx', 'date-fns', 'sonner'],
-          vendor: ['leaflet', 'react-leaflet', 'recharts']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'react-core';
+            }
+            if (id.includes('leaflet') || id.includes('react-leaflet')) {
+              return 'leaflet-vendor';
+            }
+            if (id.includes('recharts')) {
+              return 'recharts-vendor';
+            }
+          }
         },
       },
     },

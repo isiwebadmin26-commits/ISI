@@ -214,6 +214,7 @@ export async function sendToSheet(
     const bodyObj: Record<string, unknown> = {
         sheetName: actualSheetName,
         source: normalizedSource,
+        leadSource: normalizedSource,
         pageUrl,
 
         // Form data
@@ -258,14 +259,10 @@ export async function sendToSheet(
     const body = JSON.stringify(bodyObj);
 
     // Send to Google Sheets Webhook
-    const isAdCampaign = actualSheetName === 'Google_Ad_Leads' || actualSheetName === 'AdCampaign';
-    const targetUrl = isAdCampaign
-        ? (import.meta.env.VITE_AD_CAMPAIGN_WEB_APP_URL || "https://script.google.com/macros/s/AKfycbwL1i7fOTIPdyo86zgI2AbAmeAowti2nJy7LftH2YY-MEUmir8gYOKyaS2BhrK8zNnC/exec")
-        : SHEETS_URL;
-
-    if (targetUrl) {
+    // 1. Primary Master Webhook (handles all forms including Google_Ad_Leads & Sales_Inquiries)
+    if (SHEETS_URL) {
         try {
-            await fetch(targetUrl, {
+            await fetch(SHEETS_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -275,6 +272,24 @@ export async function sendToSheet(
             });
         } catch (e) {
             console.warn('[INTERNAL SHEETS LOG NOTICE]', e);
+        }
+    }
+
+    // 2. Secondary Dedicated Ad Campaign Webhook (if distinct and applicable)
+    const isAdCampaign = actualSheetName === 'Google_Ad_Leads' || actualSheetName === 'AdCampaign' || actualSheetName === 'Sales_Inquiries';
+    const adWebhookUrl = import.meta.env.VITE_AD_CAMPAIGN_WEB_APP_URL;
+    if (isAdCampaign && adWebhookUrl && adWebhookUrl !== SHEETS_URL) {
+        try {
+            await fetch(adWebhookUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body
+            });
+        } catch (e) {
+            console.warn('[AD CAMPAIGN SHEETS LOG NOTICE]', e);
         }
     }
 

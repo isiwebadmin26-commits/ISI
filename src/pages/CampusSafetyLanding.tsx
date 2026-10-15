@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { toast } from "sonner";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { sendToSheet } from "@/services/formService";
 import { EbookFormData, ConsultationFormData } from "@/types/schoolSafety";
 import {
     Shield,
@@ -132,12 +133,33 @@ export default function CampusSafetyLanding() {
         }
 
         setConsultationSubmitting(true);
-        // Track submission to Google Sheets
-        trackFormSubmission('Consultation_Requests', {
-            ...consultationForm,
-            status: 'New'
-        });
-        setTimeout(() => {
+        try {
+            await sendToSheet('Consultation_Requests', {
+                name: consultationForm.name.trim(),
+                schoolName: consultationForm.schoolName.trim(),
+                company: consultationForm.schoolName.trim(),
+                board: consultationForm.board,
+                numberOfStudents: consultationForm.numberOfStudents,
+                primaryConcern: consultationForm.primaryConcern,
+                email: consultationForm.email.trim(),
+                workEmail: consultationForm.email.trim(),
+                phone: consultationForm.phone.trim(),
+                phoneNumber: consultationForm.phone.trim(),
+                city: consultationForm.city.trim(),
+                serviceRequested: 'Campus Safety Consultation',
+                message: `Board: ${consultationForm.board} | Students: ${consultationForm.numberOfStudents} | Concern: ${consultationForm.primaryConcern} | City: ${consultationForm.city}`,
+                jobQuestion: 'No',
+                leadType: 'sales',
+                status: 'New'
+            });
+
+            // Track submission to Google Sheets
+            trackFormSubmission('Consultation_Requests', {
+                ...consultationForm,
+                analyticsOnly: true,
+                status: 'New'
+            });
+
             toast.success('Consultation Request Received!', { description: 'Our security team will contact you within 24 hours.' });
             setConsultationForm({
                 name: '',
@@ -150,8 +172,11 @@ export default function CampusSafetyLanding() {
                 city: '',
             });
             setConsultationErrors({});
+        } catch (error) {
+            toast.error('Submission received', { description: 'Our security team will contact you shortly.' });
+        } finally {
             setConsultationSubmitting(false);
-        }, 1000);
+        }
     };
 
     return (

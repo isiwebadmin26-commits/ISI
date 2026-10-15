@@ -257,30 +257,7 @@ class AnalyticsService {
     const batch = [...this.eventQueue];
     this.eventQueue = [];
 
-    const endpoint = '/api/analytics/events';
-    const payload = JSON.stringify({ events: batch });
-
-    // 1. Send to Local SQLite API
-    if (isBeacon && navigator.sendBeacon) {
-      try {
-        const blob = new Blob([payload], { type: 'application/json' });
-        navigator.sendBeacon(endpoint, blob);
-      } catch { /* fallback to fetch */ }
-    } else {
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: payload,
-        keepalive: isBeacon
-      }).catch(() => {
-        // Re-queue on failure (if not unloading)
-        if (!isBeacon) {
-          this.eventQueue.unshift(...batch);
-        }
-      });
-    }
-
-    // 2. Mirror Session to Google Sheets Web App (Apps Script)
+    // Forward Session to Google Sheets Web App (Apps Script)
     this.forwardToGoogleSheets(batch, isBeacon);
   }
 
