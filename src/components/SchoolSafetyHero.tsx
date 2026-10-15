@@ -17,16 +17,16 @@ const heroSlides = [
         titleEnd: "for Future",
         description: "Blending child-first psychology with military-grade intelligence to create the world's most secure learning ecosystems.",
         image: schoolSafety1,
-        overlay: "from-background via-background/95 to-background/70",
+        overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
     },
     {
         badge: "24/7 Monitoring",
         title: "Advanced",
         highlight: "Campus Watch",
         titleEnd: "Systems",
-        description: "Round-the-clock surveillance and rapid response protocols tailored for educational environments, ensuring peace of mind.",
+        description: "Round-the-clock surveillance and rapid response protocols tailored for educational environments, ensuring complete peace of mind.",
         image: schoolSafety2,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
     },
     {
         badge: "Verified Personnel",
@@ -35,7 +35,7 @@ const heroSlides = [
         titleEnd: "",
         description: "Moving beyond traditional watchmen to Intelligent Safety Marshals (ISM) equipped with situational AI overlays.",
         image: schoolSafety3,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
     },
     {
         badge: "Digital Security",
@@ -44,7 +44,7 @@ const heroSlides = [
         titleEnd: "",
         description: "A unified NOC-SOC approach to campus infrastructure, ensuring 99.99% uptime for digital learning.",
         image: schoolSafety4,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
     },
     {
         badge: "Health & Transport",
@@ -53,7 +53,7 @@ const heroSlides = [
         titleEnd: "Protocols",
         description: "Comprehensive oversight of everything that moves, from school buses to student medical records with AI tracking.",
         image: schoolSafety5,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
     },
 ];
 
@@ -186,107 +186,220 @@ export const SchoolSafetyHero = ({ onOpenEbook }: { onOpenEbook: () => void }) =
                                     transform: selectedIndex === index ? 'scale(1.05)' : 'scale(1)'
                                 }}
                             />
-                            <div className={`absolute inset-0 bg-gradient-to-r ${slide.overlay}`} />
-                            <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
-                            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-400/10 rounded-full blur-[100px]" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-900/40" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
+                            <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[140px] pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Content Overlay */}
-            <div className="absolute inset-0 flex items-start md:items-center pt-40 md:pt-10">
-                <div className="container mx-auto px-4 lg:px-8 relative z-10">
-                    <div className="max-w-4xl">
+            {/* Desktop Left/Right Navigation Arrows */}
+            <button
+                onClick={scrollPrev}
+                aria-label="Previous school safety slide"
+                className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/70 hover:bg-primary text-white/90 hover:text-white backdrop-blur-md border border-white/20 items-center justify-center transition-all duration-200 shadow-2xl hover:scale-110 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+                <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+                onClick={scrollNext}
+                aria-label="Next school safety slide"
+                className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/70 hover:bg-primary text-white/90 hover:text-white backdrop-blur-md border border-white/20 items-center justify-center transition-all duration-200 shadow-2xl hover:scale-110 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+                <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Content Overlay - Balanced 2-Column Grid */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-20 py-16 lg:py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    {/* Left Column: Authoritative Message & CTAs */}
+                    <div className="lg:col-span-7 flex flex-col justify-center">
                         {/* Badge */}
                         <div
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm border border-border rounded-full mb-8 animate-fade-in"
+                            className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-slate-900/80 backdrop-blur-md border border-primary/40 rounded-full mb-6 w-fit animate-fade-in shadow-lg shadow-primary/10"
                             key={`badge-${selectedIndex}`}
                         >
                             <Shield className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-medium text-primary">{heroSlides[selectedIndex].badge}</span>
+                            <span className="text-xs sm:text-sm font-semibold tracking-wide text-primary-foreground uppercase">
+                                {heroSlides[selectedIndex].badge}
+                            </span>
                         </div>
 
                         {/* Main Heading */}
                         <h1
-                            className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-in"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-[1.15] mb-5 tracking-tight animate-fade-in"
                             key={`title-${selectedIndex}`}
                         >
                             {heroSlides[selectedIndex].title}{" "}
-                            <span className="text-gradient">{heroSlides[selectedIndex].highlight}</span>{" "}
+                            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
+                                {heroSlides[selectedIndex].highlight}
+                            </span>{" "}
                             {heroSlides[selectedIndex].titleEnd}
                         </h1>
 
                         {/* Subheading */}
                         <p
-                            className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 animate-fade-in"
+                            className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed font-normal animate-fade-in"
                             key={`desc-${selectedIndex}`}
                         >
                             {heroSlides[selectedIndex].description}
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8 animate-fade-in">
                             <Button
                                 size="lg"
-                                className="gap-2 text-base px-8 py-6 shadow-lg shadow-primary/20"
+                                className="gap-2.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-full shadow-xl shadow-primary/30 px-8 h-13 text-base cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                                 onClick={scrollToConsultation}
                             >
-                                Secure My Campus
-                                <ArrowRight className="w-5 h-5" />
+                                Secure My School
+                                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                             </Button>
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="gap-2 text-base px-8 py-6 bg-card/60 backdrop-blur-md border-white/20 hover:bg-primary hover:text-white transition-all duration-300"
+                                className="gap-2.5 bg-slate-900/60 hover:bg-white/10 text-white backdrop-blur-md border border-white/25 rounded-full px-7 h-13 text-base cursor-pointer hover:border-primary transition-all duration-200"
                                 onClick={onOpenEbook}
                             >
-                                <FileText className="w-4 h-4" />
+                                <FileText className="w-4 h-4 text-primary" />
                                 View Blueprint
                             </Button>
                         </div>
 
                         {/* Trust Indicators */}
-                        <div className="flex flex-wrap gap-8 text-sm text-muted-foreground">
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs sm:text-sm text-slate-300 font-medium animate-fade-in">
                             <div className="flex items-center gap-2">
-                                <CheckCircle className="w-5 h-5 text-primary" />
-                                <span className="font-medium">Police Verified Teams</span>
+                                <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                                <span>Police Verified Teams</span>
                             </div>
+                            <div className="w-1 h-1 rounded-full bg-slate-600 hidden sm:block" />
                             <div className="flex items-center gap-2">
-                                <CheckCircle className="w-5 h-5 text-primary" />
-                                <span className="font-medium">500+ Schools Safe</span>
+                                <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                                <span>500+ Schools Safe</span>
                             </div>
+                            <div className="w-1 h-1 rounded-full bg-slate-600 hidden sm:block" />
                             <div className="flex items-center gap-2">
-                                <CheckCircle className="w-5 h-5 text-primary" />
-                                <span className="font-medium">DPDP Compliant</span>
+                                <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                                <span>DPDP & POCSO Compliant</span>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column (Desktop): School Safety Telemetry HUD */}
+                    <div className="lg:col-span-5 hidden lg:block">
+                        <div className="relative bg-slate-900/85 backdrop-blur-xl border border-white/15 rounded-2xl p-7 shadow-2xl overflow-hidden hover:border-primary/50 transition-colors duration-300">
+                            {/* Card Header */}
+                            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                                <div className="flex items-center gap-2.5">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                                    <span className="text-xs font-bold tracking-wider text-slate-300 uppercase">
+                                        SCHOOL DEFENSE TELEMETRY
+                                    </span>
+                                </div>
+                                <span className="text-xs font-mono text-primary font-bold px-2 py-0.5 rounded bg-primary/10 border border-primary/20">
+                                    MODULE 0{selectedIndex + 1} / 0{heroSlides.length}
+                                </span>
+                            </div>
+
+                            {/* Active Slide Focus */}
+                            <div className="mb-5">
+                                <div className="text-xs text-primary font-semibold uppercase tracking-wider mb-1">
+                                    {heroSlides[selectedIndex].badge}
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2">
+                                    {heroSlides[selectedIndex].title} {heroSlides[selectedIndex].highlight}
+                                </h3>
+                                <p className="text-xs text-slate-300 leading-relaxed">
+                                    Child-first institutional security integrating Intelligent Safety Marshals (ISM), AI bus fleet tracking, and 24/7 centralized monitoring.
+                                </p>
+                            </div>
+
+                            {/* Performance Grid */}
+                            <div className="grid grid-cols-2 gap-3 mb-5">
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Staff Verification</div>
+                                    <div className="text-lg font-bold text-white">100% Police</div>
+                                    <div className="text-[10px] text-emerald-400 mt-0.5">Criminal Record Screened</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Fleet Oversight</div>
+                                    <div className="text-lg font-bold text-white">GPS + CCTV</div>
+                                    <div className="text-[10px] text-primary mt-0.5">Live Bus Telemetry</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Schools Protected</div>
+                                    <div className="text-lg font-bold text-white">500+</div>
+                                    <div className="text-[10px] text-blue-400 mt-0.5">Nationwide Footprint</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Regulatory Audit</div>
+                                    <div className="text-lg font-bold text-white">POCSO Ready</div>
+                                    <div className="text-[10px] text-emerald-400 mt-0.5">Statutory Standard</div>
+                                </div>
+                            </div>
+
+                            {/* Action inside card */}
+                            <button
+                                onClick={scrollToConsultation}
+                                className="w-full flex items-center justify-between p-3 rounded-xl bg-primary/20 hover:bg-primary/30 border border-primary/30 text-white text-xs font-semibold transition-all duration-200 cursor-pointer group"
+                            >
+                                <span>Request Comprehensive Institutional Audit</span>
+                                <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            {/* Slide Indicators */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
-                {heroSlides.map((_, index) => (
+            {/* Bottom Controls: Numbered Slide Pills and Mobile Navigation */}
+            <div className="absolute bottom-6 left-0 right-0 z-20 flex items-center justify-between px-6 lg:px-12 pointer-events-none">
+                {/* Mobile Prev/Next Controls */}
+                <div className="flex md:hidden items-center gap-2 pointer-events-auto">
                     <button
-                        key={index}
-                        onClick={() => scrollTo(index)}
-                        className={`relative h-2 rounded-full transition-all duration-300 ${selectedIndex === index
-                            ? "w-10 bg-primary"
-                            : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
-                            }`}
-                        aria-label={`Go to slide ${index + 1}`}
+                        onClick={scrollPrev}
+                        aria-label="Previous school slide"
+                        className="w-9 h-9 rounded-full bg-slate-900/80 text-white border border-white/20 flex items-center justify-center active:bg-primary"
                     >
-                        {selectedIndex === index && (
-                            <span className="absolute inset-0 rounded-full bg-primary animate-pulse" />
-                        )}
+                        <ChevronLeft className="w-5 h-5" />
                     </button>
-                ))}
+                    <button
+                        onClick={scrollNext}
+                        aria-label="Next school slide"
+                        className="w-9 h-9 rounded-full bg-slate-900/80 text-white border border-white/20 flex items-center justify-center active:bg-primary"
+                    >
+                        <ChevronRight className="w-5 h-5" />
+                    </button>
+                </div>
+
+                {/* Central Pagination Pills */}
+                <div className="flex items-center gap-2.5 mx-auto pointer-events-auto">
+                    {heroSlides.map((slide, index) => (
+                        <button
+                            key={index}
+                            onClick={() => scrollTo(index)}
+                            className={`relative h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                                selectedIndex === index
+                                    ? "w-10 bg-primary shadow-lg shadow-primary/50"
+                                    : "w-2.5 bg-slate-600/60 hover:bg-slate-400"
+                            }`}
+                            aria-label={`Go to slide ${index + 1}: ${slide.badge}`}
+                        />
+                    ))}
+                </div>
+
+                {/* Slide Number Counter */}
+                <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-400 pointer-events-auto">
+                    <span className="text-white font-bold">0{selectedIndex + 1}</span>
+                    <span>/</span>
+                    <span>0{heroSlides.length}</span>
+                </div>
             </div>
 
             {/* Progress Bar */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-border/50 z-20">
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
                 <div
                     className="h-full bg-primary transition-all duration-300"
                     style={{ width: `${((selectedIndex + 1) / heroSlides.length) * 100}%` }}

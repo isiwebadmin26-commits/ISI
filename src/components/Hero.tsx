@@ -12,35 +12,49 @@ import heroDrone from "../assets/hero-drone.webp";
 import heroFacility from "../assets/verticals-facility.webp";
 import heroCommand from "../assets/command_center_1.webp";
 
-// The text overlay will be static now, so we only need the images and overlays for the carousel.
+// The carousel slides with high-contrast, rich enterprise dark overlays and slide metadata
 const heroSlides = [
   {
+    title: "AI-Driven Physical Security",
+    badge: "Next-Gen Guarding",
     image: heroAiDriven,
-    overlay: "from-background via-background/95 to-background/70",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
   {
+    title: "Electronic Systems Integration",
+    badge: "Integrated Tech",
     image: heroIntegration,
-    overlay: "from-background via-background/95 to-background/60",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
   {
+    title: "24/7 Redundant SOC Operations",
+    badge: "Central Command",
     image: heroSoc,
-    overlay: "from-background via-background/95 to-background/60",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
   {
+    title: "Police-Verified Guarding Teams",
+    badge: "Elite Personnel",
     image: heroVerify,
-    overlay: "from-background via-background/95 to-background/60",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
   {
+    title: "Aerial Drone & Perimeter Watch",
+    badge: "Autonomous Drones",
     image: heroDrone,
-    overlay: "from-background via-background/95 to-background/60",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
   {
+    title: "Integrated Facility Management",
+    badge: "Facility Excellence",
     image: heroFacility,
-    overlay: "from-background via-background/95 to-background/60",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
   {
+    title: "Command Center Intelligence",
+    badge: "Command & Control",
     image: heroCommand,
-    overlay: "from-background via-background/95 to-background/60",
+    overlay: "from-slate-950/95 via-slate-950/80 to-slate-900/40",
   },
 ];
 
@@ -223,94 +237,222 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Content Overlay - Static */}
-      <div className="absolute inset-0 flex items-center pt-28 md:pt-32 lg:pt-36 pointer-events-none">
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="max-w-5xl pointer-events-auto">
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm border border-border rounded-full mb-6 md:mb-8 animate-fade-in"
-            >
-              <Shield className="w-4 h-4 text-primary" />
-              <span className="text-xs sm:text-sm font-medium text-primary text-nowrap">Enterprise Security Partner</span>
+      {/* Left and Right Desktop Arrow Controls */}
+      <button
+        onClick={scrollPrev}
+        aria-label="Previous hero slide"
+        className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/70 hover:bg-primary text-white backdrop-blur-md border border-white/20 items-center justify-center transition-all duration-200 shadow-2xl hover:scale-110 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
+
+      <button
+        onClick={scrollNext}
+        aria-label="Next hero slide"
+        className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/70 hover:bg-primary text-white backdrop-blur-md border border-white/20 items-center justify-center transition-all duration-200 shadow-2xl hover:scale-110 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
+
+      {/* Content Overlay - Balanced 2-Column Grid */}
+      <div className="absolute inset-0 flex items-center pt-24 md:pt-28 lg:pt-32 pb-16 pointer-events-none">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pointer-events-auto">
+            {/* Left Column: Authoritative Copy and Action CTAs */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              {/* Badge */}
+              <div
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-900/80 backdrop-blur-md border border-primary/40 rounded-full mb-6 animate-fade-in w-fit shadow-lg shadow-primary/10"
+              >
+                <Shield className="w-4 h-4 text-primary" />
+                <span className="text-xs sm:text-sm font-semibold tracking-wide text-white uppercase">
+                  Enterprise Security Partner
+                </span>
+              </div>
+
+              {/* Main Heading */}
+              <h1
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-[1.15] mb-5 tracking-tight animate-fade-in"
+              >
+                Integrated Security Solutions for{" "}
+                <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent block sm:inline">
+                  Modern Enterprises
+                </span>
+              </h1>
+
+              {/* Subheading */}
+              <p
+                className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed font-normal animate-fade-in"
+              >
+                Delivering AI-enabled integrated security solutions including Security Guarding, Electronic Security, Facility Management, and Risk Consulting across India.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8 animate-fade-in">
+                <Button
+                  size="lg"
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))}
+                  className="gap-2.5 text-base h-13 px-8 shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 rounded-full bg-primary text-white font-bold group cursor-pointer"
+                >
+                  Get an Instant Security Quote
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => window.open("https://wa.me/917708887878?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20your%20security%20solutions.", "_blank")}
+                  className="gap-2.5 text-base h-13 px-7 bg-slate-900/60 backdrop-blur-md border border-white/25 hover:border-primary text-white hover:text-white hover:bg-white/10 transition-all duration-200 rounded-full group cursor-pointer"
+                >
+                  Talk to Our Security Experts
+                </Button>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs sm:text-sm text-slate-300 font-medium animate-fade-in">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span>Trusted by 500+ Enterprises</span>
+                </div>
+                <div className="hidden sm:block w-1 h-1 rounded-full bg-slate-600" />
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span>ISO 9001:2015 Certified</span>
+                </div>
+                <div className="hidden sm:block w-1 h-1 rounded-full bg-slate-600" />
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span>PAN India Coverage</span>
+                </div>
+              </div>
             </div>
 
-            {/* Main Heading */}
-            <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.15] mb-4 md:mb-6 animate-fade-in"
-            >
-              Integrated Security Solutions for <span className="text-gradient block sm:inline">Modern Enterprises</span>
-            </h1>
+            {/* Right Column (Desktop): Enterprise Live Telemetry & Slide Spec Card */}
+            <div className="lg:col-span-5 hidden lg:block">
+              <div className="relative bg-slate-900/85 backdrop-blur-xl border border-white/15 rounded-2xl p-7 shadow-2xl overflow-hidden hover:border-primary/50 transition-colors duration-300">
+                {/* Header */}
+                <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-xs font-bold tracking-wider text-slate-300 uppercase">
+                      COMMAND CENTER TELEMETRY
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono text-primary font-bold px-2 py-0.5 rounded bg-primary/10 border border-primary/20">
+                    FOCUS 0{selectedIndex + 1} / 0{heroSlides.length}
+                  </span>
+                </div>
 
-            {/* Subheading */}
-            <p
-              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 md:mb-10 animate-fade-in"
-            >
-              Delivering AI-enabled integrated security solutions including Security Guarding, Electronic Security, Facility Management and Risk Consulting across multiple industries.
-            </p>
+                {/* Active Slide Focus */}
+                <div className="mb-5">
+                  <div className="text-xs text-primary font-semibold uppercase tracking-wider mb-1">
+                    {heroSlides[selectedIndex].badge}
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {heroSlides[selectedIndex].title}
+                  </h3>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    AI-powered optical monitoring, military-grade response protocols, and verified personnel safeguarding enterprise sites across India.
+                  </p>
+                </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-6 sm:mb-8">
-              <Button
-                size="lg"
-                onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))}
-                className="w-full sm:w-auto gap-2 text-base h-14 px-8 shadow-xl shadow-primary/30 hover:scale-[1.02] transition-transform rounded-full bg-primary text-white group cursor-pointer"
-              >
-                Get an Instant Security Quote
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => window.open("https://wa.me/917708887878?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20your%20security%20solutions.", "_blank")}
-                className="w-full sm:w-auto gap-2 text-base h-14 px-8 bg-card/40 backdrop-blur-md border border-white/20 hover:bg-primary/10 hover:text-primary transition-all duration-300 rounded-full group cursor-pointer"
-              >
-                Talk to Our Security Experts
-              </Button>
-            </div>
+                {/* Key Metrics */}
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                    <div className="text-[11px] text-slate-400 mb-0.5">Enterprise Scale</div>
+                    <div className="text-lg font-bold text-white">500+ Sites</div>
+                    <div className="text-[10px] text-emerald-400 mt-0.5">Active Deployments</div>
+                  </div>
+                  <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                    <div className="text-[11px] text-slate-400 mb-0.5">Incident Response</div>
+                    <div className="text-lg font-bold text-white">&lt; 3 Mins</div>
+                    <div className="text-[10px] text-primary mt-0.5">Rapid SLA Dispatch</div>
+                  </div>
+                </div>
 
-            {/* Trust Indicators & Slide Indicators */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground font-medium animate-fade-in">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-primary shrink-0" />
-                <span className="whitespace-nowrap">Trusted by 500+ Enterprises</span>
-              </div>
-              <div className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-primary shrink-0" />
-                <span className="whitespace-nowrap">ISO 9001:2015 Certified</span>
-              </div>
-              <div className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-primary shrink-0" />
-                <span className="whitespace-nowrap">Nationwide Service (PAN India)</span>
-              </div>
+                {/* Sector Fast-Track Chips */}
+                <div className="mb-5">
+                  <div className="text-[11px] text-slate-400 font-medium mb-2 uppercase tracking-wider">
+                    Sector Solutions:
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { label: "IT Parks & GCCs", link: "/gccitparks" },
+                      { label: "Cash Logistics", link: "/cashlogistics" },
+                      { label: "Command Center", link: "/commandcenter" },
+                      { label: "Campus Safety", link: "/campussafety" },
+                      { label: "Modern Living", link: "/modernliving" }
+                    ].map((sec) => (
+                      <Link
+                        key={sec.label}
+                        to={sec.link}
+                        className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-white/5 hover:bg-primary/20 text-slate-300 hover:text-white border border-white/10 transition-colors"
+                      >
+                        {sec.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-              {/* Slide Indicators next to trust indicators */}
-              <div className="flex items-center gap-3 ml-2 mt-1 sm:mt-0">
-                {heroSlides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollTo(index)}
-                    className={`relative h-2 rounded-full transition-all duration-300 ${selectedIndex === index
-                      ? "w-10 bg-primary"
-                      : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
-                      }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  >
-                    {selectedIndex === index && (
-                      <span className="absolute inset-0 rounded-full bg-primary opacity-80 animate-pulse" />
-                    )}
-                  </button>
-                ))}
+                {/* Interactive Consultation Button */}
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))}
+                  className="w-full flex items-center justify-between p-3 rounded-xl bg-primary/20 hover:bg-primary/30 border border-primary/30 text-white text-xs font-semibold transition-all duration-200 cursor-pointer group"
+                >
+                  <span>Book Free Security Risk Consultation</span>
+                  <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Bottom Controls: Numbered Slide Pills and Mobile Navigation */}
+      <div className="absolute bottom-6 left-0 right-0 z-20 flex items-center justify-between px-6 lg:px-12 pointer-events-none">
+        {/* Mobile Prev/Next Controls */}
+        <div className="flex md:hidden items-center gap-2 pointer-events-auto">
+          <button
+            onClick={scrollPrev}
+            aria-label="Previous hero slide"
+            className="w-9 h-9 rounded-full bg-slate-900/80 text-white border border-white/20 flex items-center justify-center active:bg-primary"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={scrollNext}
+            aria-label="Next hero slide"
+            className="w-9 h-9 rounded-full bg-slate-900/80 text-white border border-white/20 flex items-center justify-center active:bg-primary"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Central Pagination Pills */}
+        <div className="flex items-center gap-2.5 mx-auto pointer-events-auto">
+          {heroSlides.map((slide, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={`relative h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                selectedIndex === index
+                  ? "w-10 bg-primary shadow-lg shadow-primary/50"
+                  : "w-2.5 bg-slate-600/60 hover:bg-slate-400"
+              }`}
+              aria-label={`Go to slide ${index + 1}: ${slide.badge}`}
+            />
+          ))}
+        </div>
+
+        {/* Slide Number Counter */}
+        <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-400 pointer-events-auto">
+          <span className="text-white font-bold">0{selectedIndex + 1}</span>
+          <span>/</span>
+          <span>0{heroSlides.length}</span>
+        </div>
+      </div>
+
       {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-border/50 z-20">
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
         <div
           className="h-full bg-primary transition-transform duration-300 origin-left"
           style={{ transform: `scaleX(${((selectedIndex + 1) / heroSlides.length)})` }}

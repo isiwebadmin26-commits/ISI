@@ -1,9 +1,11 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowRight, Monitor, Brain, Zap } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ShieldCheck, Activity, Smartphone, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { modernLivingData } from "@/data/modern-living-data";
+import { cn } from "@/lib/utils";
 
 import hero1 from "../../assets/hero-ai-driven.jpg";
 import hero2 from "../../assets/hero-drone.jpg";
@@ -15,14 +17,15 @@ const slideImages = [hero1, hero2, hero3, hero4];
 export const ModernLivingHero = () => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const autoplayRef = useRef<any>(null);
+    const [isPaused, setIsPaused] = useState(false);
+    const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
     const startAutoPlay = useCallback(() => {
-        if (autoplayRef.current) return;
+        if (autoplayRef.current || isPaused) return;
         autoplayRef.current = setInterval(() => {
             if (emblaApi) emblaApi.scrollNext();
-        }, 6000);
-    }, [emblaApi]);
+        }, 5500);
+    }, [emblaApi, isPaused]);
 
     const stopAutoPlay = useCallback(() => {
         if (autoplayRef.current) {
@@ -31,113 +34,289 @@ export const ModernLivingHero = () => {
         }
     }, []);
 
+    const onNavClick = useCallback((callback: () => void) => {
+        stopAutoPlay();
+        callback();
+        setTimeout(() => {
+            if (!isPaused) startAutoPlay();
+        }, 6000);
+    }, [startAutoPlay, stopAutoPlay, isPaused]);
+
+    const scrollPrev = useCallback(() => {
+        if (emblaApi) onNavClick(() => emblaApi.scrollPrev());
+    }, [emblaApi, onNavClick]);
+
+    const scrollNext = useCallback(() => {
+        if (emblaApi) onNavClick(() => emblaApi.scrollNext());
+    }, [emblaApi, onNavClick]);
+
+    const scrollTo = useCallback((index: number) => {
+        if (emblaApi) onNavClick(() => emblaApi.scrollTo(index));
+    }, [emblaApi, onNavClick]);
+
     useEffect(() => {
         if (!emblaApi) return;
         const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
         emblaApi.on("select", onSelect);
         startAutoPlay();
+
+        emblaApi.on("pointerDown", stopAutoPlay);
+        emblaApi.on("pointerUp", startAutoPlay);
+
         return () => {
             stopAutoPlay();
             emblaApi.off("select", onSelect);
+            emblaApi.off("pointerDown", stopAutoPlay);
+            emblaApi.off("pointerUp", startAutoPlay);
         };
     }, [emblaApi, startAutoPlay, stopAutoPlay]);
+
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") scrollPrev();
+            if (e.key === "ArrowRight") scrollNext();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [scrollPrev, scrollNext]);
 
     const { heroSlides } = modernLivingData;
 
     return (
-        <section className="relative min-h-screen overflow-hidden bg-background">
-            {/* Carousel Background */}
-            <div ref={emblaRef} className="absolute inset-0 z-0 overflow-hidden h-screen" onMouseEnter={stopAutoPlay} onMouseLeave={startAutoPlay}>
+        <section
+            className="relative min-h-[640px] lg:min-h-[720px] flex items-center overflow-hidden bg-slate-950 text-white"
+            onMouseEnter={() => { setIsPaused(true); stopAutoPlay(); }}
+            onMouseLeave={() => { setIsPaused(false); startAutoPlay(); }}
+            onFocus={() => { setIsPaused(true); stopAutoPlay(); }}
+            onBlur={() => { setIsPaused(false); startAutoPlay(); }}
+            aria-roledescription="carousel"
+            aria-label="Modern Living Security Hero"
+        >
+            {/* Carousel Background with Calibrated Overlays */}
+            <div ref={emblaRef} className="absolute inset-0 z-0 overflow-hidden h-full">
                 <div className="flex h-full">
                     {slideImages.map((image, index) => (
                         <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
                             <div 
-                                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[10000ms] ease-linear" 
+                                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[8000ms] ease-out" 
                                 style={{ 
                                     backgroundImage: `url(${image})`,
-                                    transform: selectedIndex === index ? 'scale(1.1)' : 'scale(1)'
+                                    transform: selectedIndex === index ? 'scale(1.08)' : 'scale(1)'
                                 }} 
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
+                            {/* Rich Dark Overlays to ensure 100% visual contrast */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-900/40" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
+                            <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[140px] pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Content Overlay */}
-            <div className="relative z-10 container mx-auto px-4 lg:px-8 h-screen flex flex-col justify-center">
-                <div className="max-w-4xl pt-20 md:pt-0">
-                    <AnimatePresence mode="wait">
-                        <motion.div 
-                            key={`content-${selectedIndex}`}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 backdrop-blur-md border border-primary/20 rounded-full mb-8">
-                                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                                <span className="text-xs md:text-sm font-bold text-primary tracking-widest uppercase">
-                                    {heroSlides[selectedIndex].badge}
+            {/* Desktop Left/Right Navigation Arrows */}
+            <button
+                onClick={scrollPrev}
+                aria-label="Previous modern living slide"
+                className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/70 hover:bg-primary text-white/90 hover:text-white backdrop-blur-md border border-white/20 items-center justify-center transition-all duration-200 shadow-2xl hover:scale-110 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+                <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+                onClick={scrollNext}
+                aria-label="Next modern living slide"
+                className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/70 hover:bg-primary text-white/90 hover:text-white backdrop-blur-md border border-white/20 items-center justify-center transition-all duration-200 shadow-2xl hover:scale-110 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+                <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Content Overlay - Balanced 2-Column Grid */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-20 py-16 lg:py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    {/* Left Column: Authoritative Copy & CTAs */}
+                    <div className="lg:col-span-7 flex flex-col justify-center">
+                        <AnimatePresence mode="wait">
+                            <motion.div 
+                                key={`content-${selectedIndex}`}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -15 }}
+                                transition={{ duration: 0.35 }}
+                            >
+                                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-slate-900/80 backdrop-blur-md border border-primary/40 rounded-full mb-6 w-fit shadow-lg shadow-primary/10">
+                                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                                    <span className="text-xs sm:text-sm font-semibold tracking-wide text-primary-foreground uppercase">
+                                        {heroSlides[selectedIndex].badge}
+                                    </span>
+                                </div>
+
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-[1.15] mb-5 tracking-tight">
+                                    {heroSlides[selectedIndex].title}
+                                </h1>
+
+                                <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed font-normal">
+                                    {heroSlides[selectedIndex].subtitle}
+                                </p>
+
+                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+                                    <Button 
+                                        size="lg" 
+                                        onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))}
+                                        className="gap-2.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-full shadow-xl shadow-primary/30 px-8 h-13 text-base cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                                    >
+                                        Request a Private Demo
+                                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                                    </Button>
+
+                                    <Button 
+                                        variant="outline" 
+                                        size="lg" 
+                                        onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                                        className="gap-2.5 bg-slate-900/60 hover:bg-white/10 text-white backdrop-blur-md border border-white/25 rounded-full px-7 h-13 text-base cursor-pointer hover:border-primary transition-all duration-200"
+                                    >
+                                        Secure Your Space Today
+                                    </Button>
+                                </div>
+
+                                {/* Trust Indicators */}
+                                <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+                                    <div className="flex items-center gap-2">
+                                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                                        <span>Discreet Luxury Integration</span>
+                                    </div>
+                                    <div className="w-1 h-1 rounded-full bg-slate-600 hidden sm:block" />
+                                    <div className="flex items-center gap-2">
+                                        <ShieldCheck className="w-4 h-4 text-primary shrink-0" />
+                                        <span>24/7 Managed SOC Link</span>
+                                    </div>
+                                    <div className="w-1 h-1 rounded-full bg-slate-600 hidden sm:block" />
+                                    <div className="flex items-center gap-2">
+                                        <Smartphone className="w-4 h-4 text-primary shrink-0" />
+                                        <span>Zero-Latency Mobile App</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Right Column (Desktop): Modern Living Telemetry HUD */}
+                    <div className="lg:col-span-5 hidden lg:block">
+                        <div className="relative bg-slate-900/85 backdrop-blur-xl border border-white/15 rounded-2xl p-7 shadow-2xl overflow-hidden hover:border-primary/50 transition-colors duration-300">
+                            {/* Card Header */}
+                            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                                <div className="flex items-center gap-2.5">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                                    <span className="text-xs font-bold tracking-wider text-slate-300 uppercase">
+                                        RESIDENTIAL & SOHO TELEMETRY
+                                    </span>
+                                </div>
+                                <span className="text-xs font-mono text-primary font-bold px-2 py-0.5 rounded bg-primary/10 border border-primary/20">
+                                    MODE 0{selectedIndex + 1} / 0{heroSlides.length}
                                 </span>
                             </div>
 
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-6 tracking-tight">
-                                {heroSlides[selectedIndex].title}
-                            </h1>
-
-                            <p className="text-lg md:text-xl text-muted-foreground/90 max-w-2xl mb-10 leading-relaxed font-medium">
-                                {heroSlides[selectedIndex].subtitle}
-                            </p>
-
-                            <div className="flex flex-col sm:flex-row gap-5">
-                                <Button 
-                                    size="lg" 
-                                    onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))}
-                                    className="h-16 px-10 text-lg gap-3 shadow-2xl shadow-primary/30 group cursor-pointer"
-                                >
-                                    Request a Private Demo
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </Button>
-                                <Button 
-                                    variant="outline" 
-                                    size="lg" 
-                                    onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                                    className="h-16 px-10 text-lg gap-3 bg-background/50 backdrop-blur-md hover:bg-primary/5 border-primary/20 cursor-pointer"
-                                >
-                                    Secure Your Space Today
-                                </Button>
+                            {/* Active Slide Focus */}
+                            <div className="mb-5">
+                                <div className="text-xs text-primary font-semibold uppercase tracking-wider mb-1">
+                                    {heroSlides[selectedIndex].badge}
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2">
+                                    {heroSlides[selectedIndex].title}
+                                </h3>
+                                <p className="text-xs text-slate-300 leading-relaxed">
+                                    High-definition optical sensors, geofenced perimeter tripwires, and encrypted resident communication linked to our 24/7 Security Operations Center.
+                                </p>
                             </div>
-                        </motion.div>
-                    </AnimatePresence>
+
+                            {/* Performance Grid */}
+                            <div className="grid grid-cols-2 gap-3 mb-5">
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">False Alarm Filtering</div>
+                                    <div className="text-lg font-bold text-white">99.2%</div>
+                                    <div className="text-[10px] text-emerald-400 mt-0.5">AI Filtered</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Mobile Notification</div>
+                                    <div className="text-lg font-bold text-white">&lt; 5 Secs</div>
+                                    <div className="text-[10px] text-primary mt-0.5">Instant Alerting</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Patrol Verification</div>
+                                    <div className="text-lg font-bold text-white">100% Geo</div>
+                                    <div className="text-[10px] text-blue-400 mt-0.5">RFID Time-Stamped</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-slate-950/60 border border-white/10">
+                                    <div className="text-[11px] text-slate-400 mb-0.5">Privacy Assurance</div>
+                                    <div className="text-lg font-bold text-white">DPDP Certified</div>
+                                    <div className="text-[10px] text-emerald-400 mt-0.5">Encrypted Stream</div>
+                                </div>
+                            </div>
+
+                            {/* Action inside card */}
+                            <button
+                                onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))}
+                                className="w-full flex items-center justify-between p-3 rounded-xl bg-primary/20 hover:bg-primary/30 border border-primary/30 text-white text-xs font-semibold transition-all duration-200 cursor-pointer group"
+                            >
+                                <span>Book Tailored Site Assessment</span>
+                                <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* Pagination Indicators */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-                {heroSlides.map((_, i) => (
+            {/* Bottom Controls: Resolved Overlap with Separate Pagination & Mobile Arrows */}
+            <div className="absolute bottom-6 left-0 right-0 z-20 flex items-center justify-between px-6 lg:px-12 pointer-events-none">
+                {/* Mobile Prev/Next Controls */}
+                <div className="flex md:hidden items-center gap-2 pointer-events-auto">
                     <button
-                        key={i}
-                        onClick={() => emblaApi?.scrollTo(i)}
-                        className={cn(
-                            "h-1.5 rounded-full transition-all duration-300",
-                            selectedIndex === i ? "w-10 bg-primary" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"
-                        )}
-                    />
-                ))}
+                        onClick={scrollPrev}
+                        aria-label="Previous slide"
+                        className="w-9 h-9 rounded-full bg-slate-900/80 text-white border border-white/20 flex items-center justify-center active:bg-primary"
+                    >
+                        <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                        onClick={scrollNext}
+                        aria-label="Next slide"
+                        className="w-9 h-9 rounded-full bg-slate-900/80 text-white border border-white/20 flex items-center justify-center active:bg-primary"
+                    >
+                        <ChevronRight className="w-5 h-5" />
+                    </button>
+                </div>
+
+                {/* Central Pagination Pills */}
+                <div className="flex items-center gap-2.5 mx-auto pointer-events-auto">
+                    {heroSlides.map((slide, i) => (
+                        <button
+                            key={i}
+                            onClick={() => scrollTo(i)}
+                            className={cn(
+                                "h-2.5 rounded-full transition-all duration-300 cursor-pointer",
+                                selectedIndex === i ? "w-10 bg-primary shadow-lg shadow-primary/50" : "w-2.5 bg-slate-600/60 hover:bg-slate-400"
+                            )}
+                            aria-label={`Go to slide ${i + 1}: ${slide.badge}`}
+                        />
+                    ))}
+                </div>
+
+                {/* Slide Counter */}
+                <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-400 pointer-events-auto">
+                    <span className="text-white font-bold">0{selectedIndex + 1}</span>
+                    <span>/</span>
+                    <span>0{heroSlides.length}</span>
+                </div>
             </div>
 
-            {/* Decorative Elements */}
-            <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-1" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] -z-1" />
-            
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-                <div className="w-1 h-12 bg-gradient-to-b from-primary to-transparent rounded-full animate-bounce" />
+            {/* Progress Bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
+                <div
+                    className="h-full bg-primary transition-all duration-300"
+                    style={{ width: `${((selectedIndex + 1) / heroSlides.length) * 100}%` }}
+                />
             </div>
         </section>
     );
 };
-
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
