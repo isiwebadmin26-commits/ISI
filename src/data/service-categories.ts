@@ -2523,27 +2523,24 @@ export const serviceCategories: ServiceCategory[] = [
         subtitle: "Autonomous Environment Adaptation",
         heroSlides: [
             {
-                badge: "Space & Occupancy Analytics",
-                title: "Autonomous",
-                highlight: "Space & Workplace",
-                titleEnd: "Intelligence",
-                description: "Maximize real estate ROI and empower hybrid teams with real-time occupancy heatmaps, dynamic desk allocation, and IoT-driven environmental adaptation.",
+                badge: "Occupancy Intelligence",
+                title: "Space &",
+                highlight: "Workplace",
+                description: "Dynamic layout optimization using real-time employee behavioral flows.",
                 image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
             },
             {
-                badge: "Smart Desking & Agility",
+                badge: "Smart Desking",
                 title: "Adaptive",
-                highlight: "Hybrid Workspaces",
-                titleEnd: "& Micro-Climates",
-                description: "Seamless desk booking linked to biometric access and localized climate controls, creating high-productivity environments across enterprise campuses.",
+                highlight: "Workspaces",
+                description: "IoT-linked booking and personalized environmental controls.",
                 image: "https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&q=80"
             },
             {
-                badge: "Spatial Collaboration",
-                title: "Enterprise",
-                highlight: "Workplace Culture",
-                titleEnd: "& Flow Optimization",
-                description: "Analyze cross-functional footfall and collision density to eliminate spatial bottlenecks and elevate employee satisfaction by over 25%.",
+                badge: "Community Flow",
+                title: "Social",
+                highlight: "Analytics",
+                description: "Measure and enhance workplace culture through spatial interaction data.",
                 image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"
             }
         ],
