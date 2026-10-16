@@ -17,7 +17,7 @@ const heroSlides = [
         titleEnd: "for Future",
         description: "Blending child-first psychology with military-grade intelligence to create the world's most secure learning ecosystems.",
         image: schoolSafety1,
-        overlay: "from-background via-background/95 to-background/70",
+        overlay: "from-background via-background/80 to-transparent",
     },
     {
         badge: "24/7 Monitoring",
@@ -26,7 +26,7 @@ const heroSlides = [
         titleEnd: "Systems",
         description: "Round-the-clock surveillance and rapid response protocols tailored for educational environments, ensuring peace of mind.",
         image: schoolSafety2,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-background via-background/80 to-transparent",
     },
     {
         badge: "Verified Personnel",
@@ -35,7 +35,7 @@ const heroSlides = [
         titleEnd: "",
         description: "Moving beyond traditional watchmen to Intelligent Safety Marshals (ISM) equipped with situational AI overlays.",
         image: schoolSafety3,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-background via-background/80 to-transparent",
     },
     {
         badge: "Digital Security",
@@ -44,7 +44,7 @@ const heroSlides = [
         titleEnd: "",
         description: "A unified NOC-SOC approach to campus infrastructure, ensuring 99.99% uptime for digital learning.",
         image: schoolSafety4,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-background via-background/80 to-transparent",
     },
     {
         badge: "Health & Transport",
@@ -53,7 +53,7 @@ const heroSlides = [
         titleEnd: "Protocols",
         description: "Comprehensive oversight of everything that moves, from school buses to student medical records with AI tracking.",
         image: schoolSafety5,
-        overlay: "from-background via-background/95 to-background/60",
+        overlay: "from-background via-background/80 to-transparent",
     },
 ];
 
@@ -163,13 +163,13 @@ export const SchoolSafetyHero = ({ onOpenEbook }: { onOpenEbook: () => void }) =
     };
 
     return (
-        <section className="relative min-h-screen overflow-hidden" id="hero">
+        <section className="relative min-h-[calc(100vh-5.5rem)] overflow-hidden" id="hero">
             <VideoModal isOpen={showVideo} onClose={closeVideo} />
 
             {/* Carousel */}
             <div
                 ref={emblaRef}
-                className="overflow-hidden h-screen"
+                className="overflow-hidden min-h-[calc(100vh-5.5rem)] h-[calc(100vh-5.5rem)]"
                 onMouseEnter={stopAutoPlay}
                 onMouseLeave={startAutoPlay}
             >

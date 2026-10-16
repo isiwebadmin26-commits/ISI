@@ -118,7 +118,7 @@ export const PageHero = ({
 
     return (
         <section 
-            className={cn("relative overflow-hidden bg-background py-8 sm:py-10 lg:py-12", className)}
+            className={cn("relative overflow-hidden bg-background min-h-[calc(100vh-5.5rem)] flex items-center py-10 lg:py-16", className)}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -127,18 +127,18 @@ export const PageHero = ({
                 <div className="flex h-full">
                     {slides.map((slide, index) => (
                         <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
-                            {/* High-Res Background Image with Ken Burns Zoom & crisp right-aligned focal point */}
+                            {/* High-Res Background Image with Ken Burns Zoom & crisp focal point */}
                             <div
-                                className="absolute inset-0 bg-cover bg-right lg:bg-center bg-no-repeat transition-transform duration-[12000ms] ease-out will-change-transform"
+                                className="absolute inset-0 bg-cover bg-center lg:bg-center bg-no-repeat transition-transform duration-[12000ms] ease-out will-change-transform"
                                 style={{
                                     backgroundImage: `url(${slide.image})`,
                                     transform: selectedIndex === index ? 'scale(1.05)' : 'scale(1.0)'
                                 }}
                             />
 
-                            {/* Targeted Contrast Gradient Overlay: allows the image to shine on the right while ensuring text readability on the left */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/25 dark:from-background dark:via-background/95 dark:to-background/40" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+                            {/* Targeted Contrast Gradient Overlay: allows the full image to shine while ensuring text readability on the left */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent dark:from-background dark:via-background/85 dark:to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
                         </div>
                     ))}
                 </div>

@@ -271,11 +271,11 @@ export default function SchoolSafetyLanding() {
 
 
                     {/* ================= HERO SECTION WITH CAROUSEL ================= */}
-                    <section className="relative min-h-screen overflow-hidden" id="hero">
+                    <section className="relative min-h-[calc(100vh-5.5rem)] overflow-hidden" id="hero">
                         {/* Carousel */}
                         <div
                             ref={emblaRef}
-                            className="overflow-hidden h-screen"
+                            className="overflow-hidden min-h-[calc(100vh-5.5rem)] h-[calc(100vh-5.5rem)]"
                             onMouseEnter={stopAutoPlay}
                             onMouseLeave={startAutoPlay}
                         >
@@ -295,7 +295,7 @@ export default function SchoolSafetyLanding() {
                                         />
 
                                         {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70" />
+                                        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
 
                                         {/* Accent Shapes */}
                                         <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />

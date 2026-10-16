@@ -162,7 +162,7 @@ export const CoursesPage = () => {
       <div className="bg-background min-h-screen">
         
         {/* SECTION 1 — HERO */}
-        <section className="relative py-10 md:py-16 bg-gradient-to-br from-primary/95 via-primary to-primary/90 text-white overflow-hidden">
+        <section className="relative min-h-[calc(100vh-5.5rem)] flex items-center py-12 md:py-16 bg-gradient-to-br from-primary/95 via-primary to-primary/90 text-white overflow-hidden">
           {/* Top Banner Image Background Overlay */}
           <div 
             className="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"

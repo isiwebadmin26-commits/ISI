@@ -196,7 +196,7 @@ export const Hero = () => {
 
   return (
     <section
-      className="relative overflow-hidden bg-background py-8 sm:py-10 lg:py-12"
+      className="relative overflow-hidden bg-background min-h-[calc(100vh-5.5rem)] flex items-center py-10 lg:py-16"
       id="hero"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -209,16 +209,16 @@ export const Hero = () => {
           {homeHeroSlides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
               <div
-                className="absolute inset-0 bg-cover bg-right lg:bg-center bg-no-repeat transition-transform duration-[12000ms] ease-out will-change-transform"
+                className="absolute inset-0 bg-cover bg-center lg:bg-center bg-no-repeat transition-transform duration-[12000ms] ease-out will-change-transform"
                 style={{
                   backgroundImage: `url(${slide.image})`,
                   transform: selectedIndex === index ? 'scale(1.05)' : 'scale(1.0)'
                 }}
               />
 
-              {/* Dynamic Gradient Overlay: high contrast on left for typography, open & vibrant on right */}
-              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/25 dark:from-background dark:via-background/95 dark:to-background/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+              {/* Dynamic Gradient Overlay: high contrast on left for typography, open & vibrant on right to show full image */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent dark:from-background dark:via-background/85 dark:to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
             </div>
           ))}
         </div>
