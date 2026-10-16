@@ -176,7 +176,7 @@ export const AcademyPage = () => {
                     className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border text-sm text-foreground focus:outline-none focus:border-primary transition-all appearance-none"
                   >
                     <option value="Technology">Technology (AI, Cyber, IoT, Security Systems)</option>
-                    <option value="Facility Management">Facility Management (Hard & Soft FM, MEP)</option>
+                    <option value="Facility Management">Facility Management (Hard & Soft Facility Management, MEP)</option>
                     <option value="Guarding Security">Guarding Security (Physical Guarding & Protection)</option>
                     <option value="Academy Program">General Academy Program</option>
                     <option value="Corporate Workforce Training">Corporate Workforce Training</option>

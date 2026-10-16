@@ -493,7 +493,7 @@ export const CURRENT_CAREER_OPPORTUNITIES = [
     id: 'facility-tech',
     title: 'Facility & MEP Technician (HVAC, BMS, Electrical)',
     location: 'Chennai & Bangalore Tech Parks',
-    experience: '1 - 5 Years in Hard FM / Technical Services',
+    experience: '1 - 5 Years in Hard Facility Management / Technical Services',
     department: 'Integrated Facility Management'
   },
   {

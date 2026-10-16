@@ -64,7 +64,7 @@ const Sitemap = () => {
                 {
                     name: "Integrated Facility Management",
                     href: "/services/integrated-facility-management/",
-                    description: "End-to-end hard & soft FM solutions, energy intelligence, and asset management",
+                    description: "End-to-end hard & soft facility management solutions, energy intelligence, and asset management",
                     type: "Primary Service"
                 },
                 {
@@ -192,13 +192,13 @@ const Sitemap = () => {
             icon: Building2,
             links: [
                 {
-                    name: "Hard FM Excellence",
+                    name: "Hard Facility Management Excellence",
                     href: "/services/facility-management/hard-fm",
                     description: "Autonomous asset reliability and predictive maintenance for critical infrastructure",
                     type: "Category"
                 },
                 {
-                    name: "Soft FM Intelligence",
+                    name: "Soft Facility Management Intelligence",
                     href: "/services/facility-management/soft-fm",
                     description: "AI-powered workforce orchestration and premium experience management",
                     type: "Category"

@@ -534,7 +534,7 @@ export const useChatBot = () => {
 
         if (lowerInput.includes('academy program') || lowerInput.includes('academy courses') || lowerInput === 'academy programs') {
             return {
-                text: "ISI Academy features 3 core tracks across 15 domains:\n• **Technology Programs** (AI, Cyber Security, IoT, Drones, Quantum & Data Center)\n• **Facility Management** (Hard FM, Soft FM, Smart Building IoT & MEP)\n• **Guarding Security** (PSARA Guarding, Fire Safety, C4i Command Center, VIP Protection)\n\nAll programs include practical lab simulations and a mandatory 3-Month Industry Residency across 6 TN campuses.",
+                text: "ISI Academy features 3 core tracks across 15 domains:\n• **Technology Programs** (AI, Cyber Security, IoT, Drones, Quantum & Data Center)\n• **Facility Management** (Hard Facility Management, Soft Facility Management, Smart Building IoT & MEP)\n• **Guarding Security** (PSARA Guarding, Fire Safety, C4i Command Center, VIP Protection)\n\nAll programs include practical lab simulations and a mandatory 3-Month Industry Residency across 6 TN campuses.",
                 actions: [
                     { label: "Talk to Advisor", value: "callback", type: "contact" },
                     { label: "Visit Academy Page", value: "/academy", type: "link" },
@@ -667,7 +667,7 @@ export const useChatBot = () => {
             } else if (action.value === 'explore security services') {
                 setContext(prev => ({ ...prev, stage: 'discovery', topic: 'Services' }));
                 streamResponse(
-                    "We offer end-to-end security and infrastructure solutions across India:\n\n1. **Manned Guarding & PSARA Forces**\n2. **Electronic Security & AI Video Analytics**\n3. **Integrated Facility Management (Hard & Soft FM)**\n4. **24/7 Command Center (C4i) Monitoring**\n\nWhich service would you like to explore?",
+                    "We offer end-to-end security and infrastructure solutions across India:\n\n1. **Manned Guarding & PSARA Forces**\n2. **Electronic Security & AI Video Analytics**\n3. **Integrated Facility Management (Hard & Soft Facility Management)**\n4. **24/7 Command Center (C4i) Monitoring**\n\nWhich service would you like to explore?",
                     [
                         { label: "Manned Guarding", value: "manned guarding", type: "quickReply" },
                         { label: "Electronic Security", value: "electronic security", type: "quickReply" },

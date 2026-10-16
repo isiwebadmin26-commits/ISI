@@ -34,8 +34,8 @@ const academyList = [
   { name: "Data Center Infrastructure", href: "/academy#technology", category: "Technology", desc: "TIA-942 Tier IV & Mission-Critical MEP", icon: Server },
 
   // 2. Facility Management Category (4 Domains)
-  { name: "Hard FM (Technical MEP)", href: "/academy#facility-management", category: "Facility Management", desc: "HVAC Chillers, Substations & BMS Ops", icon: Cog },
-  { name: "Soft FM & Sanitation Fleet", href: "/academy#facility-management", category: "Facility Management", desc: "Mechanized Housekeeping & ESG Protocols", icon: Briefcase },
+  { name: "Hard Facility Management (Technical MEP)", href: "/academy#facility-management", category: "Facility Management", desc: "HVAC Chillers, Substations & BMS Ops", icon: Cog },
+  { name: "Soft Facility Management & Sanitation Fleet", href: "/academy#facility-management", category: "Facility Management", desc: "Mechanized Housekeeping & ESG Protocols", icon: Briefcase },
   { name: "Smart Building Energy IoT", href: "/academy#facility-management", category: "Facility Management", desc: "BEE Energy Audits & Sub-1.2 PUE Ops", icon: Zap },
   { name: "Workplace Experience & ESG", href: "/academy#facility-management", category: "Facility Management", desc: "ISO 41001 Governance & Auditing", icon: Building2 },
 
@@ -63,8 +63,8 @@ const verticalsList = [
 
 const offeringsList = [
   // Facility Management Group
-  { name: "Hard FM (Engineering)", href: "/services/facility-management/hard-fm", category: "Facility Management", desc: "Technical maintenance & engineering", icon: Cog },
-  { name: "Soft FM (Sanitation)", href: "/services/facility-management/soft-fm", category: "Facility Management", desc: "Cleaning, housekeeping & hygiene", icon: Briefcase },
+  { name: "Hard Facility Management (Engineering)", href: "/services/facility-management/hard-fm", category: "Facility Management", desc: "Technical maintenance & engineering", icon: Cog },
+  { name: "Soft Facility Management (Sanitation)", href: "/services/facility-management/soft-fm", category: "Facility Management", desc: "Cleaning, housekeeping & hygiene", icon: Briefcase },
   { name: "Energy & Sustainability", href: "/services/facility-management/energy-sustainability", category: "Facility Management", desc: "Green initiatives & energy mgmt", icon: Zap },
   { name: "Space & Workplace", href: "/services/facility-management/space-workplace", category: "Facility Management", desc: "Office layout & environment", icon: Building2 },
   { name: "Compliance & Risk", href: "/services/facility-management/compliance-risk", category: "Facility Management", desc: "Regulatory adherence & auditing", icon: ShieldCheck },

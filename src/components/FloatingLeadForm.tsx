@@ -30,7 +30,7 @@ interface FloatingLeadFormProps {
 const SERVICE_OPTIONS = [
   'Manned Guarding & Security Force',
   'Electronic Security & Surveillance (CCTV / Access)',
-  'Integrated Facility Management (Hard & Soft FM)',
+  'Integrated Facility Management (Hard & Soft Facility Management)',
   'Command & Control Center (SOC Monitoring)',
   'Executive & VIP Protection',
   'Risk Advisory & Security Audit',

@@ -52,12 +52,12 @@ export const serviceCategories: ServiceCategory[] = [
     {
         id: "hard-fm",
         type: "facility-management",
-        title: "Hard FM Excellence",
+        title: "Hard Facility Management Excellence",
         subtitle: "Autonomous Asset Reliability & Predictive Maintenance",
         heroSlides: [
             {
                 badge: "Integrated Engineering",
-                title: "Hard FM",
+                title: "Hard Facility Management",
                 highlight: "Excellence",
                 description: "Autonomous asset reliability and predictive maintenance powered by AI.",
                 image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80"
@@ -875,12 +875,12 @@ export const serviceCategories: ServiceCategory[] = [
     {
         id: "soft-fm",
         type: "facility-management",
-        title: "Soft FM Intelligence",
+        title: "Soft Facility Management Intelligence",
         subtitle: "Autonomous Workforce & Experience Orchestration",
         heroSlides: [
             {
                 badge: "Hygiene Intelligence",
-                title: "Soft FM",
+                title: "Soft Facility Management",
                 highlight: "Innovation",
                 description: "AI-driven sanitation and workspace hygiene monitoring systems.",
                 image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80"

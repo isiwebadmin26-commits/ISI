@@ -24,8 +24,8 @@ import {
 } from "lucide-react";
 
 const fmServices = [
-    { id: "hard-fm", title: "Hard FM", subtitle: "Engineering & Technical Intelligence", icon: Settings, type: "facility-management" },
-    { id: "soft-fm", title: "Soft FM", subtitle: "Sanitation & Soft Services Intelligence", icon: Maximize, type: "facility-management" },
+    { id: "hard-fm", title: "Hard Facility Management", subtitle: "Engineering & Technical Intelligence", icon: Settings, type: "facility-management" },
+    { id: "soft-fm", title: "Soft Facility Management", subtitle: "Sanitation & Soft Services Intelligence", icon: Maximize, type: "facility-management" },
     { id: "energy-sustainability", title: "Energy & ESG", subtitle: "Energy & Sustainability Intelligence", icon: Zap, type: "facility-management" },
     { id: "space-workplace", title: "Space & Workplace", subtitle: "Space & Workplace Intelligence", icon: Globe, type: "facility-management" },
     { id: "compliance-risk", title: "Compliance & Risk", subtitle: "Compliance & Risk Intelligence", icon: FileCheck, type: "facility-management" },

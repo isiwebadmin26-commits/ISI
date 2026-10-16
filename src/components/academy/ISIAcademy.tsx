@@ -312,7 +312,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
   const facilityManagementCoursePortfolio = [
     {
       id: 101,
-      title: "Hard FM & Technical MEP Engineering",
+      title: "Hard Facility Management & Technical MEP Engineering",
       badge: "BMS & MEP Certified",
       images: [academyHeroImg, smartCityImg, enterpriseImg],
       captions: ["HVAC & Chiller Plant Control", "Substation & DG Operations", "Building Automation Console"],
@@ -326,13 +326,13 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
     },
     {
       id: 102,
-      title: "Soft FM, Mechanized Sanitation & ESG",
+      title: "Soft Facility Management, Mechanized Sanitation & ESG",
       badge: "ISO 41001 Standard",
       images: [smartCityImg, enterpriseImg, academyHeroImg],
       captions: ["Mechanized Cleaning Fleet", "Chemical Dilution Matrix", "Bio-Waste Management Hub"],
       desc: "Enterprise hygiene management, mechanized cleaning machinery operations, hospital-grade sanitation, chemical dilution matrices, and green building waste compliance.",
       modules: ["Mechanized Scrubbers & Ops", "Chemical Safety & Hazmat", "Waste Segregation & ESG", "SLA Auditing & Metrics"],
-      outcome: "Soft FM Executive / Facility Hygiene Manager",
+      outcome: "Soft Facility Management Executive / Facility Hygiene Manager",
       labs: "Mechanized Facility Simulation & Sanitation Standards Lab",
       duration: "90 Days + 30 Days Residency",
       campuses: "Chennai, Madurai, Coimbatore",

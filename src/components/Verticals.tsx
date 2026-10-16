@@ -102,7 +102,7 @@ export const Verticals = ({ isSidebar = false }: VerticalsProps) => {
     return (
         <section
             id="verticals"
-            className={`${isSidebar ? 'h-full overflow-y-auto' : 'overflow-x-hidden pt-12'} bg-background relative`}
+            className={`${isSidebar ? 'h-full overflow-y-auto' : 'overflow-x-hidden'} bg-background relative`}
         >
             {/* ===== HERO CAROUSEL ===== */}
             {!isSidebar && <PageHero slides={verticalsHeroSlides} />}
