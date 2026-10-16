@@ -5,7 +5,7 @@ import { Verticals } from "@/components/Verticals";
 const VerticalsPage = () => {
     useContentProtection();
     return (
-        <Layout>
+        <Layout noPadding={true}>
             <Verticals />
         </Layout>
     );

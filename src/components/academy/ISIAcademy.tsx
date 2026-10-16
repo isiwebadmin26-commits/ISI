@@ -994,7 +994,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION (WITH PHYSICAL GUARDING & CERTIFICATION HEADER)            */}
       {/* ========================================================================= */}
-      <section className="relative py-20 lg:py-28 bg-gradient-to-b from-blue-50/90 via-white to-slate-50 border-b border-slate-200 overflow-hidden">
+      <section className="relative py-10 lg:py-14 bg-gradient-to-b from-blue-50/90 via-white to-slate-50 border-b border-slate-200 overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-indigo-400/10 rounded-full blur-[120px] pointer-events-none" />
         

@@ -42,3 +42,4 @@ scratch/
 *.sqlite
 *.db*
 data/
+tar files/

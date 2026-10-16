@@ -5,7 +5,7 @@ import { useContentProtection } from "@/hooks/useContentProtection";
 const OfferingsPage = () => {
     useContentProtection();
     return (
-        <Layout>
+        <Layout noPadding={true}>
             <OfferingStack />
         </Layout>
     );

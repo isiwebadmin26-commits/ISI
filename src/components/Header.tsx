@@ -311,10 +311,7 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || mobileMenuOpen
-        ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border/50"
-        : "bg-transparent"
-        }`}
+      className="sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md shadow-xs border-b border-border/50"
     >
       {/* Top Bar */}
       <div className={`border-b border-border/50 transition-all duration-300 ${scrolled ? "h-0 opacity-0 overflow-hidden" : "h-auto opacity-100"}`}>

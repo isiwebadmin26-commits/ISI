@@ -20,132 +20,79 @@ import city3 from "../assets/command_center_3.jpg";
 import city4 from "../assets/command_center_4.jpg";
 import city5 from "../assets/hero-ai-driven.jpg";
 
-const heroSlides = [
-    { image: city1, ...smartCityHeroSlides[0] },
-    { image: city2, ...smartCityHeroSlides[1] },
-    { image: city3, ...smartCityHeroSlides[2] },
-    { image: city4, ...smartCityHeroSlides[3] }
-];
-
+import { PageHero, HeroSlide } from "@/components/PageHero";
 import { useContentProtection } from "@/hooks/useContentProtection";
+
+const smartCitySlides: HeroSlide[] = [
+    {
+        badge: "Smart Cities Platform",
+        title: "AI-Driven Urban Safety &",
+        highlight: "City Operations",
+        titleEnd: "",
+        description: "Enterprise-grade platform for governments and municipalities to manage urban safety, citizen welfare, and smart surveillance.",
+        image: city1,
+        tags: ["Urban Safety AI", "Citizen Welfare", "Smart Surveillance"],
+        telemetry: "City C2 Glass Active",
+        ctaText: "Build Safer Cities",
+        secondaryCtaText: "Urban Intelligence",
+        secondaryCtaAction: () => document.getElementById('urban-intelligence')?.scrollIntoView({ behavior: 'smooth' })
+    },
+    {
+        badge: "Integrated Command & Control",
+        title: "Unified Municipal",
+        highlight: "Command Centers (ICCC)",
+        titleEnd: "",
+        description: "A unified AI-powered ecosystem connecting traffic management, emergency services, civic sensors, and multi-agency response.",
+        image: city2,
+        tags: ["Municipal ICCC", "Traffic AI", "Emergency Grid"],
+        telemetry: "ICCC Hub Connected",
+        ctaText: "Build Safer Cities",
+        secondaryCtaText: "Urban Intelligence",
+        secondaryCtaAction: () => document.getElementById('urban-intelligence')?.scrollIntoView({ behavior: 'smooth' })
+    },
+    {
+        badge: "Infrastructure Intelligence",
+        title: "Critical Utilities &",
+        highlight: "Public Asset Protection",
+        titleEnd: "",
+        description: "Predictive monitoring for city electrical grids, water pipelines, bridges, transit corridors, and public infrastructure.",
+        image: city3,
+        tags: ["Utility Grids", "Asset Protection", "Predictive Sensors"],
+        telemetry: "Utility Telemetry Synced",
+        ctaText: "Build Safer Cities",
+        secondaryCtaText: "Urban Intelligence",
+        secondaryCtaAction: () => document.getElementById('urban-intelligence')?.scrollIntoView({ behavior: 'smooth' })
+    },
+    {
+        badge: "Citizen-First Safety",
+        title: "Next-Gen Urban",
+        highlight: "Emergency Response",
+        titleEnd: "Systems",
+        description: "Zero-latency SOS kiosks, panic buttons, AI automated license plate recognition (ANPR), and rapid tactical dispatch.",
+        image: city4,
+        tags: ["ANPR Cameras", "SOS Kiosks", "Rapid Dispatch"],
+        telemetry: "Safe City Grid Active",
+        ctaText: "Build Safer Cities",
+        secondaryCtaText: "Urban Intelligence",
+        secondaryCtaAction: () => document.getElementById('urban-intelligence')?.scrollIntoView({ behavior: 'smooth' })
+    }
+];
 
 const SmartCityPage = () => {
     useContentProtection();
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-        const stopAutoPlay = useCallback(() => {
-        if (autoplayRef.current) {
-            clearInterval(autoplayRef.current);
-            autoplayRef.current = null;
-        }
-    }, []);
-
-    const startAutoPlay = useCallback(() => {
-        if (autoplayRef.current) return;
-        autoplayRef.current = setInterval(() => {
-            if (emblaApi) emblaApi.scrollNext();
-        }, 4000);
-    }, [emblaApi]);
-
-    const scrollPrev = useCallback(() => {
-        if (emblaApi) {
-            stopAutoPlay();
-            emblaApi.scrollPrev();
-            setTimeout(startAutoPlay, 5000);
-        }
-    }, [emblaApi, startAutoPlay, stopAutoPlay]);
-
-    const scrollNext = useCallback(() => {
-        if (emblaApi) {
-            stopAutoPlay();
-            emblaApi.scrollNext();
-            setTimeout(startAutoPlay, 5000);
-        }
-    }, [emblaApi, startAutoPlay, stopAutoPlay]);
-
-    const scrollTo = useCallback((index: number) => {
-        if (emblaApi) {
-            stopAutoPlay();
-            emblaApi.scrollTo(index);
-            setTimeout(startAutoPlay, 5000);
-        }
-    }, [emblaApi, startAutoPlay, stopAutoPlay]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-
-        const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
-        emblaApi.on("select", onSelect);
-        startAutoPlay();
-
-        emblaApi.on('pointerDown', stopAutoPlay);
-        emblaApi.on('pointerUp', startAutoPlay);
-
-        return () => {
-            stopAutoPlay();
-            emblaApi.off("select", onSelect);
-            emblaApi.off('pointerDown', stopAutoPlay);
-            emblaApi.off('pointerUp', startAutoPlay);
-        };
-    }, [emblaApi, startAutoPlay, stopAutoPlay]);
 
     return (
         <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
             <Header />
             <main className="flex-grow overflow-x-hidden">
-                {/* Hero Section with Carousel */}
-                <section className="relative min-h-[85vh] overflow-hidden" id="hero">
-                    <div ref={emblaRef} className="overflow-hidden h-[85vh]" onMouseEnter={stopAutoPlay} onMouseLeave={startAutoPlay}>
-                        <div className="flex h-full">
-                            {heroSlides.map((slide, index) => (
-                                <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full transition-opacity duration-50 ease-out">
-                                    <div className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[8000ms] ease-out" style={{ backgroundImage: `url(${slide.image})`, transform: selectedIndex === index ? 'scale(1.05)' : 'scale(1)' }} />
-                                    <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70" />
-                                    <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
-                                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px]" />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="absolute inset-0 flex items-start md:items-center pt-32 md:pt-0">
-                        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-                            <div className="max-w-4xl">
-                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm border border-border rounded-full mb-8 animate-fade-in">
-                                    <span className="text-sm font-medium text-primary">{smartCityHero.badge}</span>
-                                </div>
-                                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4 animate-fade-in">{heroSlides[selectedIndex].title}</h1>
-                                <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mb-6 md:mb-8 animate-fade-in">{heroSlides[selectedIndex].subtitle}</p>
-                                <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                                    <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('open-lead-form'))} className="gap-2 text-base px-8 py-6 shadow-lg shadow-primary/20 cursor-pointer">Build Safer Cities<ArrowRight className="w-5 h-5" /></Button>
-                                    <Button variant="outline" size="lg" onClick={() => document.getElementById('urban-intelligence')?.scrollIntoView({ behavior: 'smooth' })} className="gap-2 text-base px-8 py-6 bg-card/60 backdrop-blur-md border-white/20 hover:bg-primary hover:text-primary-foreground transition-all duration-300 cursor-pointer">Explore Urban Intelligence</Button>
-                                </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 max-w-2xl text-xs sm:text-sm text-muted-foreground/80 font-medium">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px]">✔</div>
-                                        <span>AI-Powered City Surveillance</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px]">✔</div>
-                                        <span>Integrated Command & Control Centers</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px]">✔</div>
-                                        <span>Infrastructure Monitoring Systems</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px]">✔</div>
-                                        <span>Citizen-First Urban Safety Framework</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
-                        {heroSlides.map((_, index) => (<button key={index} onClick={() => scrollTo(index)} className={`relative h-2 rounded-full transition-all duration-300 ${selectedIndex === index ? "w-10 bg-primary" : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"}`} aria-label={`Go to slide ${index + 1}`}>{selectedIndex === index && <span className="absolute inset-0 rounded-full bg-primary animate-pulse" />}</button>))}
-                    </div>
-                </section>
+                {/* Hero Section with Enhanced 2-Column Showcase Slider */}
+                <div id="hero">
+                    <PageHero 
+                        slides={smartCitySlides} 
+                        secondaryScrollTarget="urban-intelligence"
+                        secondaryCtaLabel="Explore Urban Intelligence"
+                    />
+                </div>
 
                 {/* All Sections */}
                 {allSmartCitySections.map((section, index) => (

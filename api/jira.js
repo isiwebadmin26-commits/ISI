@@ -200,10 +200,10 @@ export default async function handler(req, res) {
     // ═══════════════════════════════════════════════════════════════════════════
     const JIRA_DOMAIN = process.env.JIRA_DOMAIN || 'isiwebadmin26.atlassian.net';
     const JIRA_EMAIL = process.env.JIRA_EMAIL || 'isiwebadmin26@gmail.com';
-    const JIRA_API_TOKEN = process.env.JIRA_API_TOKEN || 'ATATT3xFfGF0otuT6NaBOLUbC3N82v9T3sasNAVBJTbn2gNeDADIrmsyBqgwaSGLlFLLiZScEk1o0WSvs5EXGPGn7xAFLzCa78uqGv8PBNKjnEWxe-qo-bcgygTWO6FQ4HSPQp7ZWM_MPHwGOk1Fq698Kd41tPAjn192xAJZsGSN27QqDbIvFko=9A1EAAFA';
+    const JIRA_API_TOKEN = process.env.JIRA_API_TOKEN || 'ATATT3xFfGF0lbD19gZUlyhl9RVsKhYuV00cAPobsB5tpHRd8SAHwl2juYm1yVJ_yAo4dPxGU2RV1V-xbdDBDFPjNpRwJ4zrNpvODmVpwZH0dYWzmyZdZkGMnbh7soHQuyHK9adyS7uC2tqcDEkb0LbLMVoQ62wc5-XRQVllZrhtCGJo5k6U_Wk=29205FB8';
     const JIRA_PROJECT_KEY = process.env.JIRA_PROJECT_KEY || 'DLF';
     const JIRA_ISSUE_TYPE = process.env.JIRA_ISSUE_TYPE || 'Lead';
-    const JIRA_ASSIGNEE_ID = process.env.JIRA_ASSIGNEE_ID || '712020:6dedc500-fbd4-4005-86ad-4420830ee6af'; // Pooja (isiwebadmin26)
+    const JIRA_ASSIGNEE_ID = process.env.JIRA_ASSIGNEE_ID || '712020:4446ab55-34e6-4ef5-a525-b60c122f3cb5';
 
     const cleanDomain = JIRA_DOMAIN.replace(/^https?:\/\//, '').replace(/\/+$/, '');
     const authString = Buffer.from(`${JIRA_EMAIL.trim()}:${JIRA_API_TOKEN.trim()}`).toString('base64');

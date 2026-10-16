@@ -45,9 +45,9 @@ export const ModernLivingHero = () => {
     const { heroSlides } = modernLivingData;
 
     return (
-        <section className="relative min-h-screen overflow-hidden bg-background">
+        <section className="relative min-h-[500px] overflow-hidden bg-background">
             {/* Carousel Background */}
-            <div ref={emblaRef} className="absolute inset-0 z-0 overflow-hidden h-screen" onMouseEnter={stopAutoPlay} onMouseLeave={startAutoPlay}>
+            <div ref={emblaRef} className="absolute inset-0 z-0 overflow-hidden" onMouseEnter={stopAutoPlay} onMouseLeave={startAutoPlay}>
                 <div className="flex h-full">
                     {slideImages.map((image, index) => (
                         <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
@@ -65,8 +65,8 @@ export const ModernLivingHero = () => {
             </div>
 
             {/* Content Overlay */}
-            <div className="relative z-10 container mx-auto px-4 lg:px-8 h-screen flex flex-col justify-center">
-                <div className="max-w-4xl pt-20 md:pt-0">
+            <div className="relative z-10 container mx-auto px-4 lg:px-8 py-12 md:py-16 flex flex-col justify-center min-h-[500px]">
+                <div className="max-w-4xl">
                     <AnimatePresence mode="wait">
                         <motion.div 
                             key={`content-${selectedIndex}`}

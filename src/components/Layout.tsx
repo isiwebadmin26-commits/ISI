@@ -19,7 +19,6 @@ export const Layout = ({ children, className, noPadding = false, hideHeaderFoote
             {!hideHeaderFooter && <Header />}
             <main className={cn(
                 "flex-grow overflow-x-hidden w-full",
-                !noPadding && "pt-24 md:pt-32", // Default top padding for fixed header
                 className
             )}>
                 {children}

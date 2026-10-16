@@ -43,7 +43,7 @@ const ServiceCategoryPage = ({ categoryIdOverride, canonicalPathOverride }: Serv
                 canonical={canonicalPath}
             />
             <Header />
-            <main className="flex-grow overflow-x-hidden pt-32">
+            <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section */}
                 <PageHero
                     slides={categoryData.heroSlides}

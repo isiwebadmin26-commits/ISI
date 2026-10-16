@@ -195,7 +195,7 @@ export const SchoolSafetyHero = ({ onOpenEbook }: { onOpenEbook: () => void }) =
             </div>
 
             {/* Content Overlay */}
-            <div className="absolute inset-0 flex items-start md:items-center pt-40 md:pt-10">
+            <div className="absolute inset-0 flex items-center py-10 md:py-12">
                 <div className="container mx-auto px-4 lg:px-8 relative z-10">
                     <div className="max-w-4xl">
                         {/* Badge */}
