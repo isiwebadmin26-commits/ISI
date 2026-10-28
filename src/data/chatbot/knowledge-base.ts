@@ -83,7 +83,7 @@ export const isiKnowledgeBase: KnowledgeBase = {
             ]
         },
         {
-            triggers: ["vault", "locker", "atms", "branch", "cash chest", "currency", "gold loan", "bank", "rbi", "safes", "shroffing", "custodian", "escorting", "valuable", "bullion", "transit", "armored", "gps", "money", "atm machine"],
+            triggers: ["vault", "locker", "atms", "branch", "cash chest", "currency", "gold loan", "bank", "rbi", "safes", "shroffing", "custodian", "secure transit", "valuable", "bullion", "transit", "armored", "gps", "money", "atm machine"],
             domain: "BFSI & Vault Security",
             acknowledgment: "High-stakes environments like banks and vaults require 100% reliability and RBI-compliant logistics. We've been securing leading financial institutions since 1994.",
             targetServiceId: "secure_logistics",
@@ -113,7 +113,7 @@ export const isiKnowledgeBase: KnowledgeBase = {
             ]
         },
         {
-            triggers: ["wedding", "marriage", "function", "concert", "crowd", "celebrity", "guest list", "vvip", "protection", "event", "bouncers", "bodyguard", "escort", "protocol", "security guys", "valet"],
+            triggers: ["wedding", "marriage", "function", "concert", "crowd", "celebrity", "guest list", "vvip", "protection", "event", "bouncers", "bodyguard", "personal protection", "executive protection", "protocol", "security guys", "valet"],
             domain: "Event & VIP Protection",
             acknowledgment: "For major events and VIP movements, we deploy elite personnel trained in discreet protection, crowd management, and high-level protocol.",
             targetServiceId: "manned_guarding",
