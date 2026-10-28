@@ -169,7 +169,7 @@ const appRoutes = [
   { path: "/services/integrated-facility-management", element: <ServiceCategoryPage categoryIdOverride="hard-fm" canonicalPathOverride="/services/integrated-facility-management" /> },
   { path: "/services/skill-development-manpower", element: <Navigate to="/academy" replace /> },
   { path: "/mobile-security-services-chennai-crime-prevention", element: <Navigate to="/services/security" replace /> },
-  { path: "/need-protection-money-properties-vip-escort-services", element: <ServiceCategoryPage categoryIdOverride="specialized-protection" canonicalPathOverride="/need-protection-money-properties-vip-escort-services" /> },
+  // Removed spam route /need-protection-money-properties-vip-escort-services (returns HTTP 410 Gone at server/edge and falls through to NotFound in SPA)
   { path: "/404", element: <NotFound /> },
   { path: "/services/:type/:categoryId", element: <ServiceCategoryPage /> }
 ];

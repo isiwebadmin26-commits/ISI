@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { useContentProtection } from "@/hooks/useContentProtection";
 import { FileText, Shield, AlertTriangle, Scale, Globe, Lock, Server } from "lucide-react";
 
@@ -7,6 +8,11 @@ const TermsOfService = () => {
     return (
         <Layout>
             <div className="bg-background min-h-screen">
+                <SEO
+                    title="Terms of Service | Legal Conditions & Website Usage | ISI Security"
+                    description="Review the official Terms of Service governing access to and use of ISI Security's website and digital platforms at https://www.isisecurity.in/."
+                    canonicalPath="/termsofservice"
+                />
                 {/* Header */}
                 <div className="relative py-10 bg-gradient-to-br from-cyan-600 via-blue-600 to-indigo-700 overflow-hidden">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
@@ -83,7 +89,7 @@ const TermsOfService = () => {
                             <div>
                                 <h2 className="text-2xl font-bold mb-4 text-foreground">4. Intellectual Property</h2>
                                 <p className="text-muted-foreground">
-                                    All Website content is owned by ISIS Security and protected under Indian intellectual property laws.
+                                    All Website content is owned by ISI Security and protected under Indian intellectual property laws.
                                 </p>
                             </div>
                         </div>
@@ -112,7 +118,7 @@ const TermsOfService = () => {
                             <div>
                                 <h2 className="text-2xl font-bold mb-4 text-foreground">6. Limitation of Liability</h2>
                                 <p className="text-muted-foreground">
-                                    To the maximum extent permitted by Indian law, ISIS Security shall not be liable for indirect, incidental, or consequential damages arising from Website use.
+                                    To the maximum extent permitted by Indian law, ISI Security shall not be liable for indirect, incidental, or consequential damages arising from Website use.
                                 </p>
                             </div>
                         </div>

@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { CashLogisticsSection } from "@/data/cash-logistics-data";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
@@ -81,6 +82,12 @@ const TravelTourismPage = () => {
         <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
             <Header />
             <main className="flex-grow overflow-x-hidden">
+                <SEO
+                    title="Travel, Tourism, Hospitality & Heritage Site Security | ISI Security"
+                    description="Discreet five-star hospitality security, luxury resort guarding, tourist safety corridors, and heritage monument protection across India."
+                    keywords="Hospitality Security Services, Hotel and Resort Guarding, Tourism Safety India, Heritage Site Protection, ISI Security"
+                    canonicalPath="/traveltourism"
+                />
                 <PageHero slides={tourismSlides} />
 
                 {/* All Sections */}

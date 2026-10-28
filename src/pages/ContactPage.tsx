@@ -16,8 +16,8 @@ export const ContactPage = () => {
   return (
     <Layout>
       <SEO 
-        title="Contact Us" 
-        description="Get in touch with ISI Security for comprehensive guarding, facility management, electronic security, and risk consulting across India."
+        title="Contact ISI Security | 24/7 Enterprise Security & Facility Management Consultation" 
+        description="Get in touch with ISI Security for comprehensive PSARA guarding, integrated facility management, electronic security, and risk consulting across India."
         canonical="/contact"
       />
       <Contact />

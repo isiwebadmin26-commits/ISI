@@ -1,20 +1,35 @@
-# ISI - Industrial Security & Intelligence (I) Pvt. Ltd
+# ISI India (Industrial Security & Intelligence India Pvt. Ltd.)
 
-## Purpose
-ISI is an ISO 9001:2015 certified company providing comprehensive security solutions including guarding services, electronic security, and risk consulting across India.
+> Premier Enterprise Security, AI Surveillance, Cash Logistics & Integrated Facility Management in India.
 
-## Pages
-- [Home](https://www.isecurityindia.com/)
-- [About](https://www.isecurityindia.com/about)
-- [Services](https://www.isecurityindia.com/services)
-- [Contact](https://www.isecurityindia.com/contact)
+ISI Security is an ISO 9001:2015 and PSARA-certified enterprise security and integrated facility management organization operating across 18+ Indian states with 25+ years of operational excellence.
 
-## Sitemap
-[Sitemap](https://www.isecurityindia.com/sitemap.xml)
+## Main Pages
 
-## Contact
-Email: info@isecurityindia.com
-Phone: +91 123 456 7890
+- [Home](https://www.isisecurity.in/): Enterprise security solutions, C4i command center intelligence, and integrated facility management.
+- [About Us](https://www.isisecurity.in/about): 25+ year legacy, leadership team, certifications, and nationwide operational footprint.
+- [Capabilities](https://www.isisecurity.in/capabilities): Physical guarding, autonomous drones, AI video analytics, and command center integration.
+- [Offerings](https://www.isisecurity.in/offerings): Complete service stack across Security Services and Facility Management.
+- [Verticals](https://www.isisecurity.in/verticals): Tailored security frameworks for Banking/BFSI, GCC & IT Parks, Manufacturing, Healthcare, Education, and Retail.
+- [ISI Academy](https://www.isisecurity.in/academy): Skill development, PSARA training, and CDAC-aligned technical security programs.
+- [Technology Courses](https://www.isisecurity.in/courses): Certified cybersecurity, AI surveillance, IoT, and enterprise security courses.
+- [Security Insights & Blog](https://www.isisecurity.in/blog): Threat intelligence and operational security guides for enterprise leaders.
+- [Careers](https://www.isisecurity.in/career): Nationwide career opportunities in security operations, SOC monitoring, and facility management.
+- [Contact Us](https://www.isisecurity.in/contact): 24/7 enterprise security consultation and pan-India branch network.
 
-## API & Documentation
-(Not applicable for this public-facing website)
+## Specialized Solutions
+
+- [Security Services](https://www.isisecurity.in/services/security): Manned guarding, electronic security, remote monitoring, and Executive Protection Services.
+- [Integrated Facility Management](https://www.isisecurity.in/services/integrated-facility-management): Hard FM, Soft FM, preventive maintenance, and ESG energy optimization.
+- [Command Center (C4i)](https://www.isisecurity.in/commandcenter): 24/7 centralized surveillance, IoT sensor fusion, and rapid incident response.
+- [Cash Logistics (CIT)](https://www.isisecurity.in/cashlogistics): RBI-compliant Cash-in-Transit, ATM replenishment, and biometric vaulting.
+- [Secure Value Logistics](https://www.isisecurity.in/securevaluelogistics): Bullion, diamond, jewellery, and high-value asset transit protection.
+- [School Safety](https://www.isisecurity.in/schoolsafety): K-12 student safety, bus GPS telemetry, and visitor verification.
+- [Campus Safety](https://www.isisecurity.in/campussafety): University and residential campus security ecosystems.
+- [GCC & IT Parks](https://www.isisecurity.in/gccitparks): Zero-trust physical security for technology parks and Global Capability Centers.
+
+## Contact Information
+
+- Website: https://www.isisecurity.in/
+- Email: mdu@isisecurity.in
+- Phone: +91 77088 87878

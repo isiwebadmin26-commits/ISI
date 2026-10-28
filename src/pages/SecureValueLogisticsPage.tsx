@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
 import {
@@ -75,13 +76,13 @@ const secureLogisticsSlides: HeroSlide[] = [
         secondaryCtaAction: () => document.getElementById('cash-monetary-logistics')?.scrollIntoView({ behavior: 'smooth' })
     },
     {
-        badge: "High-Value Cargo Escorts",
-        title: "Armed Tactical Escorts &",
+        badge: "High-Value Cargo Protection",
+        title: "Armed Tactical Protection &",
         highlight: "Precious Asset Custody",
         titleEnd: "",
         description: "Ex-military tactical personnel protecting precious metals, pharmaceuticals, high-value electronics, and classified shipments.",
         image: cashLogistics5,
-        tags: ["Tactical Escorts", "Pharmaceutical Transit", "Bullion Protection"],
+        tags: ["Secure Transit Services", "Pharmaceutical Transit", "Bullion Protection"],
         telemetry: "High-Value Corridor Active",
         ctaText: "Get Started",
         secondaryCtaText: "Explore Solutions",
@@ -98,6 +99,12 @@ const SecureValueLogisticsPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="Secure Value Logistics | Bullion, Jewellery & High-Value Asset Transit | ISI Security"
+                        description="Specialized high-value cargo protection, bullion and diamond transit, pharmaceutical custody, and RFID-enabled vaulting across India."
+                        keywords="Secure Value Logistics, High Value Cargo Security, Bullion and Diamond Transit, Jewellery Logistics Security, ISI Security"
+                        canonicalPath="/securevaluelogistics"
+                    />
                     <PageHero 
                         slides={secureLogisticsSlides} 
                         secondaryScrollTarget="cash-monetary-logistics"

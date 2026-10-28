@@ -37,8 +37,8 @@ export const gemsJewelleryOfferingsData = {
             id: "security-services",
             title: "Security & Protection",
             icon: Shield,
-            description: "High-security personnel, armed guards, transit escort squads, and specialized loss-prevention units trained specifically for precious metals and gemstone protection.",
-            highlights: ["Armed & Unarmed Guarding", "Transit & Escort Protection", "Showroom Loss Prevention"]
+            description: "High-security personnel, armed guards, secure transit squads, and specialized loss-prevention units trained specifically for precious metals and gemstone protection.",
+            highlights: ["Armed & Unarmed Guarding", "Secure Transit & Close Protection", "Showroom Loss Prevention"]
         },
         {
             id: "facility-management",

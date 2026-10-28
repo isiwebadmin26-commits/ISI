@@ -57,19 +57,19 @@ const Sitemap = () => {
             links: [
                 {
                     name: "Security Services",
-                    href: "/services/security/",
+                    href: "/services/security",
                     description: "Comprehensive manned guarding, tactical intelligence, and electronic security solutions",
                     type: "Primary Service"
                 },
                 {
                     name: "Integrated Facility Management",
-                    href: "/services/integrated-facility-management/",
+                    href: "/services/integrated-facility-management",
                     description: "End-to-end hard & soft facility management solutions, energy intelligence, and asset management",
                     type: "Primary Service"
                 },
                 {
                     name: "Skill Development & Manpower",
-                    href: "/services/skill-development-manpower/",
+                    href: "/academy",
                     description: "Specialized training, certified security personnel, and workforce deployment",
                     type: "Primary Service"
                 },
@@ -307,7 +307,7 @@ const Sitemap = () => {
 
     return (
         <Layout>
-            <SEO title="Site Map" description="Explore our complete website structure and quickly find all pages and security solutions." canonical="/sitemap" />
+            <SEO title="Site Map | Complete Website Navigation | ISI Security" description="Explore ISI Security's complete website structure and quickly find all enterprise security, facility management, and skill development pages." canonicalPath="/sitemap" />
             <div className="bg-background min-h-screen">
                 {/* Enhanced Hero Section */}
                 <div className="relative py-8 md:py-10 bg-gradient-to-br from-primary via-primary/95 to-primary/90 overflow-hidden">

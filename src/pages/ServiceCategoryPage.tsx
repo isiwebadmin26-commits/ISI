@@ -38,7 +38,7 @@ const ServiceCategoryPage = ({ categoryIdOverride, canonicalPathOverride }: Serv
     return (
         <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
             <SEO
-                title={categoryData.title}
+                title={`${categoryData.title} | ISI Security`}
                 description={categoryData.subtitle}
                 canonical={canonicalPath}
             />

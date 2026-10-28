@@ -248,7 +248,7 @@ export const capabilityPillars: CapabilityPillar[] = [
                 capabilities: [
                     "Universal Credentialing: Single biometric identity enabling access across multiple sites, buildings, and zones with role-based permissions and time-based restrictions.",
                     "Mobile Access Solutions: Smartphone-based credentials using Bluetooth Low Energy, NFC, and dynamic QR codes with anti-tailgating algorithms.",
-                    "Visitor Management: Pre-registration portals, background check integration, temporary credential issuance, and escort protocols."
+                    "Visitor Management: Pre-registration portals, background check integration, temporary credential issuance, and guided access protocols."
                 ],
                 scenarios: [
                     "Corporate campuses with 10,000+ employees and contractors",
@@ -682,7 +682,7 @@ export const securityDomains: SecurityDomain[] = [
                 ]
             },
             {
-                title: "Mobile Response & Escort Services",
+                title: "Mobile Response & Executive Protection Services",
                 items: [
                     "Vehicle-mounted security teams",
                     "Route-secured movement for assets and personnel",
@@ -801,7 +801,7 @@ export const securityDomains: SecurityDomain[] = [
                 title: "Cash & High-Value Logistics",
                 items: [
                     "Cash-in-Transit (CIT) operations",
-                    "Escort and convoy security",
+                    "Close Protection Services and convoy security",
                     "Tamper detection and chain-of-custody assurance"
                 ]
             },
@@ -902,7 +902,7 @@ export const securityDomains: SecurityDomain[] = [
                 title: "Business Continuity Protection",
                 items: [
                     "Controlled access and phased operations",
-                    "Management escort and safe corridor creation",
+                    "Management personal protection and safe corridor creation",
                     "Coordination with legal and compliance teams"
                 ]
             }

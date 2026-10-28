@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { useContentProtection } from "@/hooks/useContentProtection";
 import { Shield, Lock, FileText, Eye, Database, Server, Users, Globe, AlertCircle, Mail } from "lucide-react";
 
@@ -7,6 +8,11 @@ const PrivacyPolicy = () => {
     return (
         <Layout>
             <div className="bg-background min-h-screen">
+                <SEO
+                    title="Privacy Policy | Data Protection & Compliance | ISI Security"
+                    description="Read ISI Security's Privacy Policy detailing how we collect, protect, and process personal and enterprise information across https://www.isisecurity.in/."
+                    canonicalPath="/privacypolicy"
+                />
                 {/* Header */}
                 <div className="relative py-10 bg-slate-900 overflow-hidden">
                     <div className="container mx-auto px-4 relative z-10 text-center">

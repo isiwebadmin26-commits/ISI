@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
 import {
@@ -98,6 +99,12 @@ const CommandCenterPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="Centralized C4i Command Center & AI Video Analytics | ISI Security"
+                        description="24/7 mission-critical C4i Command Center connecting AI video analytics, IoT intrusion sensors, autonomous drones, and rapid incident response across India."
+                        keywords="C4i Command Center, Security Operations Center SOC, AI Video Surveillance, Remote Monitoring India, ISI Security"
+                        canonicalPath="/commandcenter"
+                    />
                     <PageHero 
                         slides={commandCenterSlides} 
                         secondaryScrollTarget="value-proposition"

@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { useContentProtection } from "@/hooks/useContentProtection";
 import { Copyright, Shield, AlertTriangle, Eye, Server, Globe } from "lucide-react";
 
@@ -7,6 +8,11 @@ const CopyrightPolicy = () => {
     return (
         <Layout>
             <div className="bg-background min-h-screen">
+                <SEO
+                    title="Copyright Policy | Intellectual Property Protection | ISI Security"
+                    description="Official Copyright Policy and intellectual property notice for content, media, and materials published by ISI Security."
+                    canonicalPath="/copyrightpolicy"
+                />
                 {/* Header */}
                 <div className="relative py-10 bg-gradient-to-br from-cyan-600 via-blue-600 to-indigo-700 overflow-hidden">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
@@ -29,7 +35,7 @@ const CopyrightPolicy = () => {
                             <div>
                                 <h2 className="text-2xl font-bold mb-4 text-foreground">1. Ownership of Content</h2>
                                 <p className="text-muted-foreground">
-                                    All materials on <a href="https://www.isisecurity.in/" className="text-primary hover:underline">https://www.isisecurity.in/</a> including text, images, graphics, logos, videos, layouts, and software are the exclusive property of ISIS Security, unless otherwise stated.
+                                    All materials on <a href="https://www.isisecurity.in/" className="text-primary hover:underline">https://www.isisecurity.in/</a> including text, images, graphics, logos, videos, layouts, and software are the exclusive property of ISI Security, unless otherwise stated.
                                 </p>
                             </div>
                         </div>

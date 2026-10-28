@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { getAllBlogs, getFeaturedBlog } from "@/data/blogs-data";
 import { Search, Clock, ArrowRight, ShieldAlert, Shield, HeartPulse, User, Calendar, BookOpen, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,12 @@ const BlogListingPage = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Enterprise Security Insights & Threat Intelligence Blog | ISI Security"
+        description="Read expert operational guides, physical security architectures, and threat intelligence insights for Healthcare, Jewellery Retail, Banking, and Manufacturing."
+        keywords="Enterprise Security Blog, Physical Security Insights, Healthcare Security Guide, Jewellery Security, Banking Vault Compliance, ISI Security"
+        canonicalPath="/blog"
+      />
       {/* Hero Section */}
       <section className="relative bg-slate-900 py-20 overflow-hidden border-b border-slate-800">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-950/90 via-slate-900/95 to-slate-900/90 z-10" />

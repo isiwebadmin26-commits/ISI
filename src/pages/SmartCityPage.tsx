@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { CashLogisticsSection } from "@/data/cash-logistics-data";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
@@ -87,6 +88,12 @@ const SmartCityPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="Smart City Surveillance & Urban Intelligence Solutions | ISI Security"
+                        description="AI-powered urban security, ANPR traffic analytics, public safety monitoring, and municipal command center integration for Smart Cities."
+                        keywords="Smart City Security, Urban Surveillance India, ANPR Traffic Analytics, Public Safety Command Center, ISI Security"
+                        canonicalPath="/smartcity"
+                    />
                     <PageHero 
                         slides={smartCitySlides} 
                         secondaryScrollTarget="urban-intelligence"

@@ -34,8 +34,8 @@ export const goldOfferingsData = {
             id: "security-services",
             title: "Security Services",
             icon: Shield,
-            description: "High-security personnel, armed guards, transit escort squads, and specialized loss-prevention units trained specifically for precious metals and gemstone protection.",
-            highlights: ["Armed & Unarmed Guarding", "Transit & Escort Protection", "Showroom Loss Prevention"]
+            description: "High-security personnel, armed guards, secure transit squads, and specialized loss-prevention units trained specifically for precious metals and gemstone protection.",
+            highlights: ["Armed & Unarmed Guarding", "Secure Transit & Close Protection", "Showroom Loss Prevention"]
         },
         {
             id: "facility-management",
@@ -117,7 +117,7 @@ export const goldOfferingsData = {
         {
             title: "Visitor management",
             icon: UserCheck,
-            desc: "Digital ID registration, facial matching verification, and escort tracking for all guests and contractors."
+            desc: "Digital ID registration, facial matching verification, and accompanied access tracking for all guests and contractors."
         },
         {
             title: "Incident response management",

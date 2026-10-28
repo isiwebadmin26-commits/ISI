@@ -43,7 +43,7 @@ const academyList = [
   { name: "PSARA Guarding & Patrols", href: "/academy#guarding-security", category: "Guarding Security", desc: "Statutory PSARA & Gatehouse Security", icon: ShieldCheck },
   { name: "Command Center (C4i) & VMS", href: "/academy#guarding-security", category: "Guarding Security", desc: "24/7 CCTV Wall & Incident Triaging", icon: Activity },
   { name: "Tactical Emergency & Fire", href: "/academy#guarding-security", category: "Guarding Security", desc: "NBC 2016 Standards, First Aid & Evacuation", icon: ShieldAlert },
-  { name: "Executive & VIP Escort", href: "/academy#guarding-security", category: "Guarding Security", desc: "Convoy Tactics & High-Risk Protection", icon: UserCheck },
+  { name: "VIP Personal Protection Services", href: "/academy#guarding-security", category: "Guarding Security", desc: "Convoy Tactics & High-Risk Protection", icon: UserCheck },
 ];
 
 // New industry verticals list for the dropdown

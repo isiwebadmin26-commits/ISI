@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { SEO } from '@/components/SEO';
 import {
   Shield,
   Activity,
@@ -175,6 +176,7 @@ export const IntelligenceDashboard: React.FC = () => {
   if (!authToken) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+        <SEO title="Enterprise Intelligence Portal | ISI Security" description="Restricted corporate security intelligence portal." noindex={true} />
         <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -259,6 +261,7 @@ export const IntelligenceDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      <SEO title="Enterprise Intelligence Dashboard | ISI Security" description="Restricted corporate security intelligence portal." noindex={true} />
       {/* Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 px-4 md:px-8 py-3.5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

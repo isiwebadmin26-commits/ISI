@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { validateWorkEmail, validatePhoneNumber } from "@/utils/validation";
 import { Button } from "@/components/ui/button";
@@ -268,6 +269,12 @@ export default function SchoolSafetyLanding() {
             <Header />
             <main className="flex-grow overflow-x-hidden">
                 <div className="font-sans text-gray-900 bg-gray-50">
+                    <SEO
+                        title="School Safety & Student Protection Solutions | ISI Security"
+                        description="Comprehensive K-12 school safety solutions: verified guards, GPS bus tracking, RFID attendance, AI perimeter surveillance, and visitor verification."
+                        keywords="School Safety Solutions, K-12 Campus Security, School Bus GPS Tracking, Student Protection India, ISI Security"
+                        canonicalPath="/schoolsafety"
+                    />
 
 
                     {/* ================= HERO SECTION WITH CAROUSEL ================= */}

@@ -42,6 +42,11 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// Return HTTP 410 Gone for removed spam route
+app.use(['/need-protection-money-properties-vip-escort-services', '/need-protection-money-properties-vip-escort-services/*'], (req, res) => {
+  res.status(410).set('X-Robots-Tag', 'noindex, nofollow').send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="robots" content="noindex, nofollow"><title>410 Gone | ISI Security</title></head><body><h1>410 Gone</h1><p>This resource has been permanently removed.</p><p><a href="https://www.isisecurity.in/">Return to ISI Security</a></p></body></html>');
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Jira Integration Server running on http://localhost:${PORT}`);
 });

@@ -5300,7 +5300,7 @@ export const serviceCategories: ServiceCategory[] = [
                     },
                     {
                         title: "Dynamic Auth",
-                        features: ["Risk-based access levels", "Time-limited permissions", "Escort requirements"],
+                        features: ["Risk-based access levels", "Time-limited permissions", "Accompanied access requirements"],
                         icon: Clock
                     },
                     {
@@ -6127,7 +6127,7 @@ export const serviceCategories: ServiceCategory[] = [
                     },
                     {
                         title: "Risk Adaptation",
-                        features: ["Frictionless low-risk entry", "Escort requirement AI", "Time-based restrictions"],
+                        features: ["Frictionless low-risk entry", "Accompanied access AI", "Time-based restrictions"],
                         icon: Settings
                     }
                 ],
@@ -7465,7 +7465,7 @@ export const serviceCategories: ServiceCategory[] = [
                 badge: "Close Protection",
                 title: "Executive",
                 highlight: "Safety",
-                description: "Elite escort services with integrated advanced threat intelligence.",
+                description: "Elite Executive Protection Services with integrated advanced threat intelligence.",
                 image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80"
             },
             {

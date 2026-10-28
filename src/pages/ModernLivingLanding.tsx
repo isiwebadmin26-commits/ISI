@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { CashLogisticsSection } from "@/data/cash-logistics-data";
 import { ModernLivingHero } from "@/components/modern-living/ModernLivingHero";
@@ -80,6 +81,12 @@ export default function ModernLivingLanding() {
         <div className="min-h-screen bg-background flex flex-col overflow-x-hidden selection:bg-primary/20">
             <Header />
             <main className="flex-grow">
+                <SEO
+                    title="Modern Living, Gated Community & Luxury Residential Security | ISI Security"
+                    description="Smart residential security and facility management for gated communities, luxury apartments, and HNI residences with visitor verification and 24/7 patrolling."
+                    keywords="Gated Community Security, Residential Apartment Guarding, Smart Visitor Management, HNI Home Protection, ISI Security"
+                    canonicalPath="/modernliving"
+                />
                 <ModernLivingHero />
                 
                 <div className="bg-background">

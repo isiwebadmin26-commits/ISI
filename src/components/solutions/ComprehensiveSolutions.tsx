@@ -152,7 +152,7 @@ const comprehensiveSolutions: SolutionCategory[] = [
                 title: "Fleet & Cargo Security",
                 items: [
                     "Real-time tracking and supervised routes",
-                    "Escorted convoys with drone support",
+                    "Protected convoys with drone support",
                     "Predictive risk alerts for high-risk corridors"
                 ]
             },

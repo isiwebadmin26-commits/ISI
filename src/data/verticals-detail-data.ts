@@ -82,7 +82,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                         title: "Our Offerings",
                         description: "Specialised, discreet secure logistics for jewellery, bullion, luxury goods, and sensitive cargo, ensuring high-assurance custody from origin to destination.",
                         features: [
-                            "Discreet Secure Transport: Unbranded or decoy vehicles, tamper-evident sealing, armed escorts, and optimised, geo-fenced routes for maximum discretion.",
+                            "Discreet Secure Transport: Unbranded or decoy vehicles, tamper-evident sealing, armed transit guards, and optimised, geo-fenced routes for maximum discretion.",
                             "Tech-Enabled Vaulting: State-of-the-art vaults linked to an advanced inventory platform, tracking every item via barcodes or RFID for precise accountability.",
                             "Compliance-Ready Processes: Detailed documentation, route logs, and digital custody trails designed to streamline customs clearance, audits, and insurance claims."
                         ]
@@ -264,7 +264,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                             "Temporary Crowd Analytics: Real-time density monitoring and flow alerts for ballrooms/convention halls to prevent crushes",
                             "VIP & Celebrity Protection: Close-protection trained personnel with advance route planning and discrete security",
                             "Kitchen & Service Area Monitoring: Hygiene-compliant cameras and access control for F&B zones",
-                            "Cash & Valuables Transit: Secure escorts for event collections and hotel cashiers with digital documentation"
+                            "Cash & Valuables Transit: Secure Transit Services for event collections and hotel cashiers with digital documentation"
                         ]
                     }
                 ],
@@ -410,7 +410,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                         features: [
                             "Thermal & AI Camera Surveillance: Day/night coverage with anomaly detection for large premises",
                             "Smart Intrusion Sensors: Vibration/seismic detection with AI reducing false alarms by 80%",
-                            "Visitor Management Systems: Digital registration with ID verification and escorted access",
+                            "Visitor Management Systems: Digital registration with ID verification and accompanied access",
                             "Anti-Ram Bollards + Vehicle Barriers: Integrated with ANPR for controlled entry at critical points"
                         ]
                     }
@@ -478,7 +478,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                         features: [
                             "Multi-Layer Vault Access: Time-delay locks, dual-control biometrics, and video-verified entry logs",
                             "Cash Handling Monitoring: AI object detection for tamper-proof surveillance in strong rooms",
-                            "Armored CIT Escorts: GPS-tracked vehicles with route deviation alerts and armed guards",
+                            "Armored CIT Secure Transit: GPS-tracked vehicles with route deviation alerts and armed guards",
                             "ATM & CDM Protection: Anti-skimming devices, vibration alarms, and remote monitoring systems"
                         ]
                     }
@@ -491,7 +491,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                     },
                     {
                         title: "Cash Transit Security",
-                        description: "GPS tracking and armed escorts ensure safe transport of cash between locations with real-time monitoring.",
+                        description: "GPS tracking and armed transit guards ensure safe transport of cash between locations with real-time monitoring.",
                         icon: Truck
                     },
                     {
@@ -693,7 +693,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                         features: [
                             "GPS-Tracked School Vehicles: Live tracking with geo-fence alerts for route deviations and over-speeding",
                             "ANPR + RFID Student Tagging: Automatic attendance tracking on boarding/exiting buses with parent notifications",
-                            "Visitor Verification: Digital logs with background cross-checks and mandatory escorted access",
+                            "Visitor Verification: Digital logs with background cross-checks and mandatory accompanied access",
                             "Emergency Broadcast Integration: Mass notifications to parents via SMS/app during incidents or emergencies"
                         ]
                     }
@@ -706,7 +706,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                     },
                     {
                         title: "Stranger Danger Prevention",
-                        description: "Rigorous visitor verification and escorted access protocols prevent unauthorized contact with students.",
+                        description: "Rigorous visitor verification and accompanied access protocols prevent unauthorized contact with students.",
                         icon: Shield
                     },
                     {
@@ -908,7 +908,7 @@ export const verticalsDetailData: VerticalDetail[] = [
                         features: [
                             "ANPR + Biometric Guard Verification: Real-time gate cross-checking with automated deviation alerts",
                             "Loading Bay & Yard Monitoring: AI tamper-detection cameras preventing unauthorized access and removals",
-                            "GPS-Enabled Secure Transit: Armored/escorted valuables movement with live tracking, route locks, and geo-fencing",
+                            "GPS-Enabled Secure Transit: Armored and guarded valuables movement with live tracking, route locks, and geo-fencing",
                             "Comprehensive Digital Yard Management: Real-time visibility of vehicles, containers, personnel, and material flows"
                         ]
                     }

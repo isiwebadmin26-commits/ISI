@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { CashLogisticsSection } from "@/data/cash-logistics-data";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
@@ -87,6 +88,12 @@ const MassTransportationPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="Mass Transportation, Metro, Airport & Transit Hub Security | ISI Security"
+                        description="High-density transit security for airports, metro rail networks, bus terminals, and seaports with crowd analytics, baggage screening, and emergency response."
+                        keywords="Mass Transportation Security, Metro Rail Security, Airport Terminal Guarding, Transit Hub Surveillance, ISI Security"
+                        canonicalPath="/masstransportation"
+                    />
                     <PageHero 
                         slides={transitSlides} 
                         secondaryScrollTarget="transit-intelligence"

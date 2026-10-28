@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { verticalsDetailData } from "@/data/verticals-detail-data";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +37,11 @@ export const VerticalDetailPage = () => {
 
     return (
         <Layout>
+            <SEO
+                title={`${vertical.title} Security Solutions | ISI Security`}
+                description={vertical.subtitle}
+                canonicalPath={`/verticals/${vertical.id}`}
+            />
             <div className="bg-background min-h-screen">
                 {/* Header */}
                 <div className="relative py-10 bg-gradient-to-br from-cyan-600 via-blue-600 to-indigo-700 overflow-hidden">

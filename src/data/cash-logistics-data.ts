@@ -120,7 +120,7 @@ export const section1_IntelligentCIT: CashLogisticsSection = {
         },
         {
             title: "High-Value Enterprises",
-            description: "Corporate cash transfers & escrow movement with discreet transport, armed escorts, and comprehensive insurance coverage for high-value transactions. Our comprehensive approach ensures maximum operational resilience while maintaining rigorous compliance standards. We leverage real-time intelligence and rapid deployment protocols to neutralize risks before they escalate, providing complete peace of mind and uninterrupted continuity."
+            description: "Corporate cash transfers & escrow movement with discreet transport, armed transit guards, and comprehensive insurance coverage for high-value transactions. Our comprehensive approach ensures maximum operational resilience while maintaining rigorous compliance standards. We leverage real-time intelligence and rapid deployment protocols to neutralize risks before they escalate, providing complete peace of mind and uninterrupted continuity."
         }
     ],
     cta: {
@@ -321,7 +321,7 @@ export const section4_ChequeLogistics: CashLogisticsSection = {
         {
             icon: Truck,
             title: "Secure Pickup & Transit",
-            features: ["Branch collections", "Corporate pickups", "Tamper-evident bags", "Armed escorts"]
+            features: ["Branch collections", "Corporate pickups", "Tamper-evident bags", "Secure Transit Services"]
         },
         {
             icon: ScanLine,

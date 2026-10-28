@@ -86,6 +86,10 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeProgramModal, setActiveProgramModal] = useState<any | null>(null);
 
+  // Dedicated Course Benefits Directory State
+  const [benefitsTrack, setBenefitsTrack] = useState<"guarding-security" | "facility-management" | "technology">("guarding-security");
+  const [selectedBenefitsProgramId, setSelectedBenefitsProgramId] = useState<number>(201);
+
   // Active slide index state for course sliders
   const [carouselIndices, setCarouselIndices] = useState<{ [key: number]: number }>({
     0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
@@ -624,7 +628,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
         "Corporate Campus Security Governance",
         "Visitor & Vendor Biometric Access Systems",
         "Workplace Violence Prevention & POSH Security",
-        "Executive Escort & Boardroom Protection",
+        "Executive Personal Protection & Boardroom Security",
         "Data Leakage Physical Security Measures",
         "Emergency Evacuation in High-Rise Campuses"
       ],
@@ -743,19 +747,19 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       badge: "Banks & Cash Logistics",
       type: "Normal Course",
       images: [academyHeroImg, cyberRangeImg, enterpriseImg],
-      captions: ["Bank Vault Access Gate", "ATM Surveillance Console", "Cash Van Armed Escort Drill"],
+      captions: ["Bank Vault Access Gate", "ATM Surveillance Console", "Cash Van Secure Transit Drill"],
       desc: "ATM booth security, branch protection, cash-in-transit armed protocols, strongroom vault security, alarm response, and banking fraud awareness.",
       modules: [
         "Banking Premises & Strongroom Vault Protection",
         "ATM Electronic Surveillance & Anti-Skimming",
-        "Cash-in-Transit (CIT) Armored Escort SOPs",
+        "Cash-in-Transit (CIT) Armored Transit SOPs",
         "Armed Guard Drill & Weapon Maintenance",
         "Silent Alarm & Panic Trigger Responses",
         "RBI Physical Security Compliance Benchmarks"
       ],
-      careerRoles: ["Banking Security Officer", "ATM Operations Officer", "Cash Logistics Escort Commander"],
+      careerRoles: ["Banking Security Officer", "ATM Operations Officer", "Cash Logistics Transit Commander"],
       outcome: "Certified Banking Security Professional",
-      labs: "Bank Strongroom Mockup & Armored CIT Escort Rig",
+      labs: "Bank Strongroom Mockup & Armored CIT Transit Rig",
       campuses: "Madurai · Coimbatore · Chennai",
       eligibility: "12th Pass / Ex-Servicemen preferred",
       batch: "Admissions Open"
@@ -878,7 +882,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       badge: "VIP & Close Protection",
       type: "Advanced Course",
       images: [enterpriseImg, cyberRangeImg, academyHeroImg],
-      captions: ["Close Protection Formation", "Convoy Defensive Escort", "Threat Route Recon"],
+      captions: ["Close Protection Formation", "Convoy Defensive Protection", "Threat Route Recon"],
       desc: "Protective intelligence, defensive route planning, advance threat assessments, close protection techniques, VIP etiquette, and high-risk extraction operations.",
       modules: [
         "Protective Intelligence & Advance Threat Profiling",
@@ -904,7 +908,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       type: "Advanced Course",
       images: [smartCityImg, academyHeroImg, enterpriseImg],
       captions: ["Stadium Access Turnstiles", "Crowd Density Heatmap", "Emergency Egress Route"],
-      desc: "Crowd management dynamics, large-scale stadium & concert risk planning, access zoning, anti-stampede strategies, VIP backstage escort, and emergency egress.",
+      desc: "Crowd management dynamics, large-scale stadium & concert risk planning, access zoning, anti-stampede strategies, VIP backstage personal protection, and emergency egress.",
       modules: [
         "Large-Scale Crowd Psychology & Surge Prevention",
         "Event Venue Risk & Threat Assessment SOPs",
@@ -987,6 +991,104 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
     if (guardingFilter === "all") return true;
     return c.category === guardingFilter;
   });
+
+  const resolveProgramBenefits = (course: any) => {
+    if (!course) return null;
+
+    let keyBenefits: string[] = [];
+    if (course.category === "core") {
+      keyBenefits = [
+        "Full statutory compliance under the Private Security Agencies (Regulation) Act (PSARA 2005)",
+        "Rigorous physical gatehouse and checkpoint access control, screening, and perimeter patrol drills",
+        "Conflict de-escalation, professional code of conduct, visitor registry management, and basic emergency first aid",
+        "Practical training conducted at physical mockups located across Madurai, Coimbatore, and Chennai centers"
+      ];
+    } else if (course.category === "industry") {
+      keyBenefits = [
+        `Tailored security and compliance protocols engineered specifically for ${course.title.replace("Certified ", "")}`,
+        "Sector-specific risk deterrence (e.g. retail shrinkage, hospital emergency triage, bank cash secure transit, aviation sterile zoning)",
+        "Hands-on integration with domain hardware: EAS tags, biometric barriers, X-ray scanners, and automated fire hydrants",
+        "Direct alignment with statutory bodies and industry benchmarks (BCAS, RBI, NBC 2016, NABH)"
+      ];
+    } else if (course.category === "leadership") {
+      keyBenefits = [
+        "Executive-level security leadership, risk governance, security budgeting, and client stakeholder management",
+        "Comprehensive audit methodologies, incident investigation management, and legal evidence preservation",
+        "Command center operations, 24/7 video wall supervision, AI video analytics, and multi-agency coordination",
+        "180-day structured technical training followed by 180-day on-site managerial internship residency"
+      ];
+    } else if (course.category === "specialised") {
+      keyBenefits = [
+        "Elite protective intelligence, defensive motorcade protection, VIP bodyguard choreography, and crowd surge mitigation",
+        "Realistic scenario testing in live smoke chambers, tactical obstacle ranges, and stadium barrier rigs",
+        "Specialized operational proficiencies aligned with NBC 2016 fire safety or electronic VMS and PIDS integration",
+        "Comprehensive 360-day curriculum (180 days training + 180 days field internship) for elite private security deployment"
+      ];
+    } else if (course.id < 100) {
+      keyBenefits = [
+        "Industry-aligned technology curriculum designed to meet emerging enterprise technology requirements",
+        "Practical laboratory execution using physical testbeds, microservices, air-gapped cyber ranges, and protocol analyzers",
+        "Full-lifecycle implementation spanning architectural modeling, coding, hardware calibration, and security validation",
+        "90-day comprehensive training coupled with 30-day dedicated project residency for production readiness"
+      ];
+    } else {
+      keyBenefits = [
+        "Comprehensive technical instruction covering commercial MEP infrastructure and building operations",
+        "Direct hands-on experience with HVAC chillers, electrical substations, DGs, BMS automation, and sanitation fleets",
+        "Compliance alignment with ISO 41001 international FM standards, BEE energy codes, and corporate EHS regulations",
+        "Intensive 90-day structured technical training followed by 30-day live enterprise site residency"
+      ];
+    }
+
+    const learningOutcomes = course.modules && course.modules.length > 0
+      ? course.modules.map((m: string) => `Field mastery and operational execution of: ${m}`)
+      : [
+          `Comprehensive operational understanding of ${course.title}`,
+          "Effective execution of standard operating procedures under pressure",
+          "Thorough incident documentation, communication, and multi-agency coordination"
+        ];
+
+    const skillsAcquired = course.modules || [];
+    const practicalApplications = course.labs || "State-of-the-art facility mockups, incident drill areas, and dedicated technical workbenches";
+    const careerRoles = course.careerRoles || (course.outcome ? [course.outcome] : ["Security & Facilities Specialist"]);
+    
+    let intendedAudience = "Learners and working professionals seeking certified capability development.";
+    if (course.category === "core") {
+      intendedAudience = "Aspirants (10th/12th Pass, 18+ years) seeking certified careers in private security guarding under PSARA 2005.";
+    } else if (course.category === "industry") {
+      intendedAudience = "Security personnel and field supervisors seeking specialized certification in critical industry sectors.";
+    } else if (course.category === "leadership") {
+      intendedAudience = "Graduates, defense ex-servicemen, seasoned security supervisors, and operations executives transitioning to managerial roles.";
+    } else if (course.category === "specialised") {
+      intendedAudience = "Physically qualified security professionals, emergency marshals, and technical technicians seeking specialized assignments.";
+    } else if (course.id < 100) {
+      intendedAudience = "Graduates and technical professionals in Engineering, Computer Science, IT, and Electronics targeting emerging tech domains.";
+    } else {
+      intendedAudience = "Facility executives, technical diploma holders, MEP engineers, and operations leads seeking advanced facility management credentials.";
+    }
+
+    const prerequisites = course.eligibility || (course.id < 100 ? "Diploma or Degree in Engineering, Computer Science, or related technical disciplines." : "10th / 12th Pass or equivalent with basic physical fitness.");
+
+    return {
+      keyBenefits,
+      learningOutcomes,
+      skillsAcquired,
+      practicalApplications,
+      careerRoles,
+      intendedAudience,
+      prerequisites
+    };
+  };
+
+  const currentBenefitsProgramList = React.useMemo(() => {
+    if (benefitsTrack === "guarding-security") return guardingSecurityCoursePortfolio;
+    if (benefitsTrack === "facility-management") return facilityManagementCoursePortfolio;
+    return technologyCoursePortfolio;
+  }, [benefitsTrack]);
+
+  const activeBenefitsProgram = React.useMemo(() => {
+    return currentBenefitsProgramList.find(c => c.id === selectedBenefitsProgramId) || currentBenefitsProgramList[0];
+  }, [currentBenefitsProgramList, selectedBenefitsProgramId]);
 
   return (
     <div className="w-full bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white">
@@ -1316,7 +1418,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                       variant="outline"
                       className="flex-1 py-4 text-xs font-bold border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl"
                     >
-                      View Syllabus
+                      Benefits & Syllabus
                     </Button>
                     <Button
                       onClick={() => handleEnquire(`Enrollment Inquiry: ${course.title}`)}
@@ -1330,6 +1432,249 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
               </div>
             ))}
           </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2.5 DEDICATED ACADEMY COURSE BENEFITS DIRECTORY                           */}
+      {/* ========================================================================= */}
+      <section id="academy-benefits-directory" className="py-20 lg:py-28 bg-gradient-to-b from-slate-100 via-white to-slate-50 border-b border-slate-200">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-widest">
+              <Award className="w-4 h-4 text-blue-600" />
+              Course Value & Outcomes Matrix
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900">
+              Dedicated Course Benefits by Track
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+              Explore verified learning outcomes, practical applications, skills acquired, and career relevance for every course across Physical Guarding, Facility Management, and Technology.
+            </p>
+
+            {/* Track Selector */}
+            <div className="flex flex-wrap justify-center gap-2 pt-2">
+              <button
+                onClick={() => { setBenefitsTrack("guarding-security"); setSelectedBenefitsProgramId(201); }}
+                className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all ${
+                  benefitsTrack === "guarding-security" 
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-[1.02]" 
+                    : "bg-white border border-slate-200 text-slate-700 hover:border-blue-400"
+                }`}
+              >
+                Physical Guarding & Security ({guardingSecurityCoursePortfolio.length} Programs)
+              </button>
+              <button
+                onClick={() => { setBenefitsTrack("facility-management"); setSelectedBenefitsProgramId(101); }}
+                className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all ${
+                  benefitsTrack === "facility-management" 
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-[1.02]" 
+                    : "bg-white border border-slate-200 text-slate-700 hover:border-blue-400"
+                }`}
+              >
+                Facility Management & MEP ({facilityManagementCoursePortfolio.length} Programs)
+              </button>
+              <button
+                onClick={() => { setBenefitsTrack("technology"); setSelectedBenefitsProgramId(0); }}
+                className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all ${
+                  benefitsTrack === "technology" 
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-[1.02]" 
+                    : "bg-white border border-slate-200 text-slate-700 hover:border-blue-400"
+                }`}
+              >
+                Technology & Emerging ({technologyCoursePortfolio.length} Programs)
+              </button>
+            </div>
+          </div>
+
+          {/* Program Pill Buttons */}
+          <div className="flex items-center justify-start lg:justify-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-hide no-scrollbar w-full">
+            {currentBenefitsProgramList.map((prog) => {
+              const isActive = (activeBenefitsProgram && activeBenefitsProgram.id === prog.id);
+              return (
+                <button
+                  key={prog.id}
+                  onClick={() => setSelectedBenefitsProgramId(prog.id)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all duration-200 shrink-0 ${
+                    isActive
+                      ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-[1.02]"
+                      : "bg-white border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-slate-900"
+                  }`}
+                >
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
+                    #{prog.id}
+                  </span>
+                  <span className="max-w-[200px] truncate">{prog.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Program Card */}
+          {activeBenefitsProgram && (() => {
+            const benefits = resolveProgramBenefits(activeBenefitsProgram);
+            if (!benefits) return null;
+            return (
+              <div className="bg-white border-2 border-blue-600/20 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-slate-200 mb-8">
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap mb-2">
+                      <span className="text-xs font-black px-2.5 py-0.5 rounded-md bg-blue-100 text-blue-700 font-mono">
+                        #{activeBenefitsProgram.id}
+                      </span>
+                      <span className="text-xs font-bold px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-600 uppercase">
+                        {activeBenefitsProgram.badge || "Professional Certification"}
+                      </span>
+                      {activeBenefitsProgram.duration && (
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
+                          {activeBenefitsProgram.duration}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
+                      {activeBenefitsProgram.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
+                      {activeBenefitsProgram.desc}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3 shrink-0">
+                    <Button
+                      onClick={() => setActiveProgramModal(activeBenefitsProgram)}
+                      variant="outline"
+                      className="py-5 font-bold rounded-xl border-slate-200 text-slate-700"
+                    >
+                      View Syllabus Modal
+                    </Button>
+                    <Button
+                      onClick={() => handleEnquire(`Program Enrollment: ${activeBenefitsProgram.title}`)}
+                      className="py-5 font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white gap-2 shadow-sm"
+                    >
+                      <span>Enroll in Cohort</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                {/* 3-Column Benefits Matrix */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* Column 1 */}
+                  <div className="space-y-6 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                    <div>
+                      <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-3 uppercase tracking-wide">
+                        <Award className="w-4 h-4" />
+                        <h4>Key Program Benefits</h4>
+                      </div>
+                      <ul className="space-y-2.5">
+                        {benefits.keyBenefits.map((b, idx) => (
+                          <li key={idx} className="text-xs text-slate-700 flex items-start gap-2 leading-relaxed">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-200">
+                      <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-3 uppercase tracking-wide">
+                        <Target className="w-4 h-4" />
+                        <h4>Course Learning Outcomes</h4>
+                      </div>
+                      <ul className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                        {benefits.learningOutcomes.map((outcome, idx) => (
+                          <li key={idx} className="text-xs text-slate-700 flex items-start gap-2 leading-relaxed">
+                            <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                              {idx + 1}
+                            </span>
+                            <span>{outcome}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Column 2 */}
+                  <div className="space-y-6 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                    <div>
+                      <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-3 uppercase tracking-wide">
+                        <Cpu className="w-4 h-4" />
+                        <h4>Skills & Competencies Acquired</h4>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto">
+                        {benefits.skillsAcquired.map((skill, idx) => (
+                          <span key={idx} className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-800 shadow-2xs">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-200">
+                      <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-2 uppercase tracking-wide">
+                        <Zap className="w-4 h-4" />
+                        <h4>Practical Applications & Labs</h4>
+                      </div>
+                      <p className="text-xs text-slate-700 leading-relaxed bg-white border border-slate-200 rounded-xl p-3">
+                        {benefits.practicalApplications}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Column 3 */}
+                  <div className="space-y-6 bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div className="space-y-5">
+                      <div>
+                        <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-2 uppercase tracking-wide">
+                          <Briefcase className="w-4 h-4" />
+                          <h4>Career Relevance</h4>
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {benefits.careerRoles.map((role, idx) => (
+                            <span key={idx} className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-blue-100/70 text-blue-800">
+                              {role}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-200">
+                        <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-1 uppercase tracking-wide">
+                          <Users className="w-4 h-4" />
+                          <h4>Intended Audience</h4>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          {benefits.intendedAudience}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-200">
+                        <div className="flex items-center gap-2 text-blue-700 font-bold text-sm mb-1 uppercase tracking-wide">
+                          <BookOpen className="w-4 h-4" />
+                          <h4>Prerequisites</h4>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed italic">
+                          {benefits.prerequisites}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-200">
+                      <Button
+                        onClick={() => handleEnquire(`Program Enrollment: ${activeBenefitsProgram.title}`)}
+                        className="w-full py-5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white gap-2"
+                      >
+                        <span>Apply for {activeBenefitsProgram.title}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            );
+          })()}
 
         </div>
       </section>
@@ -1648,7 +1993,7 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
                   { sector: "Healthcare & Hospitals", reason: "Patient safety, ER crisis de-escalation, maternity protection & compliance", cert: "Certified Healthcare Security Professional", icon: HeartPulse },
                   { sector: "Hospitality & Luxury Resorts", reason: "Discrete VIP protection, keycard access audit, high-profile event security", cert: "Certified Hospitality Security Professional", icon: Building2 },
                   { sector: "Retail & Shopping Malls", reason: "Loss prevention, anti-shoplifting EAS systems, crowd safety", cert: "Certified Retail Security Professional", icon: Coins },
-                  { sector: "Banking & Financial Services", reason: "Strongroom vault protection, cash logistics armed escort, ATM surveillance", cert: "Certified Banking Security Professional", icon: Lock },
+                  { sector: "Banking & Financial Services", reason: "Strongroom vault protection, cash logistics secure transit, ATM surveillance", cert: "Certified Banking Security Professional", icon: Lock },
                   { sector: "Logistics & Warehouses", reason: "Cargo tracking, seal verification, yard access, and supply chain security", cert: "Certified Logistics Security Professional", icon: Truck },
                   { sector: "Education Campuses", reason: "Student safety, school transport verification, emergency lockdown readiness", cert: "Certified Campus Security Professional", icon: School },
                   { sector: "Events & Entertainment", reason: "Large crowd management, venue risk planning, anti-stampede coordination", cert: "Event Security Management Professional", icon: Users },
@@ -1985,100 +2330,147 @@ export const ISIAcademy: React.FC<ISIAcademyProps> = ({ onEnquireClick }) => {
       {/* ========================================================================= */}
       {/* PROGRAM DETAIL MODAL                                                      */}
       {/* ========================================================================= */}
-      {activeProgramModal && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md animate-fade-in">
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button 
-              onClick={() => setActiveProgramModal(null)}
-              className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-900 transition-colors cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+      {activeProgramModal && (() => {
+        const modalBenefits = resolveProgramBenefits(activeProgramModal);
+        return (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-md animate-fade-in overflow-y-auto">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] my-8 flex flex-col justify-between overflow-hidden">
+              <button 
+                onClick={() => setActiveProgramModal(null)}
+                className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-900 transition-colors cursor-pointer z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
 
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase text-blue-700 tracking-wider">
-                  {activeProgramModal.badge || "Professional Certification"}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900">{activeProgramModal.title}</h3>
-              </div>
-            </div>
-
-            <p className="text-sm text-slate-600 leading-relaxed mb-6">
-              {activeProgramModal.desc}
-            </p>
-
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
-                <span className="text-slate-500 font-medium block">Duration & Format</span>
-                <span className="font-bold text-slate-900 text-sm mt-0.5 block">{activeProgramModal.duration}</span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
-                <span className="text-slate-500 font-medium block">Training Centers</span>
-                <span className="font-bold text-blue-700 text-sm mt-0.5 block">{activeProgramModal.campuses || "Madurai · Coimbatore · Chennai"}</span>
-              </div>
-            </div>
-
-            {/* Modules Section */}
-            {activeProgramModal.modules && activeProgramModal.modules.length > 0 && (
-              <div className="mb-6 space-y-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-800">
-                  Comprehensive Syllabus Modules ({activeProgramModal.modules.length})
+              <div className="overflow-y-auto pr-2 space-y-6">
+                <div>
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-blue-100 text-blue-700">
+                      #{activeProgramModal.id}
+                    </span>
+                    <span className="text-xs font-bold uppercase text-blue-700 tracking-wider px-2 py-0.5 rounded-md bg-blue-50 border border-blue-200/60">
+                      {activeProgramModal.badge || "Professional Certification"}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900">{activeProgramModal.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed mt-2">
+                    {activeProgramModal.desc}
+                  </p>
                 </div>
-                <div className="space-y-1.5 p-4 rounded-2xl bg-slate-50 border border-slate-200 max-h-48 overflow-y-auto">
-                  {activeProgramModal.modules.map((mod: string, idx: number) => (
-                    <div key={idx} className="text-xs text-slate-700 flex items-start gap-2">
-                      <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <span>{mod}</span>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+                    <span className="text-slate-500 font-medium block text-[10px] uppercase">Duration & Format</span>
+                    <span className="font-bold text-slate-900 text-sm mt-0.5 block">{activeProgramModal.duration}</span>
+                  </div>
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+                    <span className="text-slate-500 font-medium block text-[10px] uppercase">Training Centers</span>
+                    <span className="font-bold text-blue-700 text-sm mt-0.5 block">{activeProgramModal.campuses || "Madurai · Coimbatore · Chennai"}</span>
+                  </div>
+                </div>
+
+                {/* Key Program Benefits */}
+                {modalBenefits && modalBenefits.keyBenefits.length > 0 && (
+                  <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200/80 space-y-2.5">
+                    <div className="flex items-center gap-2 text-blue-800 font-bold text-xs uppercase tracking-wide">
+                      <Award className="w-4 h-4 text-blue-600" />
+                      <span>Key Program Benefits</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                    <ul className="space-y-2">
+                      {modalBenefits.keyBenefits.map((b, idx) => (
+                        <li key={idx} className="text-xs text-slate-700 flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-            {/* Career Outcomes & Roles */}
-            {(activeProgramModal.careerRoles || activeProgramModal.outcome) && (
-              <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-slate-900 space-y-1 mb-6 text-xs">
-                <div className="text-blue-800 font-bold">Target Career Roles / Outcomes:</div>
-                <div className="text-slate-800 font-semibold">
-                  {activeProgramModal.careerRoles ? activeProgramModal.careerRoles.join(' · ') : activeProgramModal.outcome}
-                </div>
-                {activeProgramModal.eligibility && (
-                  <div className="text-slate-600 text-[11px] pt-1 border-t border-blue-200/60 mt-2">
-                    Eligibility: <strong>{activeProgramModal.eligibility}</strong>
+                {/* Modules & Syllabus */}
+                {activeProgramModal.modules && activeProgramModal.modules.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                      <Target className="w-4 h-4 text-blue-600" />
+                      <span>Comprehensive Syllabus Modules ({activeProgramModal.modules.length})</span>
+                    </div>
+                    <div className="space-y-1.5 p-4 rounded-2xl bg-slate-50 border border-slate-200 max-h-48 overflow-y-auto">
+                      {activeProgramModal.modules.map((mod: string, idx: number) => (
+                        <div key={idx} className="text-xs text-slate-700 flex items-start gap-2">
+                          <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                            {idx + 1}
+                          </span>
+                          <span>{mod}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Practical Labs */}
+                {modalBenefits && modalBenefits.practicalApplications && (
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+                    <div className="flex items-center gap-2 text-slate-800 font-bold text-xs uppercase tracking-wide">
+                      <Zap className="w-4 h-4 text-amber-600" />
+                      <span>Practical Applications & Hands-on Infrastructure</span>
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {modalBenefits.practicalApplications}
+                    </p>
+                  </div>
+                )}
+
+                {/* Career Outcomes & Roles */}
+                {modalBenefits && (
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 space-y-2 text-xs">
+                    <div>
+                      <span className="text-slate-500 font-bold block text-[10px] uppercase mb-1">Target Career Roles:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {modalBenefits.careerRoles.map((role, idx) => (
+                          <span key={idx} className="px-2.5 py-1 rounded-md bg-blue-100 text-blue-800 font-semibold text-[11px]">
+                            {role}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="pt-2 border-t border-slate-200">
+                      <span className="text-slate-500 font-bold block text-[10px] uppercase mb-0.5">Intended Audience:</span>
+                      <span className="text-slate-700">{modalBenefits.intendedAudience}</span>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-200">
+                      <span className="text-slate-500 font-bold block text-[10px] uppercase mb-0.5">Eligibility & Prerequisites:</span>
+                      <span className="text-slate-700 italic">{modalBenefits.prerequisites}</span>
+                    </div>
                   </div>
                 )}
               </div>
-            )}
 
-            <div className="flex gap-3">
-              <Button 
-                variant="outline"
-                onClick={() => setActiveProgramModal(null)}
-                className="flex-1 py-5 rounded-xl border-slate-200 text-slate-700"
-              >
-                Close
-              </Button>
-              <Button 
-                onClick={() => {
-                  const title = activeProgramModal.title;
-                  setActiveProgramModal(null);
-                  handleEnquire(`Program Enrollment: ${title}`);
-                }}
-                className="flex-1 py-5 rounded-xl font-bold bg-blue-600 hover:bg-blue-700 text-white gap-2"
-              >
-                <span>Apply for Cohort</span>
-                <ArrowRight className="w-4 h-4" />
-              </Button>
+              <div className="flex gap-3 pt-4 border-t border-slate-200 mt-4">
+                <Button 
+                  variant="outline"
+                  onClick={() => setActiveProgramModal(null)}
+                  className="flex-1 py-5 rounded-xl border-slate-200 text-slate-700 font-bold"
+                >
+                  Close
+                </Button>
+                <Button 
+                  onClick={() => {
+                    const title = activeProgramModal.title;
+                    setActiveProgramModal(null);
+                    handleEnquire(`Program Enrollment: ${title}`);
+                  }}
+                  className="flex-1 py-5 rounded-xl font-bold bg-blue-600 hover:bg-blue-700 text-white gap-2"
+                >
+                  <span>Apply for Cohort</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
     </div>
   );

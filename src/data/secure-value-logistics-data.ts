@@ -295,7 +295,7 @@ export const section4_VIPLogistics: SecureLogisticsSection = {
     id: "vip-logistics",
     badgeLabel: "Discreet VIP Movement",
     title: "VIP & Executive Logistics",
-    subtitle: "Discreet, High-Security Movement for Individuals & Sensitive Cargo. Risk-assessed planning, secure escort coordination, and confidentiality-first protocols for VIP, VVIP, diplomatic, and high-profile movements.",
+    subtitle: "Discreet, High-Security Movement for Individuals & Sensitive Cargo. Risk-assessed planning, secure transit coordination, and confidentiality-first protocols for VIP, VVIP, diplomatic, and high-profile movements.",
     statistics: [
         {
             value: "100",
@@ -326,8 +326,8 @@ export const section4_VIPLogistics: SecureLogisticsSection = {
         },
         {
             icon: UserCheck,
-            title: "Secure Escort Coordination",
-            features: ["Trained security personnel", "Armed escort when required", "Multi-vehicle coordination", "Emergency response protocols"]
+            title: "Secure Transit Services Coordination",
+            features: ["Trained security personnel", "Armed personal protection when required", "Multi-vehicle coordination", "Emergency response protocols"]
         },
         {
             icon: MonitorDot,

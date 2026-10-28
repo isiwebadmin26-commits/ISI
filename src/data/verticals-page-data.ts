@@ -167,7 +167,7 @@ export const vertical2_BFSI: VerticalSection = {
         {
             icon: Lock,
             title: "Strong Room & Vault Security",
-            features: ["Multi-layer vault access", "Cash handling monitoring", "Armored CIT escorts", "ATM protection"]
+            features: ["Multi-layer vault access", "Cash handling monitoring", "Armored CIT secure transit", "ATM protection"]
         },
         {
             icon: MonitorDot,
@@ -186,7 +186,7 @@ export const vertical2_BFSI: VerticalSection = {
         },
         {
             title: "ATM Networks",
-            description: "24/7 ATM security with cash replenishment escorts, surveillance monitoring, anti-skimming protection, and rapid incident response for unattended banking points. By integrating advanced technological solutions with highly trained personnel, we create a robust defense architecture. This proactive strategy dramatically reduces incident response times and virtually eliminates vulnerabilities across your entire ecosystem without causing friction."
+            description: "24/7 ATM security with cash replenishment secure transit, surveillance monitoring, anti-skimming protection, and rapid incident response for unattended banking points. By integrating advanced technological solutions with highly trained personnel, we create a robust defense architecture. This proactive strategy dramatically reduces incident response times and virtually eliminates vulnerabilities across your entire ecosystem without causing friction."
         },
         {
             title: "Insurance Offices",
@@ -346,7 +346,7 @@ export const vertical4_Manufacturing: VerticalSection = {
         },
         {
             title: "Supply Chain Security",
-            description: "End-to-end supply chain protection with RFID tracking, secure transport escorts, real-time monitoring, and tamper-proof documentation. Our comprehensive approach ensures maximum operational resilience while maintaining rigorous compliance standards. We leverage real-time intelligence and rapid deployment protocols to neutralize risks before they escalate, providing complete peace of mind and uninterrupted continuity."
+            description: "End-to-end supply chain protection with RFID tracking, secure transit guards, real-time monitoring, and tamper-proof documentation. Our comprehensive approach ensures maximum operational resilience while maintaining rigorous compliance standards. We leverage real-time intelligence and rapid deployment protocols to neutralize risks before they escalate, providing complete peace of mind and uninterrupted continuity."
         }
     ],
     cta: {
@@ -552,7 +552,7 @@ export const vertical7_GCC: VerticalSection = {
         {
             icon: Users,
             title: "Employee Safety",
-            features: ["Safe-transport tracking", "Emergency SOS apps", "Workplace de-escalation", "Female employee escorts"]
+            features: ["Safe-transport tracking", "Emergency SOS apps", "Workplace de-escalation", "Female employee safe-transit security"]
         },
         {
             icon: Fingerprint,
@@ -708,7 +708,7 @@ export const vertical9_Logistics: VerticalSection = {
         {
             icon: Truck,
             title: "Transit & CIT",
-            features: ["Armed/Unarmed escorts", "Electronic locks", "GPS geofencing", "Panic response"]
+            features: ["Armed/Unarmed transit guards", "Electronic locks", "GPS geofencing", "Panic response"]
         },
         {
             icon: ShieldX,
@@ -1066,7 +1066,7 @@ export const vertical14_CashLogistics: VerticalSection = {
     id: "cash-logistics",
     badgeLabel: "Financial Logistics",
     title: "Cash-in-Transit & High-Value Asset Management",
-    subtitle: "Precision logistics for the financial world. RBI-compliant cash management, bullion escorts, and secure vaulting services.",
+    subtitle: "Precision logistics for the financial world. RBI-compliant cash management, bullion secure transit, and secure vaulting services.",
     statistics: [
         {
             value: "50k+",
@@ -1103,12 +1103,12 @@ export const vertical14_CashLogistics: VerticalSection = {
         {
             icon: Landmark,
             title: "ATM Replenishment",
-            features: ["End-to-end cash loading", "First-line maintenance", "Cash reconciliation", "Security escorts"]
+            features: ["End-to-end cash loading", "First-line maintenance", "Cash reconciliation", "Secure Transit Services"]
         },
         {
             icon: Briefcase,
-            title: "High-Value Escorts",
-            features: ["Bullion & Diamond escorts", "Armed guards", "Satellite tracking", "Emergency response sync"]
+            title: "High-Value Secure Transit",
+            features: ["Bullion & Diamond secure transit", "Armed guards", "Satellite tracking", "Emergency response sync"]
         }
     ],
     verticalTabs: [

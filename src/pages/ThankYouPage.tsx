@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { CheckCircle2, MessageCircle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,12 @@ const ThankYouPage = () => {
   return (
     <Layout>
       <div className="min-h-[60vh] flex items-center justify-center pt-[96px] bg-white">
+        <SEO
+          title={isCareer ? "Application Received | ISI Security" : "Thank You | ISI Security"}
+          description="Thank you for contacting ISI Security. Our team has received your submission and will respond shortly."
+          canonicalPath="/lp/facility-management/thank-you"
+          noindex={true}
+        />
         <div className="text-center max-w-2xl mx-auto px-4">
           <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto mb-6" />
           <h1 className="text-4xl font-bold text-slate-900 mb-4">

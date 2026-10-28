@@ -1,4 +1,5 @@
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { useContentProtection } from "@/hooks/useContentProtection";
 import { Cookie, Shield, Settings, Eye, Server, FileText } from "lucide-react";
 
@@ -7,6 +8,11 @@ const CookiePolicy = () => {
     return (
         <Layout>
             <div className="bg-background min-h-screen">
+                <SEO
+                    title="Cookie Policy | Website Tracking & Preferences | ISI Security"
+                    description="Learn how ISI Security uses essential, analytics, and security cookies to improve your experience on https://www.isisecurity.in/."
+                    canonicalPath="/cookiepolicy"
+                />
                 {/* Header */}
                 <div className="relative py-10 bg-gradient-to-br from-cyan-600 via-blue-600 to-indigo-700 overflow-hidden">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />

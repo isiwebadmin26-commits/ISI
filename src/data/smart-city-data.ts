@@ -214,8 +214,8 @@ export const section2_CitySurveillance: SmartCitySection = {
             description: "Dynamic surveillance deployment for festivals, rallies, and large urban gatherings with real-time crowd analytics. We prioritize continuous monitoring and predictive analytics to stay ahead of potential threats. Our tailored solutions seamlessly blend into your existing operations, ensuring elite protection without compromising on operational efficiency."
         },
         {
-            title: "Safety Escorts",
-            description: "Digital escort systems for citizens in high-risk zones, integrating mobile alerts with live city monitoring. Our comprehensive approach ensures maximum operational resilience while maintaining rigorous compliance standards. We leverage real-time intelligence and rapid deployment protocols to neutralize risks before they escalate."
+            title: "Personal Protection Services",
+            description: "Digital personal protection systems for citizens in high-risk zones, integrating mobile alerts with live city monitoring. Our comprehensive approach ensures maximum operational resilience while maintaining rigorous compliance standards. We leverage real-time intelligence and rapid deployment protocols to neutralize risks before they escalate."
         }
     ],
     cta: {

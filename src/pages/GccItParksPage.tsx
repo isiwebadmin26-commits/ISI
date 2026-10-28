@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { CashLogisticsSection } from "@/data/cash-logistics-data";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
@@ -86,6 +87,12 @@ const GccItParksPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="GCC, IT Parks & Tech Campus Security Solutions | ISI Security"
+                        description="Enterprise security and facility management for Global Capability Centers (GCCs), IT/ITES parks, and tech campuses with biometric turnstiles and SOC integration."
+                        keywords="GCC Security Solutions, IT Park Security India, Corporate Tech Campus Guarding, Biometric Turnstile Access, ISI Security"
+                        canonicalPath="/gccitparks"
+                    />
                     <PageHero 
                         slides={gccSlides} 
                         secondaryScrollTarget="workplace-intelligence"

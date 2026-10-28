@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
 import { getBlogBySlug, getRelatedBlogs } from "@/data/blogs-data";
 import { 
   ArrowLeft, Clock, Calendar, Share2, User, CheckCircle2, 
@@ -32,6 +33,30 @@ const BlogDetailPage = () => {
 
   return (
     <Layout>
+      <SEO
+        title={`${blog.title} | ISI Security Insights`}
+        description={blog.excerpt}
+        keywords={blog.tags.join(", ")}
+        canonicalPath={`/blog/${blog.slug}`}
+        ogImage={blog.coverImage}
+        ogType="article"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: blog.title,
+          description: blog.excerpt,
+          image: blog.coverImage,
+          datePublished: blog.publishedAt,
+          author: {
+            "@type": "Organization",
+            name: blog.author.name,
+          },
+          publisher: {
+            "@id": "https://www.isisecurity.in/#organization",
+          },
+          mainEntityOfPage: `https://www.isisecurity.in/blog/${blog.slug}`,
+        }}
+      />
       {/* Header Breadcrumb Banner */}
       <div className="bg-slate-900 text-slate-300 py-6 border-b border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">

@@ -77,7 +77,7 @@ export const logisticsServiceCards: LogisticsServiceCard[] = [
         title: "High-Value Logistics",
         description: "Discreet secure transport for jewellery, bullion, and luxury goods",
         features: [
-            "Discreet transport with armed escorts",
+            "Discreet transport with armed protection",
             "RFID-enabled vaulting systems",
             "Jewellery & bullion security",
             "Compliance documentation"
@@ -149,7 +149,7 @@ export const logisticsTabsContent: LogisticsTabContent[] = [
         offerings: {
             title: "Our Offerings",
             items: [
-                "Discreet Secure Transport: Unbranded or decoy vehicles, tamper-evident sealing, armed escorts, and optimised, geo-fenced routes for maximum discretion.",
+                "Discreet Secure Transport: Unbranded or decoy vehicles, tamper-evident sealing, armed transit guards, and optimised, geo-fenced routes for maximum discretion.",
                 "Tech-Enabled Vaulting: State-of-the-art vaults linked to an advanced inventory platform, tracking every item via barcodes or RFID for precise accountability.",
                 "Compliance-Ready Processes: Detailed documentation, route logs, and digital custody trails designed to streamline customs clearance, audits, and insurance claims."
             ]

@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { SectionPanel } from "@/components/cash-logistics/SectionPanel";
 import {
@@ -98,6 +99,12 @@ const CashLogisticsPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="RBI-Compliant Cash Logistics & Cash-in-Transit (CIT) Services | ISI Security"
+                        description="Secure cash-in-transit (CIT), ATM replenishment, bullion transport, and biometric vaulting services backed by live GPS telemetry and armed transit guards."
+                        keywords="Cash Logistics India, Cash in Transit CIT, ATM Replenishment Services, RBI Compliant Vaulting, Bullion Transit Security, ISI Security"
+                        canonicalPath="/cashlogistics"
+                    />
                     <PageHero 
                         slides={cashSlides} 
                         secondaryScrollTarget="intelligent-cit"

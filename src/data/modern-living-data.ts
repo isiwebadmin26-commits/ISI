@@ -826,7 +826,7 @@ export const socSection: ModernLivingSection = {
             items: [
                 "Private event monitoring",
                 "Family travel tracking",
-                "Escort coordination",
+                "Personal Protection Services coordination",
                 "Privacy-first data policy"
             ]
         },

@@ -88,6 +88,13 @@ export const CoursesPage = () => {
   const [tableFilter, setTableFilter] = useState<"All" | "Core" | "Specialized">("All");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Dedicated Course Benefits Directory State
+  const [activeBenefitsCourseId, setActiveBenefitsCourseId] = useState<string>("C1");
+  const activeBenefitsCourse = useMemo(
+    () => coursesData.find((c) => c.id === activeBenefitsCourseId) || coursesData[0],
+    [activeBenefitsCourseId]
+  );
+
   // Categorized Courses
   const flagshipCourses = useMemo(() => coursesData.filter(c => c.category === "Core"), []);
   const specializedCourses = useMemo(() => coursesData.filter(c => c.category === "Specialized"), []);
@@ -300,9 +307,24 @@ export const CoursesPage = () => {
                       {course.title}
                     </h4>
 
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-6 line-clamp-3">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
                       {course.description}
                     </p>
+
+                    {/* Benefits Preview */}
+                    {course.benefits && course.benefits.length > 0 && (
+                      <div className="mb-5 space-y-1.5 p-3 rounded-2xl bg-primary/5 border border-primary/10">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary block">Key Course Benefits</span>
+                        <ul className="space-y-1">
+                          {course.benefits.slice(0, 2).map((b, bIdx) => (
+                            <li key={bIdx} className="text-xs text-foreground/80 flex items-start gap-1.5 line-clamp-1">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                              <span className="truncate">{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     {/* Metadata Grid */}
                     <div className="grid grid-cols-2 gap-3 py-4 border-y border-border/50 text-xs font-medium text-muted-foreground mb-6">
@@ -325,7 +347,7 @@ export const CoursesPage = () => {
                         variant="outline" 
                         className="w-full font-bold text-xs rounded-xl hover:bg-primary/5"
                       >
-                        View Details
+                        Benefits & Details
                       </Button>
                       <Button 
                         onClick={() => handleOpenEnquiry(course.title)}
@@ -374,9 +396,24 @@ export const CoursesPage = () => {
                       {course.title}
                     </h4>
 
-                    <p className="text-xs text-muted-foreground leading-relaxed mb-6 line-clamp-2">
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">
                       {course.description}
                     </p>
+
+                    {/* Benefits Preview */}
+                    {course.benefits && course.benefits.length > 0 && (
+                      <div className="mb-5 space-y-1.5 p-3 rounded-2xl bg-muted/40 border border-border/60">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary block">Key Course Benefits</span>
+                        <ul className="space-y-1">
+                          {course.benefits.slice(0, 2).map((b, bIdx) => (
+                            <li key={bIdx} className="text-[11px] text-foreground/80 flex items-start gap-1.5 line-clamp-1">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                              <span className="truncate">{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     <div className="grid grid-cols-2 gap-2 py-3 border-y border-border/50 text-xs font-medium text-muted-foreground mb-6">
                       <div className="flex items-center gap-1.5">
@@ -398,7 +435,7 @@ export const CoursesPage = () => {
                         size="sm"
                         className="w-full font-bold text-xs rounded-xl"
                       >
-                        View Details
+                        Benefits & Details
                       </Button>
                       <Button 
                         onClick={() => handleOpenEnquiry(course.title)}
@@ -414,6 +451,217 @@ export const CoursesPage = () => {
             </div>
           </div>
 
+        </section>
+
+        {/* SECTION 2.5 — DEDICATED COURSE BENEFITS & OUTCOMES DIRECTORY */}
+        <section id="course-benefits" className="py-20 md:py-28 bg-gradient-to-b from-card via-muted/20 to-background border-t border-border/60">
+          <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
+                <Target className="w-4 h-4" />
+                Comprehensive Program Value
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground mb-4">
+                Dedicated Course Benefits & Outcomes
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                Explore the verified learning outcomes, practical applications, technical skills acquired, career relevance, and prerequisites for each course.
+              </p>
+            </div>
+
+            {/* Course Selector Tabs */}
+            <div className="flex items-center justify-start lg:justify-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-hide no-scrollbar w-full">
+              {coursesData.map((course) => {
+                const isActive = activeBenefitsCourseId === course.id;
+                return (
+                  <button
+                    key={course.id}
+                    onClick={() => setActiveBenefitsCourseId(course.id)}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all duration-200 shrink-0 ${
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-md shadow-primary/25 scale-[1.02]"
+                        : "bg-card border border-border hover:border-primary/40 text-foreground/80 hover:text-foreground"
+                    }`}
+                  >
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isActive ? "bg-white/20 text-white" : "bg-muted text-muted-foreground"}`}>
+                      {course.id}
+                    </span>
+                    <span>{course.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Course Benefits Card Grid */}
+            <div className="bg-card border-2 border-primary/20 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-border/60 mb-8">
+                <div className="flex items-start sm:items-center gap-4">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    {getCourseIcon(activeBenefitsCourse.iconName, "w-8 h-8")}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <span className="text-xs font-black px-2.5 py-0.5 rounded-md bg-primary/15 text-primary">
+                        {activeBenefitsCourse.id}
+                      </span>
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-muted text-muted-foreground uppercase">
+                        {activeBenefitsCourse.categoryLabel}
+                      </span>
+                      {activeBenefitsCourse.badge && (
+                        <span className="text-xs font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 border border-amber-500/20">
+                          {activeBenefitsCourse.badge}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-foreground">
+                      {activeBenefitsCourse.title}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="px-4 py-2 rounded-xl bg-muted/60 border border-border/60 text-xs">
+                    <span className="text-muted-foreground block text-[10px] uppercase font-bold">Duration</span>
+                    <span className="font-bold text-foreground">{activeBenefitsCourse.duration} ({activeBenefitsCourse.hours} Hours)</span>
+                  </div>
+                  <Button
+                    onClick={() => handleOpenEnquiry(activeBenefitsCourse.title)}
+                    className="font-bold rounded-xl gap-2 shadow-sm"
+                  >
+                    <span>Enquire for {activeBenefitsCourse.id}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* 3-Column Detailed Benefits Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                {/* Column 1: Key Benefits & Learning Outcomes */}
+                <div className="space-y-6 bg-muted/30 border border-border/60 rounded-2xl p-6">
+                  <div>
+                    <div className="flex items-center gap-2 text-primary font-bold text-sm mb-3 uppercase tracking-wide">
+                      <Award className="w-4 h-4" />
+                      <h4>Key Program Benefits</h4>
+                    </div>
+                    <ul className="space-y-2.5">
+                      {activeBenefitsCourse.benefits?.map((benefit, idx) => (
+                        <li key={idx} className="text-xs text-foreground/90 flex items-start gap-2 leading-relaxed">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/50">
+                    <div className="flex items-center gap-2 text-primary font-bold text-sm mb-3 uppercase tracking-wide">
+                      <Target className="w-4 h-4" />
+                      <h4>Learning Outcomes</h4>
+                    </div>
+                    <ul className="space-y-2">
+                      {activeBenefitsCourse.learningOutcomes?.map((outcome, idx) => (
+                        <li key={idx} className="text-xs text-foreground/80 flex items-start gap-2 leading-relaxed">
+                          <span className="w-4 h-4 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                            {idx + 1}
+                          </span>
+                          <span>{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Column 2: Skills Acquired & Practical Applications */}
+                <div className="space-y-6 bg-muted/30 border border-border/60 rounded-2xl p-6">
+                  <div>
+                    <div className="flex items-center gap-2 text-primary font-bold text-sm mb-3 uppercase tracking-wide">
+                      <Cpu className="w-4 h-4" />
+                      <h4>Technical Skills Acquired</h4>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {activeBenefitsCourse.skillsAcquired?.map((skill, idx) => (
+                        <span key={idx} className="text-xs font-semibold px-3 py-1 rounded-lg bg-card border border-border text-foreground shadow-2xs">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/50">
+                    <div className="flex items-center gap-2 text-primary font-bold text-sm mb-3 uppercase tracking-wide">
+                      <Zap className="w-4 h-4" />
+                      <h4>Practical Applications & Labs</h4>
+                    </div>
+                    <ul className="space-y-2.5">
+                      {activeBenefitsCourse.practicalApplications?.map((app, idx) => (
+                        <li key={idx} className="text-xs text-foreground/80 flex items-start gap-2 leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>{app}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Column 3: Career Relevance, Audience & Prerequisites */}
+                <div className="space-y-6 bg-muted/30 border border-border/60 rounded-2xl p-6 flex flex-col justify-between">
+                  <div className="space-y-5">
+                    <div>
+                      <div className="flex items-center gap-2 text-primary font-bold text-sm mb-2 uppercase tracking-wide">
+                        <Briefcase className="w-4 h-4" />
+                        <h4>Career Relevance</h4>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {activeBenefitsCourse.careerRelevance?.map((role, idx) => (
+                          <span key={idx} className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-primary/10 text-primary">
+                            {role}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-2 text-primary font-bold text-sm mb-2 uppercase tracking-wide">
+                        <Users className="w-4 h-4" />
+                        <h4>Intended Audience</h4>
+                      </div>
+                      <ul className="space-y-1.5">
+                        {activeBenefitsCourse.intendedAudience?.map((aud, idx) => (
+                          <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1.5">
+                            <span className="text-primary font-bold">•</span>
+                            <span>{aud}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-2 text-primary font-bold text-sm mb-1 uppercase tracking-wide">
+                        <BookOpen className="w-4 h-4" />
+                        <h4>Prerequisites</h4>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed italic">
+                        {activeBenefitsCourse.prerequisites}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/50">
+                    <Button
+                      onClick={() => setSelectedCourse(activeBenefitsCourse)}
+                      variant="outline"
+                      className="w-full py-5 text-xs font-bold rounded-xl border-primary/30 hover:bg-primary/5 text-primary"
+                    >
+                      View Full Details Modal
+                    </Button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
         </section>
 
         {/* SECTION 3 — WHY THESE COURSES */}
@@ -715,53 +963,161 @@ export const CoursesPage = () => {
 
         {/* COURSE DETAIL MODAL */}
         {selectedCourse && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-            <div className="bg-card border border-border rounded-3xl max-w-lg w-full p-8 shadow-2xl relative animate-in zoom-in-95">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in overflow-y-auto">
+            <div className="bg-card border border-border rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative animate-in zoom-in-95 my-8 max-h-[90vh] flex flex-col justify-between overflow-hidden">
               
               <button 
                 onClick={() => setSelectedCourse(null)}
-                className="absolute top-6 right-6 p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground"
+                className="absolute top-5 right-5 p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors z-10"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xl font-black text-primary px-3 py-1 bg-primary/10 rounded-xl">
-                  {selectedCourse.id}
-                </span>
-                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider bg-muted px-3 py-1 rounded-full">
-                  {selectedCourse.categoryLabel}
-                </span>
+              <div className="overflow-y-auto pr-2 space-y-6">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <span className="text-sm font-black text-primary px-3 py-1 bg-primary/10 rounded-xl">
+                      {selectedCourse.id}
+                    </span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider bg-muted px-3 py-1 rounded-full">
+                      {selectedCourse.categoryLabel}
+                    </span>
+                    {selectedCourse.badge && (
+                      <span className="text-xs font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 border border-amber-500/20">
+                        {selectedCourse.badge}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-black text-foreground mb-2">
+                    {selectedCourse.title}
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {selectedCourse.description}
+                  </p>
+                </div>
+
+                {/* Key Metrics */}
+                <div className="grid grid-cols-3 gap-3 bg-muted/40 border border-border/60 rounded-2xl p-4 text-xs">
+                  <div>
+                    <span className="text-muted-foreground block text-[10px] uppercase font-bold">Duration</span>
+                    <span className="font-bold text-foreground text-sm">{selectedCourse.duration}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground block text-[10px] uppercase font-bold">Total Hours</span>
+                    <span className="font-bold text-foreground text-sm">{selectedCourse.hours} Hours</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground block text-[10px] uppercase font-bold">Batch Size</span>
+                    <span className="font-bold text-foreground text-sm">{selectedCourse.batchSize} Learners</span>
+                  </div>
+                </div>
+
+                {/* Key Course Benefits */}
+                {selectedCourse.benefits && selectedCourse.benefits.length > 0 && (
+                  <div className="p-4 rounded-2xl bg-primary/5 border border-primary/15 space-y-2.5">
+                    <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wide">
+                      <Award className="w-4 h-4" />
+                      <span>Key Program Benefits</span>
+                    </div>
+                    <ul className="space-y-2">
+                      {selectedCourse.benefits.map((b, i) => (
+                        <li key={i} className="text-xs text-foreground/90 flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Learning Outcomes */}
+                {selectedCourse.learningOutcomes && selectedCourse.learningOutcomes.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-foreground font-bold text-xs uppercase tracking-wide">
+                      <Target className="w-4 h-4 text-primary" />
+                      <span>Course Learning Outcomes</span>
+                    </div>
+                    <div className="space-y-1.5 p-4 rounded-2xl bg-muted/30 border border-border/60">
+                      {selectedCourse.learningOutcomes.map((outcome, i) => (
+                        <div key={i} className="text-xs text-foreground/85 flex items-start gap-2.5">
+                          <span className="w-4 h-4 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                            {i + 1}
+                          </span>
+                          <span>{outcome}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Skills Acquired & Practical Applications */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {selectedCourse.skillsAcquired && selectedCourse.skillsAcquired.length > 0 && (
+                    <div className="p-4 rounded-2xl bg-muted/30 border border-border/60 space-y-2">
+                      <div className="flex items-center gap-1.5 text-foreground font-bold text-xs uppercase tracking-wide">
+                        <Cpu className="w-3.5 h-3.5 text-primary" />
+                        <span>Skills Acquired</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedCourse.skillsAcquired.map((s, i) => (
+                          <span key={i} className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-card border border-border text-foreground">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedCourse.practicalApplications && selectedCourse.practicalApplications.length > 0 && (
+                    <div className="p-4 rounded-2xl bg-muted/30 border border-border/60 space-y-2">
+                      <div className="flex items-center gap-1.5 text-foreground font-bold text-xs uppercase tracking-wide">
+                        <Zap className="w-3.5 h-3.5 text-primary" />
+                        <span>Practical Applications</span>
+                      </div>
+                      <ul className="space-y-1.5 text-xs text-muted-foreground">
+                        {selectedCourse.practicalApplications.map((app, i) => (
+                          <li key={i} className="flex items-start gap-1.5">
+                            <span className="text-primary font-bold">•</span>
+                            <span>{app}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                {/* Career Relevance, Audience & Prerequisites */}
+                <div className="space-y-3 pt-2 border-t border-border/60 text-xs text-muted-foreground">
+                  {selectedCourse.careerRelevance && (
+                    <div>
+                      <span className="font-bold text-foreground block mb-1">Target Roles:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedCourse.careerRelevance.map((role, i) => (
+                          <span key={i} className="px-2 py-0.5 rounded-md bg-primary/10 text-primary font-medium text-[11px]">
+                            {role}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedCourse.prerequisites && (
+                    <div className="p-3 rounded-xl bg-muted/40 border border-border/40">
+                      <span className="font-bold text-foreground block mb-0.5">Prerequisites:</span>
+                      <span className="italic">{selectedCourse.prerequisites}</span>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              <h3 className="text-2xl font-extrabold text-foreground mb-3">
-                {selectedCourse.title}
-              </h3>
-
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                {selectedCourse.description}
-              </p>
-
-              <div className="bg-muted/40 border border-border/60 rounded-2xl p-5 space-y-3 text-sm mb-6">
-                <div className="flex justify-between border-b border-border/40 pb-2">
-                  <span className="text-muted-foreground">Duration:</span>
-                  <span className="font-bold text-foreground">{selectedCourse.duration}</span>
-                </div>
-                <div className="flex justify-between border-b border-border/40 pb-2">
-                  <span className="text-muted-foreground">Total Hours:</span>
-                  <span className="font-bold text-foreground">{selectedCourse.hours} Hours</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Batch Size:</span>
-                  <span className="font-bold text-foreground">{selectedCourse.batchSize} Learners</span>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
+              {/* Modal Actions */}
+              <div className="flex gap-3 pt-4 border-t border-border mt-4">
                 <Button 
                   onClick={() => setSelectedCourse(null)} 
                   variant="outline"
-                  className="w-1/3 font-bold rounded-xl"
+                  className="w-1/3 py-5 font-bold rounded-xl"
                 >
                   Close
                 </Button>
@@ -771,9 +1127,10 @@ export const CoursesPage = () => {
                     setSelectedCourse(null);
                     handleOpenEnquiry(title);
                   }}
-                  className="w-2/3 font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground"
+                  className="w-2/3 py-5 font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
                 >
-                  Enquire for {selectedCourse.id}
+                  <span>Enquire for {selectedCourse.id}</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
 

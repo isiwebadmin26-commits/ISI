@@ -106,7 +106,7 @@ const commandCenterSolutions = [
         ],
         useCases: [
             "Predictive ambush-zone detection using crime analytics",
-            "Auto-dispatch of escorts and aerial surveillance",
+            "Auto-dispatch of mobile response units and aerial surveillance",
             "Real-time deviation and tamper alerts"
         ],
         impact: [

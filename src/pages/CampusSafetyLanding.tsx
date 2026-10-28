@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { validateWorkEmail, validatePhoneNumber } from "@/utils/validation";
 import { Button } from "@/components/ui/button";
@@ -181,6 +182,12 @@ export default function CampusSafetyLanding() {
 
     return (
         <div className="min-h-screen bg-background flex flex-col overflow-x-hidden selection:bg-primary/20">
+            <SEO
+                title="University & Higher Education Campus Safety Solutions | ISI Security"
+                description="Integrated campus security for universities, colleges, and residential hostels: biometric access control, 24/7 SOC monitoring, emergency SOS, and patrolling."
+                keywords="Campus Safety Solutions, University Security India, Hostel Access Control, Educational Institution Security, ISI Security"
+                canonicalPath="/campussafety"
+            />
             <Header />
             <main className="flex-grow">
                 <CampusSafetyHero onOpenEbook={() => setIsEbookWidgetOpen(true)} />

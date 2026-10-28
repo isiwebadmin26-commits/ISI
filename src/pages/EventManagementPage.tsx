@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { CashLogisticsSection } from "@/data/cash-logistics-data";
 
@@ -42,7 +43,7 @@ const eventSlides: HeroSlide[] = [
         title: "Integrated Venue &",
         highlight: "Access Operations",
         titleEnd: "Platform",
-        description: "Unified platform for managing VIP escorts, vendor logistics, ticket gate biometric access control, and incident coordination.",
+        description: "Unified platform for managing VIP Personal Protection Services, vendor logistics, ticket gate biometric access control, and incident coordination.",
         image: city2,
         tags: ["VIP Security", "Biometric Turnstiles", "Vendor Audits"],
         telemetry: "Venue Access Synced",
@@ -87,6 +88,12 @@ const EventManagementPage = () => {
             <main className="flex-grow overflow-x-hidden">
                 {/* Hero Section with Enhanced 2-Column Showcase Slider */}
                 <div id="hero">
+                    <SEO
+                        title="Event Security Management, Crowd Control & VIP Protection | ISI Security"
+                        description="Large-scale event security, stadium crowd density analytics, VIP Personal Protection Services, biometric access zoning, and emergency egress management."
+                        keywords="Event Security Management, Crowd Control India, VIP Personal Protection Services, Concert and Stadium Security, ISI Security"
+                        canonicalPath="/eventmanagement"
+                    />
                     <PageHero 
                         slides={eventSlides} 
                         secondaryScrollTarget="event-intelligence"
