@@ -60,6 +60,7 @@ export function getRouteMetadata(routePath) {
   if (
     routePath === '/contact' ||
     routePath === '/academy' ||
+    routePath === '/calendar' ||
     routePath === '/courses' ||
     routePath === '/services/security' ||
     routePath === '/services/integrated-facility-management'

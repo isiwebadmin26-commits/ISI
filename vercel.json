@@ -12,23 +12,23 @@
       "permanent": true
     },
     {
-      "source": "/calendar",
-      "destination": "/academy?book=true",
-      "permanent": false
-    },
-    {
       "source": "/book",
-      "destination": "/academy?book=true",
+      "destination": "/calendar",
       "permanent": false
     },
     {
       "source": "/schedule",
-      "destination": "/academy?book=true",
+      "destination": "/calendar",
       "permanent": false
     },
     {
       "source": "/booking",
-      "destination": "/academy?book=true",
+      "destination": "/calendar",
+      "permanent": false
+    },
+    {
+      "source": "/book-session",
+      "destination": "/calendar",
       "permanent": false
     }
   ],

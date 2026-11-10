@@ -119,6 +119,7 @@ const BlogDetailPage = lazyWithRetry(() => import("./pages/BlogDetailPage"), "Bl
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"), "NotFound");
 const CoursesPage = lazyWithRetry(() => import("./pages/CoursesPage"), "CoursesPage");
 const AcademyPage = lazyWithRetry(() => import("./pages/AcademyPage"), "AcademyPage");
+const CalendarBookingPage = lazyWithRetry(() => import("./pages/CalendarBookingPage"), "CalendarBookingPage");
 
 const appRoutes = [
   { path: "/admin", element: <IntelligenceDashboard /> },
@@ -127,10 +128,11 @@ const appRoutes = [
   { path: "/contact", element: <ContactPage /> },
   { path: "/courses", element: <CoursesPage /> },
   { path: "/academy", element: <AcademyPage /> },
-  { path: "/calendar", element: <Navigate to="/academy?book=true" replace /> },
-  { path: "/book", element: <Navigate to="/academy?book=true" replace /> },
-  { path: "/schedule", element: <Navigate to="/academy?book=true" replace /> },
-  { path: "/booking", element: <Navigate to="/academy?book=true" replace /> },
+  { path: "/calendar", element: <CalendarBookingPage /> },
+  { path: "/book", element: <CalendarBookingPage /> },
+  { path: "/book-session", element: <CalendarBookingPage /> },
+  { path: "/schedule", element: <CalendarBookingPage /> },
+  { path: "/booking", element: <CalendarBookingPage /> },
   { path: "/verticals", element: <VerticalsPage /> },
   { path: "/verticals/:verticalId", element: <VerticalDetailPage /> },
   { path: "/career", element: <CareersPage /> },
