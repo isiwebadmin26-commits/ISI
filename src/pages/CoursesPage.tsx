@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Layout } from "@/components/Layout";
 import { useContentProtection } from "@/hooks/useContentProtection";
 import SEO from "@/components/SEO";
+import { BookCounsellorModal } from "@/components/academy/BookCounsellorModal";
 import { 
   coursesData, 
   whyChooseData, 
@@ -1138,99 +1139,12 @@ export const CoursesPage = () => {
           </div>
         )}
 
-        {/* ENQUIRY MODAL */}
-        {isEnquiryOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-            <div className="bg-card border border-border rounded-3xl max-w-md w-full p-8 shadow-2xl relative animate-in zoom-in-95">
-              
-              <button 
-                onClick={() => setIsEnquiryOpen(false)}
-                className="absolute top-6 right-6 p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <h3 className="text-2xl font-extrabold text-foreground mb-2">
-                Course Enquiry
-              </h3>
-              <p className="text-xs text-muted-foreground mb-6">
-                CDAC-MEPZ Digital Technology Centre Training Program
-              </p>
-
-              <form onSubmit={handleEnquirySubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold text-foreground mb-1">Course Selected</label>
-                  <select
-                    value={formData.course}
-                    onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-muted/40 border border-border rounded-xl text-sm font-medium focus:outline-none focus:border-primary"
-                  >
-                    <option value="General Course Enquiry">General Course Enquiry</option>
-                    {coursesData.map(c => (
-                      <option key={c.id} value={c.title}>{c.id} - {c.title}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-foreground mb-1">Full Name *</label>
-                  <input 
-                    type="text"
-                    required
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-muted/40 border border-border rounded-xl text-sm focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-foreground mb-1">Email Address *</label>
-                  <input 
-                    type="email"
-                    required
-                    placeholder="name@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-muted/40 border border-border rounded-xl text-sm focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-foreground mb-1">Phone Number *</label>
-                  <input 
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-muted/40 border border-border rounded-xl text-sm focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-foreground mb-1">Message (Optional)</label>
-                  <textarea 
-                    rows={3}
-                    placeholder="Any specific query..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-muted/40 border border-border rounded-xl text-sm focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="w-full py-6 font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground"
-                >
-                  {isSubmitting ? "Submitting Enquiry..." : "Submit Enquiry"}
-                </Button>
-              </form>
-
-            </div>
-          </div>
-        )}
+        {/* ACADEMIC COUNSELING & CALENDAR SLOT BOOKING MODAL */}
+        <BookCounsellorModal
+          isOpen={isEnquiryOpen}
+          onClose={() => setIsEnquiryOpen(false)}
+          initialProgram={enquiryCourseTitle}
+        />
 
         {/* STICKY MOBILE CTA BAR */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border p-3 flex items-center justify-between shadow-2xl">

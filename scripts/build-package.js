@@ -26,6 +26,16 @@ if (fs.existsSync(publicHtaccess)) {
   console.log('✓ Synchronized .htaccess across public, dist, and workspace root');
 }
 
+// Ensure sitemap.xml and robots.txt in public and dist match
+['sitemap.xml', 'robots.txt'].forEach(file => {
+  const pubFile = path.join(workspaceDir, 'public', file);
+  const dstFile = path.join(distDir, file);
+  if (fs.existsSync(pubFile)) {
+    fs.copyFileSync(pubFile, dstFile);
+    console.log(`✓ Synchronized ${file} from public to dist`);
+  }
+});
+
 // Generate Date Stamp
 const today = new Date();
 const yyyy = today.getFullYear();

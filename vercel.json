@@ -10,6 +10,26 @@
       ],
       "destination": "https://www.isisecurity.in/$1",
       "permanent": true
+    },
+    {
+      "source": "/calendar",
+      "destination": "/academy?book=true",
+      "permanent": false
+    },
+    {
+      "source": "/book",
+      "destination": "/academy?book=true",
+      "permanent": false
+    },
+    {
+      "source": "/schedule",
+      "destination": "/academy?book=true",
+      "permanent": false
+    },
+    {
+      "source": "/booking",
+      "destination": "/academy?book=true",
+      "permanent": false
     }
   ],
   "headers": [
@@ -42,12 +62,50 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=43200"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=43200"
+        }
+      ]
     }
   ],
   "rewrites": [
     {
       "source": "/api/jira",
       "destination": "/api/jira.js"
+    },
+    {
+      "source": "/api/sitemap",
+      "destination": "/api/sitemap.js"
+    },
+    {
+      "source": "/api/robots",
+      "destination": "/api/robots.js"
+    },
+    {
+      "source": "/api/send-reply-email",
+      "destination": "/api/send-reply-email.js"
     },
     {
       "source": "/((?!api/).*)",

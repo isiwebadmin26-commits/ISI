@@ -3,6 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import handler from './api/jira.js';
 import analyticsHandler from './api/analytics.js';
+import sitemapHandler from './api/sitemap.js';
+import robotsHandler from './api/robots.js';
+import replyEmailHandler from './api/send-reply-email.js';
 import { isCorporateEmail, CORPORATE_EMAIL_ERROR_MESSAGE } from './api/corporateEmail.js';
 
 dotenv.config();
@@ -36,6 +39,13 @@ app.post('/api/chatbot-leads', (req, res) => {
   }
   res.json({ success: true, message: 'Chatbot lead received' });
 });
+
+// Sitemap & Robots.txt endpoints
+app.get(['/sitemap.xml', '/api/sitemap'], (req, res) => sitemapHandler(req, res));
+app.get(['/robots.txt', '/api/robots'], (req, res) => robotsHandler(req, res));
+
+// Automated Form Reply Email endpoint
+app.post('/api/send-reply-email', (req, res) => replyEmailHandler(req, res));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -47,10 +47,13 @@ const EMAIL_CONFIG = {
     "poojasri.aram@gmail.com"
   ],
 
-  // Recipients for Career Applications & Monthly Resumes
+  // Recipients for Career Applications & Monthly Resumes (Sent to poojasri.aram@gmail.com alone, all others removed)
   careerEmails: [
-    "hrms2026@isisecurity.in",
-    "careers@isisecurity.in",
+    "poojasri.aram@gmail.com"
+  ],
+
+  // Recipients for Academy Training & Calendar Counseling Bookings (Sent to EVERYONE)
+  academyEmails: [
     "v.varshith@isisecurity.in",
     "v.vishal@isisecurity.in",
     "bv@trustflow.in",
@@ -1150,8 +1153,8 @@ function sendLeadEmails(data, sheetName, spreadsheetUrl) {
     message: ""
   };
 
-  var userEmail = data.email || data.Email || data["Work Email"] || data.workEmail || data["work_email"] || "";
-  var userName  = data.name || data.Name || data["Full Name"] || data.fullName || data["full_name"] || "Valued Applicant";
+  var userEmail = (data.email || data.Email || data["Work Email"] || data.workEmail || data["work_email"] || data["Official Email"] || data.user_email || data.emailAddress || data.mail || "").toString().trim();
+  var userName  = (data.name || data.Name || data["Full Name"] || data.fullName || data["full_name"] || data.contactPerson || "Valued Applicant").toString().trim();
   var leadMeta = getLeadCategoryMeta(sheetName, data);
   var attachments = getAttachmentBlobs(data, userName);
   var driveMeta = archiveResumeToDrive(attachments, data);
@@ -1172,7 +1175,8 @@ function sendLeadEmails(data, sheetName, spreadsheetUrl) {
   result.quotaRemaining = quota;
   console.log("📧 Remaining daily email quota: " + quota);
 
-  var skipUserConfirm = isTest || !userEmail || userEmail.indexOf("@") === -1;
+  var isCareerLead = (sheetName === "Career_Applications" || sheetName === "CareerApplications" || (leadMeta.categoryName && leadMeta.categoryName.indexOf("Job") !== -1));
+  var skipUserConfirm = !userEmail || userEmail.indexOf("@") === -1;
   var emailsNeeded = (skipUserConfirm ? 0 : 1) + (targetRecipients.length > 0 ? 1 : 0);
 
   if (quota === 0) {
@@ -1182,12 +1186,7 @@ function sendLeadEmails(data, sheetName, spreadsheetUrl) {
     return result;
   }
 
-  if (!skipUserConfirm && quota === 1 && targetRecipients.length > 0) {
-    skipUserConfirm = true;
-    console.warn("⚠️ Only 1 email remaining today — sending internal HR/sales alert only (skipping applicant confirmation).");
-  }
-
-  // 1. User confirmation (skipped in testMode to avoid burning 2 quota units on the same inbox)
+  // 1. User confirmation reply email - ALWAYS sent to whomever fills out the form (including Career Applicants)
   if (!skipUserConfirm && quota !== 0) {
     var userSend = sendEmailOnce({
       to: userEmail,
@@ -1209,7 +1208,9 @@ function sendLeadEmails(data, sheetName, spreadsheetUrl) {
     }
   }
 
-  // 2. One batched internal alert (all HR/sales recipients in a single send)
+  // 2. One batched internal alert
+  // For Career Applications: sent to poojasri.aram@gmail.com ALONE (all other recipients removed).
+  // For other leads (Sales, Contact, Academy): sent to respective sales/management recipients.
   if (targetRecipients.length > 0) {
     var recipientBlobs = [];
     if (attachments && attachments.length > 0) {
@@ -1232,7 +1233,6 @@ function sendLeadEmails(data, sheetName, spreadsheetUrl) {
                         "Please find the attached resume document (" + (data.resumeFileName || "Resume") + ") enclosed with this email." +
                         driveNote;
 
-    var isCareerLead = (sheetName === "Career_Applications" || sheetName === "CareerApplications" || (leadMeta.categoryName && leadMeta.categoryName.indexOf("Job") !== -1));
     var senderName = leadMeta.senderName || (isCareerLead ? "Career Engine" : ("ISI Lead Engine • " + leadMeta.categoryName));
 
     var mailOptions = {
@@ -1371,10 +1371,10 @@ function getLeadCategoryMeta(sheetName, data) {
         leadName: name || "Academy Prospect",
         leadCompany: data.organization || data["Program / Course"] || "Training Inquiry",
         leadPhone: phone,
-        internalSubject: "[Academy Training Lead Generation] " + (name || "New Student") + " - " + (data.program || data["Program / Course"] || "Course Inquiry"),
-        userSubject: "Academy Training Inquiry Received - ISI Academy",
-        userMessage: "Thank you for your interest in ISI Security Academy (www.isisecurity.in/academy). Our Academic Director will contact you with course schedules, curriculum, and certification details.",
-        recipients: EMAIL_CONFIG.salesEmails
+        internalSubject: (data.message && data.message.indexOf("Preferred Date") !== -1 ? "[🗓️ Calendar Booking] " : "[Academy Training Lead] ") + (name || "New Prospect") + " - " + (data.program || data["Program / Course"] || "Counseling Session"),
+        userSubject: "Academy Counseling Session Received - ISI Academy",
+        userMessage: "Thank you for your interest in ISI Security Academy (www.isisecurity.in/academy). Our Academic Director and Counseling Team will contact you with course schedules and chosen slot details.",
+        recipients: EMAIL_CONFIG.academyEmails || EMAIL_CONFIG.salesEmails
       };
 
     case "Chatbot_Leads":

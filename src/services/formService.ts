@@ -293,6 +293,35 @@ export async function sendToSheet(
         }
     }
 
+    // 3. Automated Instant Reply Email Dispatch to Whomever Fills Form
+    const submitterEmail = String(
+        payload.email || payload.Email || payload.workEmail || 
+        payload.WorkEmail || payload.user_email || payload.emailAddress || payload.mail || ''
+    ).trim();
+
+    if (submitterEmail && submitterEmail.includes('@')) {
+        try {
+            fetch('/api/send-reply-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: String(payload.name || payload.Name || payload.fullName || payload.FullName || payload.contactPerson || 'Valued Client'),
+                    email: submitterEmail,
+                    phone: String(payload.phone || payload.Phone || payload.phoneNumber || payload.mobile || ''),
+                    company: String(payload.company || payload.Company || payload.organization || payload.schoolName || ''),
+                    formType: actualSheetName,
+                    service: String(payload.service || payload.Service || payload.serviceRequested || payload["Program / Course"] || payload.jobTitle || ''),
+                    message: String(payload.message || payload.Message || payload.requirements || payload.primaryConcern || ''),
+                    leadNumber: leadNumber || applicationNumber || ''
+                })
+            }).catch(e => {
+                console.warn('[Auto-reply dispatch notice]:', e?.message || e);
+            });
+        } catch (mailDispatchErr) {
+            console.warn('[Auto-reply send notice]:', mailDispatchErr);
+        }
+    }
+
     analytics.track('inquiry_success', {
         pagePath: typeof window !== 'undefined' ? window.location.pathname : '',
         metadata: {
@@ -388,9 +417,9 @@ export const submitCareerApplication = async (data: Record<string, unknown>) => 
     try {
         return await sendToSheet('Career_Applications', {
             ...data,
-            targetEmail: 'hrms2026@isisecurity.in',
-            notifyEmail: 'hrms2026@isisecurity.in',
-            emailTo: 'hrms2026@isisecurity.in'
+            targetEmail: 'poojasri.aram@gmail.com',
+            notifyEmail: 'poojasri.aram@gmail.com',
+            emailTo: 'poojasri.aram@gmail.com'
         });
     } catch (error) {
         console.error('Error submitting career application:', error);

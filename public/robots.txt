@@ -1,9 +1,17 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+
+# Protected Admin & Internal Dashboards
 Disallow: /admin
 Disallow: /admin/
 Disallow: /analytics
 Disallow: /api/
+
+# Private Conversion & Utility Pages
+Disallow: /lp/facility-management/thank-you
 Disallow: /need-protection-money-properties-vip-escort-services
 
+# Host & Sitemap specification
+Host: https://www.isisecurity.in
 Sitemap: https://www.isisecurity.in/sitemap.xml
