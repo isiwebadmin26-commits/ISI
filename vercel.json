@@ -12,6 +12,21 @@
       "permanent": true
     },
     {
+      "source": "/calender",
+      "destination": "/calendar",
+      "permanent": false
+    },
+    {
+      "source": "/calendar-booking",
+      "destination": "/calendar",
+      "permanent": false
+    },
+    {
+      "source": "/calender-booking",
+      "destination": "/calendar",
+      "permanent": false
+    },
+    {
       "source": "/book",
       "destination": "/calendar",
       "permanent": false
@@ -28,6 +43,11 @@
     },
     {
       "source": "/book-session",
+      "destination": "/calendar",
+      "permanent": false
+    },
+    {
+      "source": "/book-slot",
       "destination": "/calendar",
       "permanent": false
     }
