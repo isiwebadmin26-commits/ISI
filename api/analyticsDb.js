@@ -172,6 +172,42 @@ function initSchema(db) {
     );
   `);
 
+  // 7. Marketing Leads Table (Persistent Multi-Channel Storage)
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS marketing_leads (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      lead_id TEXT UNIQUE NOT NULL,
+      lead_type TEXT NOT NULL,
+      full_name TEXT NOT NULL,
+      company TEXT,
+      email TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      service_interest TEXT,
+      industry TEXT,
+      preferred_time TEXT,
+      message TEXT,
+      traffic_channel TEXT,
+      utm_source TEXT,
+      utm_medium TEXT,
+      utm_campaign TEXT,
+      utm_content TEXT,
+      utm_term TEXT,
+      ip_address TEXT,
+      location TEXT,
+      status TEXT DEFAULT 'new',
+      jira_key TEXT,
+      created_at_utc TEXT NOT NULL,
+      created_at_ist TEXT NOT NULL,
+      metadata TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_leads_type ON marketing_leads(lead_type);
+    CREATE INDEX IF NOT EXISTS idx_leads_source ON marketing_leads(utm_source);
+    CREATE INDEX IF NOT EXISTS idx_leads_campaign ON marketing_leads(utm_campaign);
+    CREATE INDEX IF NOT EXISTS idx_leads_status ON marketing_leads(status);
+    CREATE INDEX IF NOT EXISTS idx_leads_time ON marketing_leads(created_at_utc);
+  `);
+
   // Seed default admin user if none exists
   seedDefaultAdmin(db);
 }

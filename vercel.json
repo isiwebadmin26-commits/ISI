@@ -112,6 +112,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/leads",
+      "destination": "/api/leads.js"
+    },
+    {
       "source": "/api/jira",
       "destination": "/api/jira.js"
     },
@@ -126,6 +130,76 @@
     {
       "source": "/api/send-reply-email",
       "destination": "/api/send-reply-email.js"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "chat.(.*)"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "forms.(.*)"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "booking.(.*)"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "book.(.*)"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "session.(.*)"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "whatsapp.(.*)"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "linkedin.(.*)"
+        }
+      ],
+      "destination": "/index.html"
     },
     {
       "source": "/((?!api/).*)",

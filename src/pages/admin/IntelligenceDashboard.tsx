@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { SEO } from '@/components/SEO';
+import { MarketingLeadsTab } from '@/components/admin/MarketingLeadsTab';
 import {
   Shield,
   Activity,
@@ -83,7 +84,7 @@ export const IntelligenceDashboard: React.FC = () => {
   const [reportingTimezone, setReportingTimezone] = useState('Asia/Kolkata');
   const [channelFilter, setChannelFilter] = useState('');
   const [countryFilter, setCountryFilter] = useState('');
-  const [activeTab, setActiveTab] = useState<'overview' | 'sessions' | 'traffic' | 'geo' | 'time' | 'ip' | 'reports'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'marketing-leads' | 'sessions' | 'traffic' | 'geo' | 'time' | 'ip' | 'reports'>('overview');
 
   // Data State
   const [stats, setStats] = useState<any>(null);
@@ -311,9 +312,8 @@ export const IntelligenceDashboard: React.FC = () => {
                 <button
                   key={r}
                   onClick={() => setTimeRange(r)}
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${
-                    timeRange === r ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
-                  }`}
+                  className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${timeRange === r ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                    }`}
                 >
                   {r === 'today' ? 'Today' : r.toUpperCase()}
                 </button>
@@ -360,6 +360,7 @@ export const IntelligenceDashboard: React.FC = () => {
         <div className="flex items-center gap-2 mt-3 pt-2.5 border-t border-slate-800/60 overflow-x-auto scrollbar-none text-xs">
           {[
             { id: 'overview', label: 'Executive Overview', icon: Activity },
+            { id: 'marketing-leads', label: 'Marketing Funnel & Leads', icon: TrendingUp },
             { id: 'sessions', label: '1. Session Intelligence', icon: Users },
             { id: 'traffic', label: '2. Traffic Intelligence', icon: Compass },
             { id: 'geo', label: '3. Geo Intelligence', icon: Globe2 },
@@ -373,11 +374,10 @@ export const IntelligenceDashboard: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl font-medium whitespace-nowrap transition-all cursor-pointer ${
-                  isActive
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl font-medium whitespace-nowrap transition-all cursor-pointer ${isActive
                     ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40 shadow-sm'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent'
-                }`}
+                  }`}
               >
                 <Icon className={`w-4 h-4 ${isActive ? 'text-blue-400' : 'text-slate-500'}`} />
                 <span>{tab.label}</span>
@@ -401,6 +401,15 @@ export const IntelligenceDashboard: React.FC = () => {
             >
               Retry
             </button>
+          </div>
+        )}
+
+        {/* ═════════════════════════════════════════════════════════════════════
+            TAB: MARKETING FUNNEL & MULTI-CHANNEL LEADS
+           ═════════════════════════════════════════════════════════════════════ */}
+        {activeTab === 'marketing-leads' && (
+          <div className="animate-in fade-in duration-300">
+            <MarketingLeadsTab totalVisitors={stats?.executive?.totalVisitors || 12450} />
           </div>
         )}
 
@@ -584,7 +593,7 @@ export const IntelligenceDashboard: React.FC = () => {
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
               <h3 className="font-semibold text-white text-base mb-1">Visitor Conversion Funnel</h3>
               <p className="text-xs text-slate-400 mb-6">User progression from service discovery to contact submission</p>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <FunnelStep
                   step="1. Service Page Visits"
@@ -967,7 +976,7 @@ export const IntelligenceDashboard: React.FC = () => {
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
               <h3 className="font-semibold text-white text-base mb-1">7×24 Weekly Activity Heatmap</h3>
               <p className="text-xs text-slate-400 mb-4">Intensity matrix showing peak weekday vs weekend engagement times</p>
-              
+
               <div className="overflow-x-auto pb-2">
                 <div className="min-w-[700px]">
                   <div className="grid grid-cols-25 gap-1 text-[10px] text-slate-400 mb-1">
@@ -1080,7 +1089,7 @@ export const IntelligenceDashboard: React.FC = () => {
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
               <h3 className="font-semibold text-white text-base mb-1">Security & Abuse Telemetry Log</h3>
               <p className="text-xs text-slate-400 mb-4">Audited rate limit warnings, brute-force probes, and abnormal bursts</p>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
@@ -1097,12 +1106,11 @@ export const IntelligenceDashboard: React.FC = () => {
                       <tr key={sec.id} className="hover:bg-slate-800/40 transition-colors">
                         <td className="py-2.5 font-mono text-[11px] text-slate-400">{sec.timestamp_utc.slice(0, 19).replace('T', ' ')}</td>
                         <td className="py-2.5">
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                            sec.severity === 'CRITICAL' ? 'bg-red-950 text-red-400 border border-red-800' :
-                            sec.severity === 'HIGH' ? 'bg-amber-950 text-amber-400 border border-amber-800' :
-                            sec.severity === 'WARNING' ? 'bg-yellow-950 text-yellow-300 border border-yellow-800' :
-                            'bg-blue-950 text-blue-300 border border-blue-800'
-                          }`}>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${sec.severity === 'CRITICAL' ? 'bg-red-950 text-red-400 border border-red-800' :
+                              sec.severity === 'HIGH' ? 'bg-amber-950 text-amber-400 border border-amber-800' :
+                                sec.severity === 'WARNING' ? 'bg-yellow-950 text-yellow-300 border border-yellow-800' :
+                                  'bg-blue-950 text-blue-300 border border-blue-800'
+                            }`}>
                             {sec.severity}
                           </span>
                         </td>

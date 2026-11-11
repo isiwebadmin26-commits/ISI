@@ -121,7 +121,25 @@ const CoursesPage = lazyWithRetry(() => import("./pages/CoursesPage"), "CoursesP
 const AcademyPage = lazyWithRetry(() => import("./pages/AcademyPage"), "AcademyPage");
 const CalendarBookingPage = lazyWithRetry(() => import("./pages/CalendarBookingPage"), "CalendarBookingPage");
 
+// Dedicated Public Marketing Pages
+const ChatbotPage = lazyWithRetry(() => import("./pages/marketing/ChatbotPage"), "ChatbotPage");
+const BookingPage = lazyWithRetry(() => import("./pages/marketing/BookingPage"), "BookingPage");
+const SessionRequestPage = lazyWithRetry(() => import("./pages/marketing/SessionRequestPage"), "SessionRequestPage");
+const GeneralFormPage = lazyWithRetry(() => import("./pages/marketing/GeneralFormPage"), "GeneralFormPage");
+const WhatsAppPage = lazyWithRetry(() => import("./pages/marketing/WhatsAppPage"), "WhatsAppPage");
+const LinkedInCampaignPage = lazyWithRetry(() => import("./pages/marketing/LinkedInCampaignPage"), "LinkedInCampaignPage");
+
 const appRoutes = [
+  // Dedicated Public Marketing Campaign URLs
+  { path: "/chat", element: <ChatbotPage /> },
+  { path: "/booking", element: <BookingPage /> },
+  { path: "/book", element: <BookingPage /> },
+  { path: "/session-request", element: <SessionRequestPage /> },
+  { path: "/session", element: <SessionRequestPage /> },
+  { path: "/forms", element: <GeneralFormPage /> },
+  { path: "/form", element: <GeneralFormPage /> },
+  { path: "/whatsapp", element: <WhatsAppPage /> },
+  { path: "/linkedin", element: <LinkedInCampaignPage /> },
   { path: "/admin", element: <IntelligenceDashboard /> },
   { path: "/admin/intelligence", element: <IntelligenceDashboard /> },
   { path: "/analytics", element: <IntelligenceDashboard /> },
@@ -200,7 +218,14 @@ const AppRouter = () => {
   const isIntegratedServices = location.pathname.startsWith('/lp/facility-management') || 
                                location.pathname.startsWith('/integratedservices') || 
                                location.pathname.startsWith('/integrated-services') ||
-                               location.pathname.startsWith('/salesinquiry');
+                               location.pathname.startsWith('/salesinquiry') ||
+                               location.pathname.startsWith('/chat') ||
+                               location.pathname.startsWith('/booking') ||
+                               location.pathname.startsWith('/book') ||
+                               location.pathname.startsWith('/session') ||
+                               location.pathname.startsWith('/forms') ||
+                               location.pathname.startsWith('/whatsapp') ||
+                               location.pathname.startsWith('/linkedin');
   const [showWidgets, setShowWidgets] = useState(false);
 
   useEffect(() => {
@@ -228,11 +253,31 @@ const AppRouter = () => {
 
   const isAcademy = location.pathname === '/academy';
   useAnalytics();
+
+  // Subdomain routing detection (e.g. chat.domain.com -> ChatbotPage)
+  const host = typeof window !== 'undefined' ? window.location.hostname.toLowerCase() : '';
+  const isChatSubdomain = host.startsWith('chat.');
+  const isBookingSubdomain = host.startsWith('book.') || host.startsWith('booking.');
+  const isSessionSubdomain = host.startsWith('session.');
+  const isFormsSubdomain = host.startsWith('forms.') || host.startsWith('form.');
+  const isWhatsAppSubdomain = host.startsWith('whatsapp.') || host.startsWith('wa.');
+  const isLinkedInSubdomain = host.startsWith('linkedin.');
+
+  const getSubdomainRootElement = () => {
+    if (isChatSubdomain) return <ChatbotPage />;
+    if (isBookingSubdomain) return <BookingPage />;
+    if (isSessionSubdomain) return <SessionRequestPage />;
+    if (isFormsSubdomain) return <GeneralFormPage />;
+    if (isWhatsAppSubdomain) return <WhatsAppPage />;
+    if (isLinkedInSubdomain) return <LinkedInCampaignPage />;
+    return <Index />;
+  };
+
   return (
     <ErrorBoundary>
       <ScrollToTop />
       <BackToTop />
-      {showWidgets && !isIntegratedServices && (
+      {showWidgets && !isIntegratedServices && !isChatSubdomain && (
         isAcademy ? (
           <ISIAcademyChatbot />
         ) : (
@@ -241,7 +286,7 @@ const AppRouter = () => {
       )}
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center p-8"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>}>
       <Routes>
-        <Route path="/" element={<Index />} />
+        <Route path="/" element={getSubdomainRootElement()} />
         {appRoutes.map((route, idx) => (
           <Route key={`route-${idx}`} path={route.path} element={route.element} />
         ))}

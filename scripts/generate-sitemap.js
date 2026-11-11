@@ -61,6 +61,12 @@ export function getRouteMetadata(routePath) {
     routePath === '/contact' ||
     routePath === '/academy' ||
     routePath === '/calendar' ||
+    routePath === '/booking' ||
+    routePath === '/chat' ||
+    routePath === '/session-request' ||
+    routePath === '/forms' ||
+    routePath === '/whatsapp' ||
+    routePath === '/linkedin' ||
     routePath === '/courses' ||
     routePath === '/services/security' ||
     routePath === '/services/integrated-facility-management'
