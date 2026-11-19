@@ -230,7 +230,7 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
             </div>
             <div>
               <h2 className="text-sm font-bold text-foreground leading-tight flex items-center gap-1.5">
-                <span>ISI AI Chat</span>
+                <span>ISI Security Chat</span>
                 <span className="text-[10px] px-1.5 py-0.2 rounded bg-primary/10 text-primary font-mono font-semibold">
                   PRO
                 </span>

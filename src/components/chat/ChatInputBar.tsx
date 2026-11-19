@@ -318,7 +318,7 @@ export const ChatInputBar: React.FC<ChatInputBarProps> = ({
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask Arya about manned guarding, C4i AI command center, paste screenshots (Ctrl+V)..."
+              placeholder="Ask Arya about manned guarding, C4i command center, paste screenshots (Ctrl+V)..."
               className="flex-1 max-h-44 py-2 sm:py-2.5 bg-transparent resize-none border-0 text-xs sm:text-sm leading-relaxed text-foreground placeholder:text-muted-foreground/70 focus:outline-none scrollbar-thin"
             />
 
@@ -356,7 +356,7 @@ export const ChatInputBar: React.FC<ChatInputBarProps> = ({
 
       {/* Subtext info */}
       <p className="text-[11px] text-center text-muted-foreground/70 mt-2">
-        Arya AI • PSARA Tier-1 certified consulting desk • Direct WhatsApp escalation: <a href="https://wa.me/917708887878" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">+91 77088 87878</a>
+        Arya • Senior Security Operations Consultant • Direct WhatsApp escalation: <a href="https://wa.me/917708887878" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">+91 77088 87878</a>
       </p>
     </div>
   );

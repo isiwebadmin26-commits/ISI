@@ -52,7 +52,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
           </div>
           <p className="text-[10px] sm:text-[11px] text-muted-foreground flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Arya AI • Senior Security & Facility Operations Desk</span>
+            <span>Arya • Senior Security & Facility Operations Consultant</span>
           </p>
         </div>
       </div>
@@ -70,7 +70,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
         </a>
 
         <a
-          href="https://wa.me/917708887878?text=Hello!%20I%20am%20chatting%20with%20Arya%20AI%20and%20would%20like%20to%20connect%20with%20a%20security%20director%20directly."
+          href="https://wa.me/917708887878?text=Hello!%20I%20am%20chatting%20with%20Arya%20and%20would%20like%20to%20connect%20with%20a%20security%20director%20directly."
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold text-xs transition-colors"

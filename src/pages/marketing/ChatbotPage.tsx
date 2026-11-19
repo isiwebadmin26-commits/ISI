@@ -35,9 +35,9 @@ const WELCOME_SUGGESTIONS = [
   },
   {
     icon: '📹',
-    title: 'C4i AI Command Center',
+    title: 'C4i Command Center',
     desc: 'Real-time video analytics, automatic intrusion alerts, & remote SOC operations',
-    prompt: 'How does your AI-driven surveillance & 24/7 remote command center work?'
+    prompt: 'How does your 24/7 remote C4i command center surveillance work?'
   },
   {
     icon: '🏢',
@@ -88,7 +88,7 @@ export const ChatbotPage: React.FC = () => {
   };
 
   useEffect(() => {
-    tracker.track('page_view', { pageTitle: 'ISI Security AI Consultant | Enterprise Chat Platform' });
+    tracker.track('page_view', { pageTitle: 'ISI Security Consultant | Operations Chat' });
   }, []);
 
   // When conversations load or change, select first or stay on active
@@ -297,8 +297,8 @@ export const ChatbotPage: React.FC = () => {
   return (
     <>
       <SEO
-        title="ISI Security AI Consultant | Arya - Enterprise Security & Facility Operations"
-        description="Interact with Arya, ISI Security's AI Operations Consultant. Ask about PSARA-certified manned guarding, AI C4i command centers, and integrated facility management."
+        title="ISI Security Consultant | Arya - Enterprise Security & Facility Operations"
+        description="Connect with Arya, ISI Security's Operations Consultant. Ask about PSARA-certified manned guarding, C4i command centers, and integrated facility management."
         canonical="https://www.isisecurity.in/chat"
       />
 
@@ -344,7 +344,7 @@ export const ChatbotPage: React.FC = () => {
                 </div>
 
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  Welcome to ISI Security AI Consultant
+                  Welcome to ISI Security Consultant
                 </h2>
 
                 <p className="text-xs sm:text-sm text-muted-foreground max-w-lg mb-8 leading-relaxed">

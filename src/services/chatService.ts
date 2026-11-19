@@ -448,7 +448,7 @@ export async function generateAIResponse(
       text: "I have analyzed your uploaded screenshot/blueprint. Our AI-driven surveillance architecture and C4i Command Centers can directly integrate with your facility perimeter, blind spots, and access control layout. We can prepare a customized site coverage audit for this floor plan.",
       actions: [
         { label: "🛡️ Request Site Vulnerability Assessment", action: "/forms", type: 'link' },
-        { label: "📹 Learn About C4i AI Command Center", action: "/command-center", type: 'link' },
+        { label: "📹 Learn About C4i Command Center", action: "/command-center", type: 'link' },
         { label: "💬 Discuss Details on WhatsApp", action: "https://wa.me/917708887878", type: 'link' }
       ]
     };

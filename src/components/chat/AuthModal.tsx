@@ -97,7 +97,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <Shield className="w-6 h-6" />
           </div>
           <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-            {tab === 'signin' && 'Sign In to ISI AI'}
+            {tab === 'signin' && 'Sign In to ISI Security Chat'}
             {tab === 'signup' && 'Create Your Account'}
             {tab === 'forgot' && 'Reset Password'}
           </h3>
