@@ -5,8 +5,8 @@
  */
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const DEFAULT_MODEL = 'llama-3.3-70b-versatile';
-const FALLBACK_MODEL = 'llama-3.1-8b-instant';
+const DEFAULT_MODEL = 'openai/gpt-oss-120b';
+const FALLBACK_MODEL = 'openai/gpt-oss-20b';
 
 export interface GroqMessage {
   role: 'system' | 'user' | 'assistant';
@@ -99,8 +99,8 @@ export async function callGroqChat(
     content: userPrompt
   });
 
-  // Attempt primary model first, with fallback to 8B instant
-  const modelsToTry = [DEFAULT_MODEL, FALLBACK_MODEL];
+  // Attempt primary 120B model first, with fallbacks to 20B and Qwen
+  const modelsToTry = [DEFAULT_MODEL, FALLBACK_MODEL, 'qwen/qwen3.8-27b'];
 
   for (const model of modelsToTry) {
     try {

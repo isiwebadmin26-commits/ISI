@@ -35,7 +35,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages, model = 'llama-3.3-70b-versatile', temperature = 0.6, max_tokens = 1024 } = req.body || {};
+    const { messages, model = 'openai/gpt-oss-120b', temperature = 0.6, max_tokens = 1024 } = req.body || {};
 
     const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
