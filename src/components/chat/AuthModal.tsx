@@ -50,7 +50,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         if (error) {
           setErrorMessage(error.message);
         } else {
-          toast.success('Account created successfully!');
+          toast.success('Account created and signed in successfully!');
           onClose();
         }
       } else if (tab === 'forgot') {
@@ -103,7 +103,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </h3>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             {tab === 'signin' && 'Enter your username or email and password.'}
-            {tab === 'signup' && 'Create your credentials to save chat history and files.'}
+            {tab === 'signup' && 'Instant access — no verification email required.'}
             {tab === 'forgot' && 'Enter your username or email to reset password.'}
           </p>
         </div>
