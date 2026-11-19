@@ -9,8 +9,7 @@ import {
   Pin, 
   Trash2, 
   LogIn, 
-  User,
-  Zap
+  User 
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -20,7 +19,6 @@ interface ChatHeaderProps {
   isPinned: boolean;
   onClearChat?: () => void;
   onOpenAuth: () => void;
-  onOpenGroqModal?: () => void;
 }
 
 export const ChatHeader: React.FC<ChatHeaderProps> = ({
@@ -28,8 +26,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
   title,
   isPinned,
   onClearChat,
-  onOpenAuth,
-  onOpenGroqModal
+  onOpenAuth
 }) => {
   const { user, profile } = useAuth();
 
@@ -62,23 +59,11 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
 
       {/* Right Action Icons & Badges */}
       <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        {onOpenGroqModal && (
-          <button
-            type="button"
-            onClick={onOpenGroqModal}
-            className="inline-flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold text-xs transition-colors cursor-pointer"
-            title="Configure Free Groq AI Key"
-          >
-            <Zap className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-            <span className="hidden sm:inline">Groq AI</span>
-          </button>
-        )}
-
         <a
           href="/booking"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-1.5 py-1.5 px-3 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-xs transition-colors"
+          className="hidden sm:inline-flex items-center gap-1.5 py-1.5 px-3 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-xs transition-colors"
         >
           <Calendar className="w-3.5 h-3.5" />
           <span>Book Call</span>
@@ -92,7 +77,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
           title="Escalate directly to WhatsApp"
         >
           <MessageCircle className="w-3.5 h-3.5" />
-          <span className="hidden lg:inline">WhatsApp</span>
+          <span className="hidden md:inline">WhatsApp</span>
         </a>
 
         {/* User Account / Sign In */}

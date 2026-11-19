@@ -24,7 +24,6 @@ import { ChatMessageItem } from '@/components/chat/ChatMessageItem';
 import { ChatInputBar } from '@/components/chat/ChatInputBar';
 import { LightboxModal } from '@/components/chat/LightboxModal';
 import { AuthModal } from '@/components/chat/AuthModal';
-import { GroqKeyModal } from '@/components/chat/GroqKeyModal';
 import { Shield, Sparkles, MessageSquare, Bot, Calendar, PhoneCall, ArrowRight } from 'lucide-react';
 
 const WELCOME_SUGGESTIONS = [
@@ -80,7 +79,6 @@ export const ChatbotPage: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isGroqModalOpen, setIsGroqModalOpen] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -333,7 +331,6 @@ export const ChatbotPage: React.FC = () => {
             title={activeConv?.title || 'New Security Consultation'}
             isPinned={activeConv?.pinned || false}
             onOpenAuth={() => setIsAuthModalOpen(true)}
-            onOpenGroqModal={() => setIsGroqModalOpen(true)}
           />
 
           {/* Messages Scroll Area */}
@@ -429,12 +426,6 @@ export const ChatbotPage: React.FC = () => {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-      />
-
-      {/* Groq AI Settings Modal */}
-      <GroqKeyModal
-        isOpen={isGroqModalOpen}
-        onClose={() => setIsGroqModalOpen(false)}
       />
     </>
   );

@@ -103,7 +103,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </h3>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             {tab === 'signin' && 'Enter your username or email and password.'}
-            {tab === 'signup' && 'Instant access — no verification email required.'}
+            {tab === 'signup' && 'Enter your details to create your account.'}
             {tab === 'forgot' && 'Enter your username or email to reset password.'}
           </p>
         </div>
