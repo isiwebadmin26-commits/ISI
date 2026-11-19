@@ -1,19 +1,19 @@
 // src/components/chat/ChatSidebar.tsx
 import React, { useState } from 'react';
-import { 
-  Plus, 
-  Search, 
-  MessageSquare, 
-  Pin, 
-  PinOff, 
-  MoreVertical, 
-  Edit3, 
-  Trash2, 
-  X, 
-  LogIn, 
-  LogOut, 
-  Shield, 
-  User, 
+import {
+  Plus,
+  Search,
+  MessageSquare,
+  Pin,
+  PinOff,
+  MoreVertical,
+  Edit3,
+  Trash2,
+  X,
+  LogIn,
+  LogOut,
+  Shield,
+  User,
   ChevronRight,
   Check,
   Sparkles
@@ -93,11 +93,10 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
                   // On mobile, close sidebar on selection
                   if (window.innerWidth < 1024) onClose();
                 }}
-                className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
-                  isActive
+                className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${isActive
                     ? 'bg-primary/10 text-primary font-semibold dark:bg-primary/20'
                     : 'text-foreground/80 hover:bg-muted/70 hover:text-foreground'
-                }`}
+                  }`}
               >
                 {/* Pin / Message Icon */}
                 {conv.pinned ? (
@@ -140,9 +139,8 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveMenuId(isMenuOpen ? null : conv.id)}
-                      className={`p-1 rounded-md text-muted-foreground hover:text-foreground transition-opacity ${
-                        isMenuOpen ? 'opacity-100 bg-muted' : 'opacity-0 group-hover:opacity-100'
-                      }`}
+                      className={`p-1 rounded-md text-muted-foreground hover:text-foreground transition-opacity ${isMenuOpen ? 'opacity-100 bg-muted' : 'opacity-0 group-hover:opacity-100'
+                        }`}
                       title="Options"
                     >
                       <MoreVertical className="w-3.5 h-3.5" />
@@ -218,9 +216,8 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:static top-0 bottom-0 left-0 z-40 w-72 sm:w-80 h-full bg-card/95 dark:bg-slate-950/95 lg:bg-muted/30 dark:lg:bg-slate-950/50 border-r border-border/80 flex flex-col transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        }`}
+        className={`fixed lg:static top-0 bottom-0 left-0 z-40 w-72 sm:w-80 h-full bg-card/95 dark:bg-slate-950/95 lg:bg-muted/30 dark:lg:bg-slate-950/50 border-r border-border/80 flex flex-col transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          }`}
       >
         {/* Top Header: Brand + New Chat */}
         <div className="p-3.5 border-b border-border/60 flex items-center justify-between gap-2">
