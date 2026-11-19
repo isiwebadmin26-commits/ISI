@@ -393,20 +393,48 @@ export async function insertMessage(
 /**
  * Intelligent Enterprise Security AI Response Generator (Arya)
  */
-export function generateAIResponse(
+import { callGroqChat } from './groqService';
+
+/**
+ * Intelligent AI response generator for Arya.
+ * Priority: Free Groq LPU (Llama 3.3 70B / 3.1 8B) -> Specialized Local Security Intelligence Engine.
+ */
+export async function generateAIResponse(
   userPrompt: string,
   hasImage = false,
   hasFile = false,
-  hasVoice = false
-): {
+  hasVoice = false,
+  history: Array<{ role: 'user' | 'assistant'; content: string }> = []
+): Promise<{
   text: string;
   actions?: Array<{ label: string; action: string; type?: 'reply' | 'link' | 'modal' }>;
-} {
+}> {
+  // Construct enriched prompt for attachments
+  let enrichedPrompt = userPrompt;
+  if (hasVoice) {
+    enrichedPrompt = `[Voice Message Submitted by Client] ${userPrompt || 'Client sent an audio message requesting security consultation.'}`;
+  } else if (hasImage) {
+    enrichedPrompt = `[Image/Blueprint Attached by Client] ${userPrompt || 'Client shared a facility blueprint/screenshot for layout security analysis.'}`;
+  } else if (hasFile) {
+    enrichedPrompt = `[Document/RFP File Attached by Client] ${userPrompt || 'Client submitted an RFP/tender document for enterprise review.'}`;
+  }
+
+  // 1. Try Groq AI (Llama 3.3 70B / 3.1 8B via ultra-fast Groq LPU)
+  try {
+    const groqResult = await callGroqChat(enrichedPrompt, history);
+    if (groqResult?.text) {
+      return groqResult;
+    }
+  } catch (err) {
+    console.warn('[GROQ DISPATCH WARNING - Falling back to local engine]', err);
+  }
+
+  // 2. Resilient Fallback to Domain Knowledge Engine
   const p = userPrompt.toLowerCase();
 
   if (hasVoice) {
     return {
-      text: "I have received and listened to your voice message. Our security operations desk has logged your voice inquiry and is analyzing your site requirements. Would you like an instant enterprise proposal, or should we schedule an immediate 1-on-1 call with our Chief Operations Officer?",
+      text: "I have received and processed your voice message. Our security operations desk has logged your voice inquiry and is analyzing your site requirements. Would you like an instant enterprise proposal, or should we schedule an immediate 1-on-1 call with our Chief Operations Officer?",
       actions: [
         { label: "📅 Schedule 1-on-1 Consultation", action: "/booking", type: 'link' },
         { label: "💬 Connect on WhatsApp (+91 77088 87878)", action: "https://wa.me/917708887878", type: 'link' },
