@@ -116,13 +116,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem('isi_chat_guest', 'true');
   };
 
-  const signUpWithEmail = async (email: string, password: string, fullName?: string) => {
+  const normalizeLoginIdentifier = (identifier: string): string => {
+    const clean = identifier.trim().toLowerCase();
+    if (clean.includes('@')) {
+      return clean;
+    }
+    // If entered as plain username (e.g. 'admin' or 'user'), map to standard domain format
+    return `${clean}@isisecurity.in`;
+  };
+
+  const signUpWithEmail = async (identifier: string, password: string, fullName?: string) => {
+    const email = normalizeLoginIdentifier(identifier);
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          full_name: fullName || email.split('@')[0]
+          full_name: fullName || identifier.split('@')[0],
+          username: identifier.includes('@') ? identifier.split('@')[0] : identifier
         }
       }
     });
@@ -133,7 +144,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return { error };
   };
 
-  const signInWithEmail = async (email: string, password: string) => {
+  const signInWithEmail = async (identifier: string, password: string) => {
+    const email = normalizeLoginIdentifier(identifier);
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password

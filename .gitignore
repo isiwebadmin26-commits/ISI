@@ -43,3 +43,6 @@ scratch/
 *.db*
 data/
 tar files/
+
+.vercel
+.env*
