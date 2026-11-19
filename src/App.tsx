@@ -24,6 +24,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { ChatBot } from "./components/ai/ChatBot";
 import { ISIAcademyChatbot } from "./components/ai/ISIAcademyChatbot";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const IntelligenceDashboard = lazyWithRetry(() => import("./pages/admin/IntelligenceDashboard"), "IntelligenceDashboard");
 
@@ -303,9 +304,11 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/">
-        <AppRouter />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter basename="/">
+          <AppRouter />
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

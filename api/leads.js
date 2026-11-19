@@ -246,7 +246,181 @@ export default async function handler(req, res) {
         createdAtUtc, createdAtIst, metadataStr
       );
 
-      // 8. Background Forwarding to Google Sheets & Notification Email (Async)
+      // 8. Forward to Supabase Database (Real-time Lead Capture in Master Leads & Specific Tables)
+      try {
+        const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || 'https://ibauhbpcmycaygybyskn.supabase.co';
+        const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_tAmLXDptFV_i51JOFl9Qbw_3LnVNo-N';
+        const supaHeaders = {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        };
+
+        // 8a. Master Leads Table
+        fetch(`${supabaseUrl}/rest/v1/leads`, {
+          method: 'POST',
+          headers: supaHeaders,
+          body: JSON.stringify({
+            lead_number: leadId,
+            lead_type: leadType,
+            form_type: leadType,
+            full_name: fullName,
+            company: company || 'N/A',
+            email: email || 'N/A',
+            phone: phone || 'N/A',
+            service_interest: serviceInterest || 'Security Services',
+            preferred_time: preferredTime || null,
+            message: message || null,
+            status: 'new',
+            submission_status: 'Submitted',
+            traffic_channel: trafficChannel,
+            utm_source: utmSource || null,
+            utm_medium: utmMedium || null,
+            utm_campaign: utmCampaign || null,
+            utm_content: utmContent || null,
+            utm_term: utmTerm || null,
+            ip_address: clientIp || null,
+            location: location || null,
+            metadata: JSON.parse(metadataStr || '{}'),
+            created_at_ist: createdAtIst
+          })
+        }).catch(err => console.debug('[Supabase Master Lead Notice]', err.message));
+
+        // 8b. Dedicated Table based on form/lead type
+        let targetTable = 'global_lead_form';
+        let specificRecord = {};
+
+        const lt = leadType.toLowerCase();
+        if (lt.includes('contact') || lt.includes('quick')) {
+          targetTable = 'contact_form';
+          specificRecord = {
+            lead_number: leadId,
+            name: fullName,
+            email: email || 'N/A',
+            phone: phone || 'N/A',
+            requirement: serviceInterest || null,
+            company: company || null,
+            message: message || null,
+            source: trafficChannel,
+            utm_source: utmSource || null,
+            utm_medium: utmMedium || null,
+            utm_campaign: utmCampaign || null,
+            utm_term: utmTerm || null,
+            utm_content: utmContent || null,
+            status: 'Submitted',
+            ip_location: location || null,
+            ip_address: clientIp || null,
+            timestamp: createdAtIst
+          };
+        } else if (lt.includes('sales')) {
+          targetTable = 'sales_inquiries';
+          specificRecord = {
+            lead_number: leadId,
+            full_name: fullName,
+            phone_number: phone || 'N/A',
+            work_email: email || 'N/A',
+            company_name: company || 'N/A',
+            service_interest: serviceInterest || 'Security Services',
+            utm_source: utmSource || null,
+            utm_medium: utmMedium || null,
+            utm_campaign: utmCampaign || null,
+            utm_term: utmTerm || null,
+            utm_content: utmContent || null,
+            ip_location: location || null,
+            ip_address: clientIp || null,
+            timestamp: createdAtIst
+          };
+        } else if (lt.includes('google') || lt.includes('ad')) {
+          targetTable = 'google_ad_leads';
+          specificRecord = {
+            lead_number: leadId,
+            full_name: fullName,
+            phone_number: phone || 'N/A',
+            work_email: email || 'N/A',
+            company_name: company || 'N/A',
+            utm_source: utmSource || 'google_ads',
+            utm_medium: utmMedium || 'cpc',
+            utm_campaign: utmCampaign || null,
+            utm_term: utmTerm || null,
+            utm_content: utmContent || null,
+            ip_location: location || null,
+            ip_address: clientIp || null,
+            organization: company || null,
+            timestamp: createdAtIst
+          };
+        } else if (lt.includes('consultation')) {
+          targetTable = 'consultation_requests';
+          specificRecord = {
+            lead_number: leadId,
+            name: fullName,
+            school_name: company || null,
+            primary_concern: message || serviceInterest || null,
+            email: email || 'N/A',
+            phone: phone || 'N/A',
+            city: location || null,
+            utm_source: utmSource || null,
+            utm_medium: utmMedium || null,
+            utm_campaign: utmCampaign || null,
+            utm_term: utmTerm || null,
+            utm_content: utmContent || null,
+            status: 'Submitted',
+            ip_location: location || null,
+            ip_address: clientIp || null,
+            timestamp: createdAtIst
+          };
+        } else if (lt.includes('tender') || lt.includes('rfq')) {
+          targetTable = 'tender_rfq';
+          specificRecord = {
+            lead_number: leadId,
+            name: fullName,
+            email: email || 'N/A',
+            phone: phone || 'N/A',
+            organization: company || 'N/A',
+            tender_scope: serviceInterest || null,
+            message: message || null,
+            utm_source: utmSource || null,
+            utm_medium: utmMedium || null,
+            utm_campaign: utmCampaign || null,
+            utm_term: utmTerm || null,
+            utm_content: utmContent || null,
+            status: 'Submitted',
+            ip_location: location || null,
+            ip_address: clientIp || null,
+            timestamp: createdAtIst
+          };
+        } else {
+          targetTable = 'global_lead_form';
+          specificRecord = {
+            lead_number: leadId,
+            name: fullName,
+            email: email || 'N/A',
+            phone: phone || 'N/A',
+            requirement: serviceInterest || null,
+            company: company || null,
+            source: trafficChannel,
+            utm_source: utmSource || null,
+            utm_medium: utmMedium || null,
+            utm_campaign: utmCampaign || null,
+            utm_term: utmTerm || null,
+            utm_content: utmContent || null,
+            timestamp: createdAtIst,
+            ip_location: location || null,
+            ip_address: clientIp || null
+          };
+        }
+
+        fetch(`${supabaseUrl}/rest/v1/${targetTable}`, {
+          method: 'POST',
+          headers: supaHeaders,
+          body: JSON.stringify(specificRecord)
+        }).catch(err => console.debug(`[Supabase ${targetTable} Sync Notice]`, err.message));
+
+      } catch (supaErr) {
+        console.debug('[Supabase Exception]', supaErr.message);
+      }
+
+      // 9. Background Forwarding to Google Sheets & Notification Email (Async)
       try {
         const sheetsUrl = process.env.VITE_GOOGLE_SHEETS_WEB_APP_URL || process.env.GOOGLE_SHEETS_WEB_APP_URL;
         if (sheetsUrl && sheetsUrl.startsWith('http')) {

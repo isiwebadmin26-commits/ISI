@@ -4,6 +4,7 @@ import { submitLeadToJira } from './jiraService';
 import { generateLeadNumber, normalizeLeadSource } from '../utils/leadNumber';
 import { isCorporateEmail, CORPORATE_EMAIL_ERROR_MESSAGE } from '../utils/validation';
 import { analytics } from './analyticsService';
+import { routeFormToSupabase, captureLeadInSupabase, captureCareerInSupabase, captureChatbotInSupabase } from './supabaseService';
 
 const SHEETS_URL = import.meta.env.VITE_GOOGLE_SHEETS_WEB_APP_URL;
 
@@ -101,7 +102,7 @@ export async function sendToSheet(
     // (Career applications are STRICTLY excluded from Jira Sales Lead workflow)
     if (isBusinessLead) {
         const leadEmail = String(
-            payload.email || payload.Email || payload.workEmail || 
+            payload.email || payload.Email || payload.workEmail ||
             payload.WorkEmail || ''
         ).trim();
 
@@ -119,27 +120,27 @@ export async function sendToSheet(
 
         try {
             const leadName = String(
-                payload.name || payload.Name || payload.fullName || 
+                payload.name || payload.Name || payload.fullName ||
                 payload.FullName || payload.contactPerson || 'Website Lead'
             );
             const leadEmail = String(
-                payload.email || payload.Email || payload.workEmail || 
+                payload.email || payload.Email || payload.workEmail ||
                 payload.WorkEmail || ''
             );
             const leadPhone = String(
-                payload.phone || payload.Phone || payload.phoneNumber || 
+                payload.phone || payload.Phone || payload.phoneNumber ||
                 payload.mobile || ''
             );
             const leadCompany = String(
-                payload.company || payload.Company || payload.organization || 
+                payload.company || payload.Company || payload.organization ||
                 payload.Organization || payload.schoolName || ''
             );
             const leadService = String(
-                payload.service || payload.Service || payload.serviceInterest || 
+                payload.service || payload.Service || payload.serviceInterest ||
                 payload.serviceRequested || payload["Program / Course"] || sheetName
             );
             const leadMessage = String(
-                payload.message || payload.Message || payload.requirements || 
+                payload.message || payload.Message || payload.requirements ||
                 payload.topic || payload.primaryConcern || 'Form submission from website.'
             );
 
@@ -295,7 +296,7 @@ export async function sendToSheet(
 
     // 3. Automated Instant Reply Email Dispatch to Whomever Fills Form
     const submitterEmail = String(
-        payload.email || payload.Email || payload.workEmail || 
+        payload.email || payload.Email || payload.workEmail ||
         payload.WorkEmail || payload.user_email || payload.emailAddress || payload.mail || ''
     ).trim();
 
@@ -320,6 +321,31 @@ export async function sendToSheet(
         } catch (mailDispatchErr) {
             console.warn('[Auto-reply send notice]:', mailDispatchErr);
         }
+    }
+
+    // 4. Capture Lead / Career Application in Supabase Database (Separate Tables + Master Leads)
+    try {
+        routeFormToSupabase(actualSheetName, {
+            ...bodyObj,
+            leadNumber,
+            applicationNumber,
+            name: String(payload.name || payload.Name || payload.fullName || payload.FullName || payload.contactPerson || ''),
+            email: submitterEmail,
+            phone: String(payload.phone || payload.Phone || payload.phoneNumber || payload.mobile || ''),
+            company: String(payload.company || payload.Company || payload.organization || payload.schoolName || ''),
+            organization: String(payload.organization || payload.company || payload.Company || ''),
+            service: String(payload.service || payload.Service || payload.serviceRequested || payload.serviceInterest || payload.requirement || ''),
+            message: String(payload.message || payload.Message || payload.requirements || ''),
+            submissionStatus: userStatus,
+            jiraKey,
+            jiraStatus,
+            jira_issue_key: jiraKey,
+            jira_status: jiraStatus,
+            lead_number: leadNumber,
+            timestamp: getISTTimestamp()
+        });
+    } catch (supaErr) {
+        console.debug('[Supabase Dispatch Exception]', supaErr);
     }
 
     analytics.track('inquiry_success', {
@@ -393,7 +419,7 @@ export const submitAcademyInquiry = async (data: {
     try {
         const isJob = data.enquiryType === 'Job Application';
         const sheetName = isJob ? 'Career_Applications' : 'Academy_Inquiries';
-        
+
         return await sendToSheet(sheetName, {
             Name: data.name,
             Email: data.email,

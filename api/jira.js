@@ -463,6 +463,42 @@ export default async function handler(req, res) {
     const parentId = parentData.id;
     console.log(`[JIRA LEAD CREATED] Key: ${parentKey}, ID: ${parentId}, LeadNo: ${leadNumber}, correlationId: ${correlationId}`);
 
+    // Forward Jira Lead record to Supabase
+    try {
+      const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || 'https://ibauhbpcmycaygybyskn.supabase.co';
+      const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_tAmLXDptFV_i51JOFl9Qbw_3LnVNo-N';
+      fetch(`${supabaseUrl}/rest/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          lead_number: leadNumber,
+          lead_type: 'sales',
+          form_type: lead.formName || 'Sales Lead',
+          full_name: leadName,
+          company: leadCompany,
+          email: leadEmail,
+          phone: leadPhone,
+          service_interest: leadService,
+          jira_key: parentKey,
+          jira_status: 'Created',
+          status: 'new',
+          submission_status: 'Submitted',
+          traffic_channel: normalizedSource,
+          utm_source: lead.utm_source || lead.utmSource || null,
+          utm_campaign: lead.utm_campaign || lead.utmCampaign || null,
+          page_url: lead.pageUrl || null,
+          created_at_ist: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }) + ' IST'
+        })
+      }).catch(err => console.debug('[Supabase Jira Sync Notice]', err.message));
+    } catch (e) {
+      console.debug('[Supabase Jira Sync Exception]', e?.message);
+    }
+
     // ═══════════════════════════════════════════════════════════════════════════
     // 5. AUTOMATICALLY CREATE 7 SUBTASKS IN JIRA UNDER PARENT
     // ═══════════════════════════════════════════════════════════════════════════
