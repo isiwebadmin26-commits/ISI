@@ -512,11 +512,14 @@ function doPost(e) {
     // =====================================================================================
     // ROUTE A: GOOGLE AD / CAMPAIGN LEADS -> CAPTURE IN DEDICATED SEPARATE SPREADSHEET
     // =====================================================================================
+    var normAdCheck = sheetName.toLowerCase().replace(/[\s\-_]/g, '');
     var isAdLead = sheetName === "Google_Ad_Leads" || 
                    sheetName === "AdCampaign" || 
-                   sheetName.toLowerCase().replace(/[\s\-_]/g, '') === "googleadleads" ||
-                   sheetName.toLowerCase().replace(/[\s\-_]/g, '') === "adcampaign" ||
-                   sheetName.toLowerCase().replace(/[\s\-_]/g, '') === "googleads";
+                   normAdCheck === "googleadleads" ||
+                   normAdCheck === "adcampaign" ||
+                   normAdCheck === "adcampaignleads" ||
+                   normAdCheck === "adleads" ||
+                   normAdCheck === "googleads";
 
     var isCareerApp = sheetName === "Career_Applications" || 
                       sheetName === "CareerApplications" || 
@@ -564,6 +567,7 @@ function doPost(e) {
       "Contact_Form", "Partner_Applications", "Career_Applications", 
       "Ebook_Downloads", "Consultation_Requests", "Sales_Inquiries", 
       "Academy_Inquiries", "Chatbot_Leads", "Tender_RFQ", "Google_Ad_Leads",
+      "AdCampaign", "AdCampaignLeads", "Ad_Campaign", "Google_Ads", "GoogleAds", "AdLeads",
       "Global_Lead_Form", "LEADS",
       "ContactForm", "PartnerApps", "CareerApplications", 
       "EbookDownloads", "ConsultationReqs", "SalesInquiries", 
@@ -597,7 +601,7 @@ function doPost(e) {
 
     var emailSent = false;
     var emailResult = { sent: false, delivered: 0, failed: 0, driveLink: "", driveFileId: "", message: "" };
-    if (!isDuplicateLead && (LEAD_FORMS.indexOf(sheetName) !== -1 || isCareerApp)) {
+    if (!isDuplicateLead && (LEAD_FORMS.indexOf(sheetName) !== -1 || isCareerApp || isAdLead)) {
       try {
         var defaultSheetUrl = isAdLead 
           ? "https://docs.google.com/spreadsheets/d/" + CONFIG.AD_CAMPAIGN_SPREADSHEET_ID
@@ -1280,15 +1284,20 @@ function getLeadCategoryMeta(sheetName, data) {
   switch (sheetName) {
     case "Google_Ad_Leads":
     case "AdCampaign":
+    case "AdCampaignLeads":
+    case "Ad_Campaign":
+    case "Google_Ads":
+    case "GoogleAds":
+    case "AdLeads":
       return {
-        categoryName: "Google Ad & Campaign Lead Generation",
-        badgeText: "GOOGLE AD CAMPAIGN LEAD",
+        categoryName: "Ad Campaign Lead Generation",
+        badgeText: "AD CAMPAIGN LEAD",
         badgeBg: "#f59e0b",
         badgeColor: "#ffffff",
         leadName: name || "New Ad Lead",
         leadCompany: company || "Direct Business Lead",
         leadPhone: phone,
-        internalSubject: "[Google Ad Lead Generation] New Prospect: " + (name ? name + (company ? " (" + company + ")" : "") : "New Ad Inquiry"),
+        internalSubject: "[Ad Campaign Lead Generation] New Prospect: " + (name ? name + (company ? " (" + company + ")" : "") : "New Ad Inquiry"),
         userSubject: "Consultation Request Received - ISI Security",
         userMessage: "Thank you for expressing interest in ISI Security through our campaign. Our Senior Security Consultant has received your details and will connect with you shortly.",
         recipients: EMAIL_CONFIG.adCampaignEmails

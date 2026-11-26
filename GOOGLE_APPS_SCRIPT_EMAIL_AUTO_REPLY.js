@@ -51,6 +51,13 @@ const CONFIG = {
       "bv@trustflow.in",
       "poojasri.aram@gmail.com"
     ],
+    // Ad Campaign Lead Generation (includes Vishal & Varshith)
+    adCampaign: [
+      "v.varshith@isisecurity.in",
+      "v.vishal@isisecurity.in",
+      "bv@trustflow.in",
+      "poojasri.aram@gmail.com"
+    ],
     career: [
       "poojasri.aram@gmail.com"
     ],
@@ -254,6 +261,17 @@ function sendInternalAlertEmail(userName, userEmail, sheetName, data, resumeBlob
 
 function getCategoryMetadata(sheetName, data) {
   const norm = String(sheetName || '').toLowerCase().replace(/[\s\-_]/g, '');
+
+  if (norm.includes('adcampaign') || norm.includes('googlead') || norm.includes('adlead')) {
+    return {
+      categoryName: "Ad Campaign Lead",
+      accentColor: "#f59e0b",
+      userSubject: "Consultation Request Received - ISI Security",
+      userHeadline: "Thank you for your interest in ISI Security",
+      userMessage: "Thank you for expressing interest in ISI Security through our ad campaign. Our Senior Security Consultant has received your details and will connect with you shortly.",
+      teamRecipients: CONFIG.RECIPIENTS.adCampaign
+    };
+  }
 
   if (norm.includes('career') || norm.includes('job')) {
     return {

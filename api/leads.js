@@ -422,27 +422,52 @@ export default async function handler(req, res) {
 
       // 9. Background Forwarding to Google Sheets & Notification Email (Async)
       try {
+        const isAdCampaignLead =
+          leadType.includes('google') ||
+          leadType.includes('ad') ||
+          utmMedium.toLowerCase().includes('cpc') ||
+          utmMedium.toLowerCase().includes('paid');
+        const targetSheetName = isAdCampaignLead ? 'Google_Ad_Leads' : 'MarketingLeads';
+        const sheetsPayload = JSON.stringify({
+          sheetName: targetSheetName,
+          leadNumber: leadId,
+          fullName,
+          company,
+          companyName: company,
+          email,
+          workEmail: email,
+          phone,
+          phoneNumber: phone,
+          leadType,
+          serviceInterest,
+          preferredTime,
+          trafficChannel,
+          utmSource,
+          utmMedium,
+          utmCampaign,
+          utmTerm,
+          utmContent,
+          location,
+          ipAddress: clientIp,
+          timestamp: createdAtIst
+        });
+
         const sheetsUrl = process.env.VITE_GOOGLE_SHEETS_WEB_APP_URL || process.env.GOOGLE_SHEETS_WEB_APP_URL;
         if (sheetsUrl && sheetsUrl.startsWith('http')) {
           fetch(sheetsUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              sheetName: 'MarketingLeads',
-              leadNumber: leadId,
-              fullName,
-              company,
-              email,
-              phone,
-              leadType,
-              serviceInterest,
-              preferredTime,
-              trafficChannel,
-              utmSource,
-              utmCampaign,
-              timestamp: createdAtIst
-            })
+            body: sheetsPayload
           }).catch(err => console.debug('[Sheets Sync Note]', err.message));
+        }
+
+        const adSheetsUrl = process.env.VITE_AD_CAMPAIGN_WEB_APP_URL || process.env.AD_CAMPAIGN_WEB_APP_URL;
+        if (isAdCampaignLead && adSheetsUrl && adSheetsUrl.startsWith('http') && adSheetsUrl !== sheetsUrl) {
+          fetch(adSheetsUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: sheetsPayload
+          }).catch(err => console.debug('[Ad Campaign Sheets Sync Note]', err.message));
         }
       } catch (e) {
         // Continue even if sheet sync is unavailable

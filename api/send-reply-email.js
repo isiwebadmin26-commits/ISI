@@ -72,6 +72,14 @@ const EVERYONE_TEAM_RECIPIENTS = [
   'poojasri.aram@gmail.com'
 ];
 
+// Dedicated recipients for Ad Campaign Lead Generation (includes Vishal & Varshith)
+const AD_CAMPAIGN_RECIPIENTS = [
+  'v.varshith@isisecurity.in',
+  'v.vishal@isisecurity.in',
+  'bv@trustflow.in',
+  'poojasri.aram@gmail.com'
+];
+
 const CAREER_ALONE_RECIPIENTS = [
   'poojasri.aram@gmail.com'
 ];
@@ -202,13 +210,15 @@ function buildHtmlBody({ name, formType, service, message, leadNumber }) {
 /**
  * Builds high-visibility HTML notification email for the internal team
  */
-function buildTeamAlertHtml({ name, email, phone, company, formType, service, message, leadNumber, isCalendar, isCareer }) {
+function buildTeamAlertHtml({ name, email, phone, company, formType, service, message, leadNumber, isCalendar, isCareer, isAdCampaign }) {
   const safeName = (name || 'Applicant / Prospect').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const title = isCalendar 
-    ? '🗓️ New Academic Counseling & Calendar Session Booking'
-    : (isCareer ? '📄 New Career / Job Application' : '💼 New Website Business Lead');
+  const title = isAdCampaign
+    ? '🎯 New Ad Campaign Lead Generation'
+    : (isCalendar 
+        ? '🗓️ New Academic Counseling & Calendar Session Booking'
+        : (isCareer ? '📄 New Career / Job Application' : '💼 New Website Business Lead'));
 
-  const badgeColor = isCalendar ? '#d97706' : (isCareer ? '#10b981' : '#003380');
+  const badgeColor = isAdCampaign ? '#f59e0b' : (isCalendar ? '#d97706' : (isCareer ? '#10b981' : '#003380'));
   const nowIST = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
   return `
@@ -288,7 +298,12 @@ export default async function handler(req, res) {
   const userSubject = getEmailSubject(formType, leadNumber);
   const userHtml = buildHtmlBody({ name, formType, service, message, leadNumber, phone, company });
 
-  // Determine whether this is Career application or Calendar booking / General lead
+  // Determine whether this is Ad Campaign, Career application, or Calendar booking / General lead
+  const normFormType = String(formType || '').toLowerCase().replace(/[\s\-_]/g, '');
+  const isAdCampaign = normFormType.includes('adcampaign') ||
+                       normFormType.includes('googlead') ||
+                       normFormType.includes('adlead');
+
   const isCareer = String(formType || '').toLowerCase().includes('career') || 
                    String(formType || '').toLowerCase().includes('job');
 
@@ -299,14 +314,19 @@ export default async function handler(req, res) {
 
   // Recipient routing:
   // For Career Applications: poojasri.aram@gmail.com ALONE
+  // For Ad Campaign Leads: AD_CAMPAIGN_RECIPIENTS (v.varshith@isisecurity.in, v.vishal@isisecurity.in, ...)
   // For Calendar Booking, Academy, Contact, Sales: EVERYONE
-  const teamRecipients = isCareer ? CAREER_ALONE_RECIPIENTS : EVERYONE_TEAM_RECIPIENTS;
+  const teamRecipients = isCareer
+    ? CAREER_ALONE_RECIPIENTS
+    : (isAdCampaign ? AD_CAMPAIGN_RECIPIENTS : EVERYONE_TEAM_RECIPIENTS);
 
-  const teamSubject = isCalendar
-    ? `🗓️ [CALENDAR BOOKING] ${name || 'Prospect'} - ${service || 'Academic Counseling'}${leadNumber ? ` [Ref: ${leadNumber}]` : ''}`
-    : (isCareer
-        ? `📄 [CAREER APPLICATION] ${name || 'Applicant'} - ${service || 'Open Position'}`
-        : `💼 [NEW LEAD] ${name || 'Lead'} - ${formType || 'Website'}${leadNumber ? ` [Ref: ${leadNumber}]` : ''}`);
+  const teamSubject = isAdCampaign
+    ? `🎯 [AD CAMPAIGN LEAD] ${name || 'Prospect'}${company ? ` (${company})` : ''}${leadNumber ? ` [Ref: ${leadNumber}]` : ''}`
+    : (isCalendar
+        ? `🗓️ [CALENDAR BOOKING] ${name || 'Prospect'} - ${service || 'Academic Counseling'}${leadNumber ? ` [Ref: ${leadNumber}]` : ''}`
+        : (isCareer
+            ? `📄 [CAREER APPLICATION] ${name || 'Applicant'} - ${service || 'Open Position'}`
+            : `💼 [NEW LEAD] ${name || 'Lead'} - ${formType || 'Website'}${leadNumber ? ` [Ref: ${leadNumber}]` : ''}`));
 
   const teamHtml = buildTeamAlertHtml({ 
     name, 
@@ -318,7 +338,8 @@ export default async function handler(req, res) {
     message, 
     leadNumber, 
     isCalendar, 
-    isCareer 
+    isCareer,
+    isAdCampaign
   });
 
   try {

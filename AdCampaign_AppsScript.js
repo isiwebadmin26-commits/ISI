@@ -42,6 +42,7 @@ const AD_CONFIG = {
     // Leadership team who receive weekly Ad Campaign performance reports
     weeklyReportRecipients: [
       "v.varshith@isisecurity.in",
+      "v.vishal@isisecurity.in",
       "bv@trustflow.in",
       "poojasri.aram@gmail.com"
     ]
